@@ -69,7 +69,6 @@ public class FXMLDocumentController implements Initializable {
         ObservableList<Tag> tList = cr.getTags();
         tagId.setCellValueFactory(new PropertyValueFactory<Tag, Integer>("id") );
         tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name") );
-        tagStyle.
       
         tagsList.setItems(tList);
 
