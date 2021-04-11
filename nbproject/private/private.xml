@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/entities/Tag.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/DBConnection/MyConnection.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/ITag.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/CRUDTag.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/TagsFxmlDocument.fxml</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Tag.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/PodTasty.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Playlist.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/PlaylistViewController.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/services/PlaylistService.java</file>
         </group>
     </open-files>
 </project-private>

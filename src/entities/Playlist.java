@@ -75,6 +75,10 @@ public class Playlist implements Serializable {
     public Playlist(Integer id) {
         this.id = id;
     }
+    
+     public Playlist(String playlistName) {
+         this.playlistName = playlistName;
+    }
 
     public Playlist(Integer id, String playlistName, Date playlistCreationDate, Date updatedAt) {
         this.id = id;

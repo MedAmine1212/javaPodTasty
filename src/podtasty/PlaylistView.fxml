@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistViewController">
+   <children>
+      <StackPane layoutX="2.0" layoutY="3.0" prefHeight="438.0" prefWidth="659.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <Label prefHeight="62.0" prefWidth="88.0" text="Playlists list" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </top>
+               <center>
+                  <TableView fx:id="PlaylistList" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="PlaylistId" prefWidth="35.19998240470886" text="ID" />
+                      <TableColumn fx:id="PlaylistName" prefWidth="96.79998397827148" text="Playlist Name" />
+                        <TableColumn fx:id="PlaylistDescription" prefWidth="206.40003967285156" text="Description" />
+                        <TableColumn fx:id="PlaylistCreationDate" minWidth="0.0" prefWidth="190.4000244140625" text="Created in" />
+                    </columns>
+                  </TableView>
+               </center>
+               <bottom>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="659.0" spacing="20.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="btnAddPlaylist" mnemonicParsing="false" onAction="#AddAction" text="Add" />
+                        <Button fx:id="btnUpdatePlaylist" mnemonicParsing="false" text="Update" />
+                        <Button fx:id="btnDeletePlaylist" mnemonicParsing="false" text="Delete" />
+                     </children>
+                  </HBox>
+               </bottom>
+            </BorderPane>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>
