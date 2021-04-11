@@ -10,6 +10,9 @@ import entities.Podcast;
 import entities.Tag;
 import interfaces.ITag;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Date;
@@ -21,12 +24,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author MedAmine
  */
 public class CRUDTag implements ITag<Tag> {
+    
 
     @Override
     public boolean addTag(Tag tag) {
@@ -50,17 +58,60 @@ public class CRUDTag implements ITag<Tag> {
 
     @Override
     public boolean deleteTag(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+        String requete= "delete from tag where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e) {
+            System.out.println(e);
+            return false;
+        }
     }
 
     @Override
     public boolean updateTag(Tag tag, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(getTagById(id) != null) {
+            try{
+        String requete= "update tag set name=?, tag_style=? where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setString(1, tag.getName());
+            pst.setString(2, tag.getTagStyle());
+            pst.setInt(3, id);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e) {
+            System.out.println(e);
+            return false;
+        } 
+        } else {
+            return  false;
+        }
     }
 
     @Override
     public Tag getTagById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+        String requete= "select * from tag where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet res = pst.executeQuery();
+            while(res.next()) { 
+            Tag tag = new Tag();
+            tag.setId(res.getInt("id"));
+            tag.setName(res.getString("name"));
+            tag.setTagStyle(res.getString("tag_style"));
+            return tag;
+            }
+            return null;
+        }catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     @Override
@@ -82,29 +133,14 @@ public class CRUDTag implements ITag<Tag> {
                 tag.setId(rs.getInt("id"));
                 tag.setName(rs.getString("name"));
                 tag.setTagStyle(rs.getString("tag_style"));
+               
+                BufferedImage image = ImageIO.read(new File("src/images/"+tag.getTagStyle()+".png"));
+                WritableImage img = SwingFXUtils.toFXImage(image, null);
+                ImageView iv = new ImageView();
+                iv.setImage(img);
+                tag.setTagColor(iv);
                     
-                if (tag.getTagStyle() == "primary") {
-                    tag.setTagColor(Color.BLUE);
-                    
-                }else if (tag.getTagStyle() == "secondary") {
-                    tag.setTagColor(Color.GRAY);
-                    
-                }else if (tag.getTagStyle() == "success") {
-                    tag.setTagColor(Color.GREEN);
-                    
-                }else if (tag.getTagStyle() == "danger") {
-                    tag.setTagColor(Color.RED);
-                    
-                }else if (tag.getTagStyle() == "warning") {
-                    tag.setTagColor(Color.YELLOW);
-                    
-                }else if (tag.getTagStyle() == "info") {
-                    tag.setTagColor(Color.CYAN);
-                    
-                }else{
-                    tag.setTagColor(Color.BLACK);
-                    
-                }
+          
                 tags.add(tag);
                 
         }
