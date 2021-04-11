@@ -4,8 +4,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -13,38 +15,66 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.AddPlaylistController">
    <children>
-      <StackPane AnchorPane.bottomAnchor="0.0">
+      <FlowPane AnchorPane.bottomAnchor="0.0">
          <children>
-            <BorderPane prefHeight="400.0" prefWidth="600.0">
-               <top>
-                  <Label prefHeight="58.0" prefWidth="138.0" text="Add a new Playlist" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-               </top>
-               <center>
-                  <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label text="New playlist name">
-                           <VBox.margin>
-                              <Insets left="250.0" />
-                           </VBox.margin>
+            <StackPane>
+               <children>
+                  <BorderPane prefHeight="400.0" prefWidth="600.0">
+                     <top>
+                        <Label prefHeight="58.0" prefWidth="138.0" text="Add a new Playlist" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Label>
-                        <TextField minWidth="-Infinity" prefHeight="26.0" prefWidth="534.0" VBox.vgrow="NEVER" />
-                     </children>
-                  </VBox>
-               </center>
-               <bottom>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#AddPlaylistAction" text="Add" />
-                        <Button fx:id="btnCancelAddPlaylist" mnemonicParsing="false" onAction="#CancelAddPlaylist" text="Cancel" />
-                     </children>
-                  </HBox>
-               </bottom>
-            </BorderPane>
+                     </top>
+                     <center>
+                        <VBox fillWidth="false" maxWidth="441.0" prefHeight="222.0" prefWidth="380.0">
+                           <children>
+                              <Label text="New playlist name">
+                                 <VBox.margin>
+                                    <Insets left="160.0" top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="PlaylistNameField" alignment="CENTER" minWidth="-Infinity" prefHeight="26.0" prefWidth="283.0" scaleShape="false" VBox.vgrow="NEVER">
+                                 <VBox.margin>
+                                    <Insets left="75.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label alignment="CENTER" text="The playlist Description">
+                                 <VBox.margin>
+                                    <Insets left="150.0" top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="PlaylistDescriptionField" alignment="CENTER" minWidth="-Infinity" prefHeight="26.0" prefWidth="285.0" scaleShape="false">
+                                 <VBox.margin>
+                                    <Insets left="75.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </VBox>
+                     </center>
+                     <bottom>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#AddPlaylistAction" text="Add" />
+                              <Button fx:id="btnCancelAddPlaylist" mnemonicParsing="false" onAction="#CancelAddPlaylist" text="Cancel">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets bottom="5.0" />
+                           </BorderPane.margin>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </children>
+            </StackPane>
          </children>
-      </StackPane>
+      </FlowPane>
    </children>
 </AnchorPane>

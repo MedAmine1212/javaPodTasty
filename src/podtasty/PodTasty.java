@@ -5,11 +5,13 @@
  */
 package podtasty;
 
+import entities.Playlist;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import services.PlaylistService;
 
 /**
  *
@@ -25,6 +27,11 @@ public class PodTasty extends Application {
         
         stage.setScene(scene);
         stage.show();
+        
+         Playlist p=new Playlist("AAAAAAAAGGGGGGG");
+        PlaylistService ps=new PlaylistService();
+        ps.AddPlaylist(p);
+        System.out.println("done");
     }
 
     /**
@@ -32,6 +39,10 @@ public class PodTasty extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
+       
+        
+                
     }
     
 }

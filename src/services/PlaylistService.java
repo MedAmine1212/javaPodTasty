@@ -29,10 +29,14 @@ public class PlaylistService {
     
     
     public void AddPlaylist(Playlist p){
-        String req="insert into playlist (playlist_name) values ('"+p.getPlaylistName()+"')";
+        String req;
+        req = "insert into playlist (playlist_name,playlist_description,playlist_creation_date) values (?,?,?)";
         try {
-            ste=connection.createStatement();
-            ste.executeUpdate(req);
+            pst=connection.prepareStatement(req);
+            pst.setString(1,p.getPlaylistName());
+            pst.setString(2,p.getPlaylistDescription());
+            pst.setDate(3, (Date) p.getPlaylistCreationDate());
+            pst.executeUpdate();
             
         } catch (SQLException ex) {
             Logger.getLogger(PlaylistService.class.getName()).log(Level.SEVERE, null, ex);
