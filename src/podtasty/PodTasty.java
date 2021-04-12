@@ -19,7 +19,7 @@ public class PodTasty extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("TagsFxmlDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("podcastCommentsFront.fxml"));
         
         Scene scene = new Scene(root);
         

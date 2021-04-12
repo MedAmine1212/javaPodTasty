@@ -55,7 +55,17 @@ public class PodcastComment implements Serializable {
     @JoinColumn(name = "podcast_id_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Podcast podcastIdId;
+    private String userName;
 
+   
+    
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
     public PodcastComment() {
     }
 
