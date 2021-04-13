@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="podtasty.PodcasttController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="640.0" layoutX="100.0" opacity="0.2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/ESPRIT/S2/PIDEV/logo%20white%20bg.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="200.0" layoutY="2.0" prefHeight="82.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="Upaudio" layoutX="-4.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnuploadaudio" prefHeight="49.0" prefWidth="208.0" text="Upload Audio" textFill="#2500ff">
+               <font>
+                  <Font name="Calibri Bold" size="19.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="38.0" fitWidth="39.0" layoutX="1.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/microphone.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="9.0" layoutY="95.0" text="Podcast Name : ">
+         <font>
+            <Font name="Calisto MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="podname" layoutX="137.0" layoutY="95.0" prefHeight="31.0" prefWidth="400.0" />
+      <Label layoutX="7.0" layoutY="157.0" text="Podcast Description :">
+         <font>
+            <Font name="Calisto MT Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="poddesc" layoutX="172.0" layoutY="147.0" prefHeight="49.0" prefWidth="400.0" />
+      <Label layoutX="11.0" layoutY="227.0" text="Podcast image :">
+         <font>
+            <Font name="Calisto MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="upimg" layoutX="194.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnuploadimg" prefHeight="38.0" prefWidth="253.0" text="choose an image" textFill="#b04025">
+         <font>
+            <Font name="Calibri Bold" size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="36.0" fitWidth="55.0" layoutX="210.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/file-upload.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="48.0" layoutY="302.0" text="Tags :">
+         <font>
+            <Font name="Calisto MT Bold" size="19.0" />
+         </font>
+      </Label>
+      <Pane layoutX="489.0" layoutY="287.0" prefHeight="113.0" prefWidth="111.0">
+         <children>
+            <Button fx:id="ajoutpodcast" layoutX="40.0" layoutY="63.0" mnemonicParsing="false" onAction="#btnajoutpodcast" text="ADD" textFill="#24c6c1">
+               <font>
+                  <Font name="Calibri Bold Italic" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
