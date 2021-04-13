@@ -6,6 +6,7 @@
 package interfaces;
 
 import entities.Podcast;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,7 @@ public interface IPod<podcast> {
     
     public void addPodcast(Podcast podcast);
     public void deletePodcast(int id);
+    public List<Podcast> getAllpodcast();
     public Podcast getPodcastBYId(int id);
     
 }
