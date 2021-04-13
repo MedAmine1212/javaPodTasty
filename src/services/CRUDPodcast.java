@@ -12,6 +12,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -61,6 +65,39 @@ public class CRUDPodcast implements IPod<Podcast> {
     }
     
     
+    
+    @Override
+    public List<Podcast> getAllpodcast(){
+        List<Podcast> Podcastlist = new ArrayList<>();
+        try
+        {
+            String rq = ("SELECT * FROM podcast");
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(rq);
+                        ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+                Podcast podcast = new Podcast 
+                       (rs.getInt("id"),
+                        rs.getString("podcast_name"),
+                        //rs.getString("podcast_description"),
+                        rs.getDate("podcast_date"),
+                        rs.getString("podcast_image"),
+                        rs.getString("podcast_source"));
+               
+                Podcastlist.add(podcast);
+                        
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return Podcastlist;
+    }
+    
+    
+    
+    
+    
+    
+    
     @Override
     public Podcast getPodcastBYId(int id){
         try{
@@ -90,4 +127,7 @@ public class CRUDPodcast implements IPod<Podcast> {
         return null;
        
     }
+    
+    
+    
 }
