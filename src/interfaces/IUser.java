@@ -13,12 +13,13 @@ import javafx.collections.ObservableList;
  *
  * @author Douiri Amine
  */
-public interface IUser {
+public interface IUser<User> {
         public boolean addUser(User user,UserInfo info);
         public ObservableList<User> getUsers();
         public boolean deleteUser(int id);
         public boolean updateUser(User user,UserInfo info, int id);
         public User getUserById(int id);
+        public boolean validate(String email, String password); 
 
 
 
