@@ -8,6 +8,7 @@ package podtasty;
 import entities.Podcast;
 import entities.PodcastComment;
 import entities.User;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -15,13 +16,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,6 +39,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import services.CRUDComments;
 
 /**
@@ -63,7 +75,9 @@ public class PodcastCommentsFrontController implements Initializable {
     private Button addCommentButton;
     @FXML
     private TextField commentTextInput;
+    private static Stage reviwStage;
 
+   
     /**
      * Initializes the controller class.
      */
@@ -73,11 +87,7 @@ public class PodcastCommentsFrontController implements Initializable {
         deleteCheckedComment.setVisible(false);
         editCommentButton.setVisible(false);
         addCommentButton.setDisable(true);
-    }    
-
-    @FXML
-    private void editCommentClick(MouseEvent event) {
-    }
+    }  
 
    public void showComments() {
        
@@ -85,10 +95,10 @@ public class PodcastCommentsFrontController implements Initializable {
         p = new Podcast();
         p.setId(1);
         p.setCommentsAllowed(0);
-        if(p.getCommentsAllowed() == 0) {
-        } else {
-
-        }
+//        if(p.getCommentsAllowed() == 0) {
+//        } else {
+//
+//        }
         ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
         if(comList.size() > 0) {
         commentsNumber.setText(comList.size()+"");
@@ -132,13 +142,69 @@ public class PodcastCommentsFrontController implements Initializable {
 
             }
     }
+    
+    
+
+    @FXML
+    private void editCommentClick(MouseEvent event) {
+        
+       Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Update comment");
+
+    ButtonType validateUpdate = new ButtonType("Update", ButtonData.OK_DONE);
+    dialog.getDialogPane().getButtonTypes().addAll(validateUpdate, ButtonType.CANCEL);
+
+            GridPane gridPane = new GridPane();
+    gridPane.setHgap(10);
+    gridPane.setVgap(10);
+    gridPane.setPadding(new Insets(20, 150, 10, 10));
+
+    TextField from = new TextField();
+    from.setPromptText("Comment Text");
+
+    gridPane.add(from, 0, 0);
+
+    dialog.getDialogPane().setContent(gridPane);
+
+    Platform.runLater(() -> from.requestFocus());
+
+    dialog.setResultConverter(dialogButton -> {
+        if (dialogButton == validateUpdate) {
+            return from.getText();
+        }
+        return null;
+    });
+
+    Optional<String> commentText = dialog.showAndWait();
+
+    commentText.ifPresent(cmntText -> {
+            CRUDComments cr = new CRUDComments();
+            if(cr.updateComment(cmntText,clickedCommentId)) {
+                clickedCommentId = -1;
+                deleteCheckedComment.setVisible(false);
+                editCommentButton.setVisible(false);
+                showComments();
+                commentsContainer.getSelectionModel().clearSelection();
+                commentsContainer.refresh();
+                
+            } else {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setTitle("Error");
+            al.setHeaderText("Couldn't update comment");
+            al.showAndWait();
+            }
+    }
+    );
+    }
+    
 
     @FXML
     private void tblViewCurrentStoreOnClick(MouseEvent event) {
         if (commentsContainer.getSelectionModel().getSelectedItem() != null) {
          PodcastComment com =commentsContainer.getSelectionModel().getSelectedItem();
          clickedCommentId = com.getId();
-         deleteCheckedComment.setDisable(false);
+         deleteCheckedComment.setVisible(true);
+        editCommentButton.setVisible(true);
         }
     }
 
@@ -174,5 +240,25 @@ public class PodcastCommentsFrontController implements Initializable {
                 addCommentButton.setDisable(false);
             }
     }
+
+    @FXML
+    private void openRateView(MouseEvent event) {
+        Parent root;
+        try {            
+            root = FXMLLoader.load(getClass().getResource("PodcastReview.fxml"));
+            reviwStage = new Stage();
+            reviwStage.setTitle("Podcast review");
+            reviwStage.setScene(new Scene(root));
+            reviwStage.initModality(Modality.WINDOW_MODAL);
+            reviwStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+            reviwStage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
+     public static Stage getReviwStage() {
+        return reviwStage;
+    }
 }

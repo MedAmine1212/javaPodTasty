@@ -5,6 +5,14 @@
  */
 package podtasty;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +27,25 @@ public class PodTasty extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("podcastCommentsFront.fxml"));
+       
+//         URL url = new URL("http://127.0.0.1:8000/Files/podcastFiles/"+podcast.getSource());
+//
+//         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//
+//         connection.setRequestProperty("accept", "application/json");
+//
+//         // This line makes the request
+//         InputStream responseStream = connection.getInputStream();
+//       
+//         System.out.println("____________________________________");
+//         int i;
+//         byte[] b = new byte[2048];
+//        while ((i = responseStream.read(b)) != -1)
+//            System.out.println(b);
+//        responseStream.close();
+         
+        
+        Parent root = FXMLLoader.load(getClass().getResource("PodcastCommentsFront.fxml"));
         
         Scene scene = new Scene(root);
         

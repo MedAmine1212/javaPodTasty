@@ -16,7 +16,7 @@ public interface IComments<PodcastComment> {
     
      public boolean addComment(PodcastComment tag);
     public boolean deleteComment(int id);
-    public boolean updateComment(PodcastComment tag, int id);
+    public boolean updateComment(String commentText, int id);
     public PodcastComment getCommentById(int id);
     public ObservableList<PodcastComment> getCommentsByPodcast(Podcast pod);
     

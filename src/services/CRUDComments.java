@@ -64,9 +64,22 @@ public class CRUDComments implements IComments<PodcastComment> {
     }
 
     @Override
-    public boolean updateComment(PodcastComment tag, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public boolean updateComment(String commentText, int id) {
+ try{
+        String requete= "update podcast_comment set comment_text=? where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setString(1,commentText);
+            pst.setInt(2,id); 
+            //executeupdate
+            pst.executeUpdate();
+            return true;
+            
+            
+        }catch(Exception e) {
+            System.out.println(e);
+            return false;
+        }    }
 
     @Override
     public PodcastComment getCommentById(int id) {

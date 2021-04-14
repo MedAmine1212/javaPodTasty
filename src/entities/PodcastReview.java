@@ -40,7 +40,7 @@ public class PodcastReview implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @Column(name = "rating")
-    private int rating;
+    private float rating;
     @JoinColumn(name = "user_id_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userIdId;
@@ -68,11 +68,11 @@ public class PodcastReview implements Serializable {
         this.id = id;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
