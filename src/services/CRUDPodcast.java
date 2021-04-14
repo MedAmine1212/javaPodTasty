@@ -6,6 +6,7 @@
 package services;
 
 import DBConnection.MyConnection;
+import static DBConnection.MyConnection.instance;
 import entities.Podcast;
 import interfaces.IPod;
 import java.sql.Date;
@@ -23,6 +24,16 @@ import java.util.List;
  */
 public class CRUDPodcast implements IPod<Podcast> {
     
+    
+    public static CRUDPodcast instance;
+    private Statement st ;
+    private ResultSet rs ;
+    
+    public static CRUDPodcast getInstance(){
+        if (instance==null)
+            instance =new CRUDPodcast();
+        return instance;
+    }
     
     @Override
     public void addPodcast(Podcast podcast){
@@ -91,10 +102,6 @@ public class CRUDPodcast implements IPod<Podcast> {
         }
         return Podcastlist;
     }
-    
-    
-    
-    
     
     
     
