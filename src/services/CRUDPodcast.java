@@ -9,6 +9,8 @@ import DBConnection.MyConnection;
 import static DBConnection.MyConnection.instance;
 import entities.Podcast;
 import interfaces.IPod;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,6 +48,12 @@ public class CRUDPodcast implements IPod<Podcast> {
              pst.setDate(4, (Date) podcast.getPodcastDate());
              pst.setString(5, podcast.getPodcastImage());
              pst.setString(6, podcast.getPodcastSource());
+             
+             fis = new FileInputStream(PodcastImage)
+             pst.setBinaryStream(5, (InputStream) fis, (int) (PodcastImage.Length()));
+                     
+             fis = new FileInputStream(PodcastSource);
+             pst.setBinaryStream(6, (InputStream) fis, (int) (PodcastSource.Length()));
              
              pst.executeUpdate();            
              
