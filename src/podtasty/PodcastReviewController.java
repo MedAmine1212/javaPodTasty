@@ -75,13 +75,36 @@ public class PodcastReviewController implements Initializable {
     private Button closeButton;
     @FXML
     private AnchorPane reviewContainer;
-    
+    @FXML
+    private Pane reviewSubmittedPane;
+    @FXML
+    private Text submittedReviewRating;
+    @FXML
+    private Button deleteReviewButton;
+    private boolean reviewIsSubmitted;
+    @FXML
+    private Pane notSubmittedContainer;
+    private float submittedRating;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        reviewIsSubmitted = true;
+        submittedRating = 10.0f;
+        setView();
+    }    
+    private void setView() {
+        if(reviewIsSubmitted) {
+            submittedReviewRating.setText("Your review to this podcast is "+submittedRating+"/10");
+            notSubmittedContainer.setVisible(false);
+            sendingPane.setVisible(false);
+            reviewSubmittedPane.setVisible(true);
+        } else {
+        reviewSubmittedPane.setVisible(false);
+        notSubmittedContainer.setVisible(true);
+        sendingPane.setVisible(true);
         qsList.put(1, questionOne);
         qsList.put(2, questionTwo);
         qsList.put(3, questionThree);
@@ -92,8 +115,8 @@ public class PodcastReviewController implements Initializable {
         sendingPane.setVisible(false);
         currentQs = 1;
         rate = 0;
-    }    
-
+        }
+    }
     @FXML
     private void unfocusEmoji(MouseEvent event) throws IOException {
         
@@ -185,6 +208,14 @@ public class PodcastReviewController implements Initializable {
     private void closeThis(MouseEvent event) {
         PodcastCommentsFrontController.getReviwStage().close();
 
+    }
+
+    @FXML
+    private void deleteReviewAction(MouseEvent event) {
+//        CRUDReview cr = new CRUDReview();
+//        cr.deleteReview(reviewId);
+        reviewIsSubmitted = false;
+        setView();
     }
     
 }

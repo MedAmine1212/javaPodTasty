@@ -15,77 +15,91 @@
    <children>
       <Pane layoutY="28.0" prefHeight="292.0" prefWidth="600.0">
          <children>
-            <Text layoutX="25.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Podcast review">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Text fx:id="questionOne" layoutX="91.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you generaly happy with this podcast ?">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <GridPane fx:id="rateContainer" layoutX="54.0" layoutY="181.0" prefHeight="30.0" prefWidth="532.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <Pane fx:id="notSubmittedContainer" layoutX="25.0" layoutY="15.259765625">
                <children>
-                  <ImageView fx:id="love" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/love.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="like" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                     <image>
-                        <Image url="@../images/like.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="meh" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                     <image>
-                        <Image url="@../images/meh.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="dislike" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-                     <image>
-                        <Image url="@../images/dislike.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="hate" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
-                     <image>
-                        <Image url="@../images/hate.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="loath" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
-                     <image>
-                        <Image url="@../images/loath.png" />
-                     </image>
-                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Podcast review">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="questionOne" layoutX="66.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you generaly happy with this podcast ?">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <GridPane fx:id="rateContainer" layoutX="29.0" layoutY="165.740234375" prefHeight="30.0" prefWidth="532.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="love" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/love.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="like" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../images/like.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="meh" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../images/meh.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="dislike" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../images/dislike.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="hate" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                           <image>
+                              <Image url="@../images/hate.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="loath" fitHeight="48.0" fitWidth="50.0" onMouseClicked="#asnwerQuestion" onMouseEntered="#focusEmoji" onMouseExited="#unfocusEmoji" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+                           <image>
+                              <Image url="@../images/loath.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <Text fx:id="questionTwo" layoutX="159.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Is the topic interesting ?">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="questionThree" layoutX="102.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What do you think about the host ?">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="questionFour" layoutX="204.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voice quality ?">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
                </children>
-            </GridPane>
-            <Text fx:id="questionTwo" layoutX="184.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Is the topic interesting ?">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Text fx:id="questionThree" layoutX="127.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What do you think about the host ?">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Text fx:id="questionFour" layoutX="229.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voice quality ?">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Button fx:id="closeButton" layoutX="508.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#closeThis" text="Cancel" />
+            </Pane>
+            <Button fx:id="closeButton" layoutX="502.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#closeThis" text="Cancel" />
+            <Pane fx:id="reviewSubmittedPane" layoutX="86.0" layoutY="96.8642578125">
+               <children>
+                  <Text fx:id="submittedReviewRating" strokeType="OUTSIDE" strokeWidth="0.0" text="Your review to this podcast is 10/10">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="deleteReviewButton" layoutX="169.0" layoutY="59.1357421875" mnemonicParsing="false" onMouseClicked="#deleteReviewAction" text="Delete review" />
+               </children>
+            </Pane>
             <Pane fx:id="sendingPane" layoutY="52.0" prefHeight="189.0" prefWidth="600.0">
                <children>
                   <Text layoutX="145.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Have a">
