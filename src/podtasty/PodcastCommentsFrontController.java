@@ -43,6 +43,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import services.CRUDComments;
+import services.CRUDFavorite;
 
 /**
  * FXML Controller class
@@ -69,20 +70,37 @@ public class PodcastCommentsFrontController implements Initializable {
     private TableColumn<PodcastComment, String> commentText;
     @FXML
     private TableColumn<PodcastComment, Date> commentDate;
-    private int clickedCommentId = -1;
-    private Podcast p;
     @FXML
     private Button addCommentButton;
     @FXML
     private TextField commentTextInput;
     private static Stage reviwStage;
-
+    @FXML
+    private TextField searchInput;
+    
+    private User u;
+    private Podcast p;
+    private int clickedCommentId = -1;
+    private boolean filtered = false;
+    private boolean isFavorite = false;
+    @FXML
+    private Button addFavoriteButt;
+    @FXML
+    private Button removeFavoriteButt;
    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        u = new User();
+        u.setId(1);
+        searchInput.setPromptText("Search comments...");
+        if(isFavorite) {
+            addFavoriteButt.setVisible(false);
+        } else {
+            removeFavoriteButt.setVisible(false);
+        }
         showComments();
         deleteCheckedComment.setVisible(false);
         editCommentButton.setVisible(false);
@@ -133,6 +151,7 @@ public class PodcastCommentsFrontController implements Initializable {
                 deleteCheckedComment.setVisible(false);
                 editCommentButton.setVisible(false);
                 showComments();
+                searchInput.setText("");
             } else {
             Alert al = new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");
@@ -184,6 +203,7 @@ public class PodcastCommentsFrontController implements Initializable {
                 deleteCheckedComment.setVisible(false);
                 editCommentButton.setVisible(false);
                 showComments();
+                searchInput.setText("");
                 commentsContainer.getSelectionModel().clearSelection();
                 commentsContainer.refresh();
                 
@@ -210,19 +230,19 @@ public class PodcastCommentsFrontController implements Initializable {
 
     @FXML
     private void addCommentAction(MouseEvent event) {
+        searchInput.setText("");
         PodcastComment com = new PodcastComment();
         Podcast pod = new Podcast();
         pod.setId(1);
         com.setPodcastIdId(pod);
         com.setCommentText(commentTextInput.getText());
-        User u = new User();
-        u.setId(1);
         com.setUserIdId(u);
         commentTextInput.setText("");
         addCommentButton.setDisable(true);
         CRUDComments cr = new CRUDComments();
         cr.addComment(com);
         showComments();
+        searchInput.setText("");
         
     }
 
@@ -261,4 +281,45 @@ public class PodcastCommentsFrontController implements Initializable {
      public static Stage getReviwStage() {
         return reviwStage;
     }
+     
+    @FXML
+    private void filerComments(KeyEvent event) {
+        if ( searchInput.getText().length() == 0) {
+            if (filtered) {
+                CRUDComments cr = new CRUDComments();
+                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+                 FXCollections.reverse(comList);
+                commentsContainer.setItems(comList);
+                commentsContainer.refresh();
+            }
+        } else {
+            filtered = true;
+            CRUDComments rc = new CRUDComments();
+            ObservableList<PodcastComment> fileredComments = rc.getCommentsByComText(p,searchInput.getText());
+            if(!fileredComments.isEmpty()) {
+            FXCollections.reverse(fileredComments);
+            }
+            commentsContainer.setItems(fileredComments);
+            commentsContainer.refresh();
+        }
+     }
+    @FXML
+    private void addFavoriteAction(MouseEvent event) {
+        CRUDFavorite cr = new CRUDFavorite();
+        cr.addFavorite(p, u);
+        isFavorite = true;
+        removeFavoriteButt.setVisible(true);
+        addFavoriteButt.setVisible(false);
+        
+    }
+    @FXML
+    private void removeFavoriteAction(MouseEvent event) {
+        CRUDFavorite cr = new CRUDFavorite();
+        cr.removeFavorite(p, u);
+        isFavorite = false;
+        removeFavoriteButt.setVisible(false);
+        addFavoriteButt.setVisible(true);
+    }
+     
+     
 }

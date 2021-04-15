@@ -67,6 +67,7 @@
                         </Label>
                         <Button fx:id="addCommentButton" mnemonicParsing="false" onMouseClicked="#addCommentAction" prefHeight="26.0" prefWidth="138.0" text="Add comment" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <TextField fx:id="commentTextInput" onKeyPressed="#deactivateButton" onKeyTyped="#activateButton" prefHeight="26.0" prefWidth="378.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="searchInput" onKeyReleased="#filerComments" GridPane.columnIndex="3" />
                      </children>
                   </GridPane>
                   <TableView fx:id="commentsContainer" layoutY="303.0" onMouseClicked="#tblViewCurrentStoreOnClick" prefHeight="288.0" prefWidth="915.0">
@@ -76,7 +77,10 @@
                         <TableColumn fx:id="commentDate" prefWidth="112.79998779296875" />
                      </columns>
                   </TableView>
-                  <Button layoutX="767.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#openRateView" text="Rate" />
+                  <Button layoutX="738.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#openRateView" text="Rate" />
+                  <Button fx:id="addFavoriteButt" layoutX="796.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#addFavoriteAction" text="Save to favorites" />
+                  <Button layoutX="667.0" layoutY="14.0" mnemonicParsing="false" text="Report" />
+                  <Button fx:id="removeFavoriteButt" layoutX="797.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#removeFavoriteAction" text="Remove favorite" />
                </children>
             </AnchorPane>
          </children>

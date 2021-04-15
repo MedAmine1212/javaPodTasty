@@ -19,6 +19,7 @@ public interface IComments<PodcastComment> {
     public boolean updateComment(String commentText, int id);
     public PodcastComment getCommentById(int id);
     public ObservableList<PodcastComment> getCommentsByPodcast(Podcast pod);
+    public ObservableList<PodcastComment> getCommentsByComText(Podcast pod,String text);
     
     
 }

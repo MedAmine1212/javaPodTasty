@@ -118,5 +118,36 @@ public class CRUDComments implements IComments<PodcastComment> {
         }
         
     }
+
+    @Override
+    public ObservableList<PodcastComment> getCommentsByComText(Podcast pod,String text) {
+         ObservableList<PodcastComment> comments = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT * FROM podcast_comment p WHERE p.podcast_id_id=? AND UPPER(comment_text) LIKE  UPPER('%"+text+"%')";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, pod.getId());
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                PodcastComment comment = new PodcastComment();
+                comment.setId(rs.getInt("id"));
+                comment.setCommentDate(rs.getDate("comment_date"));
+                comment.setCommentText(rs.getString("comment_text"));
+                CRUDUser cu = new CRUDUser();
+                comment.setUserIdId(cu.getUserById(rs.getInt("user_id_id")));
+                comment.setUserName("Test");
+                comment.setPodcastIdId(pod);
+                comments.add(comment);
+                
+        }
+            return comments;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return null;
+        }
+    }
     
 }
