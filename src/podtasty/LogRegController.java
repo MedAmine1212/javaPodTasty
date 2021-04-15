@@ -26,6 +26,12 @@ import services.CRUDUser;
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.Date;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 
 /**
@@ -78,6 +84,18 @@ public class LogRegController implements Initializable {
     private CheckBox male;
     @FXML
     private CheckBox female;
+    @FXML
+    private Label FSreq;
+    @FXML
+    private Label LSreq;
+    @FXML
+    private Label EmailReq;
+    @FXML
+    private Label GenderReq;
+    @FXML
+    private Label BDReq;
+    @FXML
+    private Label passmatch;
     
     /**
      * Initializes the controller class.
@@ -109,7 +127,7 @@ public class LogRegController implements Initializable {
                 this.LSField.getText().isEmpty()==false&&
                 this.EmailFieldReg.getText().isEmpty()==false&&
                 this.PasswordFieldReg.getText().isEmpty()==false&&
-                this.PasswordFieldRegComnirm.getText().isEmpty()==false&&
+                this.PasswordFieldRegComnirm.getText()==this.PasswordFieldReg.getText()&&
                 this.BirthDate.getValue() != null &&
                 (this.male.isSelected()== true || this.female.isSelected()== true)){
         User user = new User();
@@ -137,8 +155,34 @@ public class LogRegController implements Initializable {
         
         CRUDUser cr = new CRUDUser();
         cr.addUser(user, userInfo);
-
+        if(cr.addUser(user, userInfo)){
+        this.LoginForm.setVisible(true);
+            this.RegForm.setVisible(false);
         }
+
+        }if(this.FSField.getText().isEmpty()){
+            this.FSreq.setVisible(true);
+        }
+        if(this.EmailFieldReg.getText().isEmpty()){
+            this.EmailReq.setVisible(true);
+        }
+        if(this.PasswordFieldReg.getText().isEmpty()){
+            this.passmatch.setVisible(true);
+        }        
+        if(this.LSField.getText().isEmpty()){
+            this.LSreq.setVisible(true);
+        }
+              
+        if(BirthDate.getValue()== null){
+            this.BDReq.setVisible(true);       }
+          
+        if(this.male.isSelected()== false && this.female.isSelected()== false){
+            this.GenderReq.setVisible(true);
+        }
+        if(PasswordFieldRegComnirm.getText()!=this.PasswordFieldReg.getText()){
+            this.passmatch.setVisible(true);
+        }
+        
         
     }
 
@@ -150,9 +194,28 @@ public class LogRegController implements Initializable {
         if(this.EmailField.getText().isEmpty()==false && this.PasswordField.getText().isEmpty()==false&&m.matches()){
             CRUDUser cr = new CRUDUser();
             if(cr.validate(this.EmailField.getText(),this.PasswordField.getText())){
+                User user = cr.getUserByEmail(this.EmailField.getText());
+                if(user.getDesactiveAccount()){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Alert");
+                alert.setHeaderText("Your acount is desactivated");
+                alert.setContentText("Your acount is desactivated");
+                alert.showAndWait();
+                }else{
+                this.messageloginSucceded.setVisible(true);       
+try {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GestionUsers.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            PodTasty.stg.close();
+    } catch(Exception e) {
+       e.printStackTrace();
+      }
 
-                this.messageloginSucceded.setVisible(true);           
-
+                }
+                        
           } else{
         this.messagelogin.setVisible(true);           
             } 

@@ -33,7 +33,7 @@
       </Label>
       <AnchorPane fx:id="logn" layoutX="355.0" layoutY="-4.0" prefHeight="504.0" prefWidth="362.0" style="-fx-background-color: #2e3038};">
          <children>
-            <Pane fx:id="RegForm" layoutX="41.0" layoutY="143.0" prefHeight="343.0" prefWidth="307.0">
+            <Pane fx:id="RegForm" layoutX="41.0" layoutY="143.0" prefHeight="343.0" prefWidth="307.0" visible="false">
                <children>
                   <Label layoutX="90.0" text="Create account" textFill="WHITE">
                      <font>
@@ -55,9 +55,39 @@
                   <PasswordField fx:id="PasswordFieldRegComnirm" layoutX="79.0" layoutY="266.0" prefHeight="27.0" prefWidth="151.0" promptText="Confirm password" style="-fx-background-color: tranparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
                   <CheckBox fx:id="male" indeterminate="true" layoutX="77.0" layoutY="139.0" mnemonicParsing="false" onAction="#male" text="male" textFill="WHITE" />
                   <CheckBox fx:id="female" indeterminate="true" layoutX="166.0" layoutY="139.0" mnemonicParsing="false" onAction="#female" text="female" textFill="WHITE" textOverrun="CLIP" />
+                  <Label fx:id="FSreq" layoutX="228.0" layoutY="30.0" prefHeight="23.0" prefWidth="55.0" text="* required" textFill="#ee0f0f" visible="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LSreq" layoutX="230.0" layoutY="73.0" prefHeight="23.0" prefWidth="55.0" text="* required" textFill="#ee0f0f" visible="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="EmailReq" layoutX="230.0" layoutY="102.0" prefHeight="23.0" prefWidth="55.0" text="* required" textFill="#ee0f0f" visible="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="GenderReq" layoutX="252.0" layoutY="137.0" prefHeight="23.0" prefWidth="55.0" text="* required" textFill="#ee0f0f" visible="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="BDReq" layoutX="256.0" layoutY="195.0" prefHeight="23.0" prefWidth="55.0" text="* required" textFill="#ee0f0f" visible="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="passmatch" layoutX="245.0" layoutY="255.0" prefHeight="23.0" prefWidth="70.0" text="* dont match " textFill="#ee0f0f" visible="false">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
-            <Pane fx:id="LoginForm" layoutX="28.0" layoutY="152.0" prefHeight="326.0" prefWidth="307.0" visible="false">
+            <Pane fx:id="LoginForm" layoutX="28.0" layoutY="152.0" prefHeight="326.0" prefWidth="307.0">
                <children>
                   <PasswordField fx:id="PasswordField" layoutX="75.0" layoutY="64.0" promptText="Password" style="-fx-background-color: tranparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
                   <Button fx:id="LoginBtn" layoutX="114.0" layoutY="190.0" mnemonicParsing="false" onAction="#Login" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="LOGIN" textFill="WHITE" />
@@ -79,7 +109,7 @@
                   <Label fx:id="messageloginSucceded" layoutX="108.0" layoutY="163.0" text="Login succeded" textFill="#28c41b" visible="false" />
                </children>
             </Pane>
-            <ImageView fitHeight="117.0" fitWidth="117.0" layoutX="115.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="117.0" fitWidth="117.0" layoutX="123.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/login.png" />
                </image>

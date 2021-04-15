@@ -65,7 +65,7 @@ public class User implements Serializable {
     private Channel channelIdId;
     @JoinColumn(name = "user_info_id_id", referencedColumnName = "id")
     @OneToOne
-    private UserInfo userInfoIdId;
+    private int userInfoIdId;
 
     public User() {
     }
@@ -146,11 +146,11 @@ public class User implements Serializable {
         this.channelIdId = channelIdId;
     }
 
-    public UserInfo getUserInfoIdId() {
+    public int getUserInfoIdId() {
         return userInfoIdId;
     }
 
-    public void setUserInfoIdId(UserInfo userInfoIdId) {
+    public void setUserInfoIdId(int userInfoIdId) {
         this.userInfoIdId = userInfoIdId;
     }
 

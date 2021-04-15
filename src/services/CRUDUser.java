@@ -77,7 +77,14 @@ public class CRUDUser implements IUser<User>{
             Statement st = MyConnection.getInstance().getCnx().createStatement();
             //contenaire
             ResultSet rs =  st.executeQuery(requete);
-    
+                while(rs.next()){
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUserEmail(rs.getString("user_email"));
+                user.setUserInfoIdId(rs.getInt("user_info_id_id"));
+                user.setDesactiveAccount(rs.getBoolean("desactive_account"));
+                users.add(user);                
+        }
       return users;
       }
         catch(Exception e){
@@ -86,20 +93,150 @@ public class CRUDUser implements IUser<User>{
         return null;
         }
     }
+    
 
     @Override
     public boolean deleteUser(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+       try{   
+        String requeteUserInfo= "delete from user_info where id = ?";
+        PreparedStatement pstInfo = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requeteUserInfo);
+        pstInfo.setString(1, "select user_info_id_id from user where id = "+id+"");
+        String requete= "delete from user where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        }
 
     @Override
     public boolean updateUser(User user, UserInfo info, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.getUserById(id)!=null){
+        try{
+           String requeteUser= "update user set user_email=? where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requeteUser);
+            pst.setString(1, user.getUserEmail());
+           pst.setInt(2,user.getId());
+            pst.executeUpdate();
+           String requeteUserInfo= "update user_info set user_first_name=?,user_last_name=? where id = ?";
+            PreparedStatement pst1 = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requeteUserInfo);
+            pst1.setString(1, info.getUserFirstName());
+            pst1.setString(2, info.getUserLastName());
+            pst1.setInt(3, user.getUserInfoIdId());
+            pst1.executeUpdate();
+           return true;
+            
+        }catch(Exception e) {
+            System.out.println(e);
+            return false;
+        
+        }
+            
+        }
+        else 
+            return false;
     }
 
     @Override
     public User getUserById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    try{
+        String requete= "select * from user where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()) { 
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setUserEmail(rs.getString("user_email"));
+            user.setUserInfoIdId(rs.getInt("user_info_id_id"));
+            user.setDesactiveAccount(rs.getBoolean("desactive_account"));
+            return user;
+            }
+            return null;
+        }catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }}
+
+    @Override
+    public UserInfo getUserInfoById(int id) {
+        try{
+            String requete = "SELECT * FROM user_info where id = ?";
+       PreparedStatement preparedStatement  = MyConnection.getInstance().getCnx().prepareStatement(requete);
+       preparedStatement.setInt(1, id);
+       ResultSet resultSet = preparedStatement.executeQuery();
+                   while(resultSet.next()) { 
+            UserInfo userInfo = new UserInfo();
+            userInfo.setId(resultSet.getInt("id"));
+            userInfo.setUserFirstName(resultSet.getString("user_first_name"));
+            userInfo.setUserLastName(resultSet.getString("user_last_name"));
+            userInfo.setUserGender(resultSet.getString("user_gender"));
+            userInfo.setUserBirthDate(resultSet.getDate("user_birth_date"));
+            return userInfo;
+            }
+            return null;
+ 
+        }catch(Exception e) {
+            System.out.println(e);
+            return null;
+        
+        }
+      
     }
-    
+
+    @Override
+    public boolean switchStatusAccount(int id) {
+        
+        if(this.getUserById(id)!=null){
+                 try{
+            String requete= "update user set desactive_account=? where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            if(this.getUserById(id).getDesactiveAccount()== true){
+            pst.setBoolean(1,false);
+            }else{
+                pst.setBoolean(1,true );
+            }
+            pst.setInt(2, id);
+            pst.executeUpdate();
+            return true;
+        }catch(Exception e) {
+            System.out.println(e);
+            return false;
+        } 
+        }
+        
+    return false;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+  try{
+        String requete= "select * from user where user_email = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()) { 
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setUserEmail(rs.getString("user_email"));
+            user.setUserInfoIdId(rs.getInt("user_info_id_id"));
+            user.setDesactiveAccount(rs.getBoolean("desactive_account"));
+            return user;
+            }
+            return null;
+        }catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }    }
 }
