@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="125.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.CommentViewController">
+   <children>
+      <Pane prefHeight="131.0" prefWidth="1000.0">
+         <children>
+            <ImageView fitHeight="71.0" fitWidth="67.0" layoutX="8.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/avatar.jpg" />
+               </image>
+            </ImageView>
+            <Text fx:id="userName" layoutX="82.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Khaili Med Amine">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Text fx:id="commentDate" layoutX="853.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="113.48016357421875">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Text>
+            <ScrollPane layoutX="95.0" layoutY="45.0" prefHeight="77.0" prefWidth="892.0" style="-fx-border-color: rgb(244,244,244);">
+               <content>
+                  <Text fx:id="commentText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="875.0802919268608">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+               </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

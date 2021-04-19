@@ -74,7 +74,6 @@ public class PodcastCommentsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         showComments();
         deleteCheckedComment.setDisable(true);
-       
     } 
     
     
@@ -93,16 +92,16 @@ public class PodcastCommentsController implements Initializable {
         ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
         if(comList.size() > 0) {
         commentsNumber.setText(comList.size()+"");
-        if(comList.size() > 1) {
-            comnumberLabel.setText("Comments");        
-            commentsNumber.setText("");
+           if(comList.size() > 1) {
+            comnumberLabel.setText("Comments");   
 
         } else {
             
             comnumberLabel.setText("Comment");
         }
         }else {
-            comnumberLabel.setText("No comments on this podcast");
+            comnumberLabel.setText("No comments on this podcast");    
+            commentsNumber.setText("");
         }
         commentUser.setCellValueFactory(new PropertyValueFactory<PodcastComment, String>("userName") );
         commentText.setCellValueFactory(new PropertyValueFactory<PodcastComment, String>("commentText") );

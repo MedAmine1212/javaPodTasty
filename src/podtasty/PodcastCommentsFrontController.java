@@ -10,10 +10,6 @@ import entities.PodcastComment;
 import entities.User;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -32,14 +28,12 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import services.CRUDComments;
@@ -55,21 +49,11 @@ public class PodcastCommentsFrontController implements Initializable {
     @FXML
     private AnchorPane container;
     @FXML
-    private Label commentsNumber;
-    @FXML
     private Label comnumberLabel;
     @FXML
     private Button editCommentButton;
     @FXML
     private Button deleteCheckedComment;
-    @FXML
-    private TableView<PodcastComment> commentsContainer;
-    @FXML
-    private TableColumn<PodcastComment, String> commentUser;
-    @FXML
-    private TableColumn<PodcastComment, String> commentText;
-    @FXML
-    private TableColumn<PodcastComment, Date> commentDate;
     @FXML
     private Button addCommentButton;
     @FXML
@@ -87,12 +71,18 @@ public class PodcastCommentsFrontController implements Initializable {
     private Button addFavoriteButt;
     @FXML
     private Button removeFavoriteButt;
-   
+    @FXML
+    private GridPane commentsContainer;
+    
+    LoadAudio audioLoader;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         u = new User();
         u.setId(1);
         searchInput.setPromptText("Search comments...");
@@ -101,41 +91,63 @@ public class PodcastCommentsFrontController implements Initializable {
         } else {
             removeFavoriteButt.setVisible(false);
         }
-        showComments();
-        deleteCheckedComment.setVisible(false);
-        editCommentButton.setVisible(false);
-        addCommentButton.setDisable(true);
-    }  
-
-   public void showComments() {
-       
         CRUDComments cr = new CRUDComments();
         p = new Podcast();
         p.setId(1);
         p.setCommentsAllowed(0);
+        
+        audioLoader = LoadAudio.getInstance();
+        audioLoader.start();
+        
 //        if(p.getCommentsAllowed() == 0) {
 //        } else {
 //
 //        }
         ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+            
+        showComments(comList ,1, null);
+        deleteCheckedComment.setVisible(false);
+        editCommentButton.setVisible(false);
+        addCommentButton.setDisable(true);
+    }  
+
+   public void showComments(ObservableList<PodcastComment> comList, int caller, String text) {
+       commentsContainer.getChildren().clear();
+       if (caller == 1) {
         if(comList.size() > 0) {
-        commentsNumber.setText(comList.size()+"");
+            
         if(comList.size() > 1) {
-            comnumberLabel.setText("Comments");        
-            commentsNumber.setText("");
+            comnumberLabel.setText(comList.size()+" Comments");   
 
         } else {
             
-            comnumberLabel.setText("Comment");
+            comnumberLabel.setText("1 Comment");
         }
         }else {
             comnumberLabel.setText("No comments on this podcast");
         }
-        commentUser.setCellValueFactory(new PropertyValueFactory<PodcastComment, String>("userName") );
-        commentText.setCellValueFactory(new PropertyValueFactory<PodcastComment, String>("commentText") );
-        commentDate.setCellValueFactory(new PropertyValueFactory<PodcastComment, Date>("commentDate") );
+       } else {
+           comnumberLabel.setText("Searching \" "+text+" \" in comments");
+       }
+        if(!comList.isEmpty()) {
         FXCollections.reverse(comList);
-        commentsContainer.setItems(comList);
+        int i = 3;
+        for(PodcastComment com : comList) {
+        try {   
+            
+            FXMLLoader fx = new FXMLLoader(getClass().getResource("commentView.fxml"));
+            Pane p = fx.load();
+            CommentViewController controller = fx.getController();
+            controller.setView(com);
+            commentsContainer.add(p, 0, i);
+            i++;
+        } catch (IOException e ) {
+            System.out.println("error 1: "+e.getMessage());
+        }
+            
+        }
+        
+    }
    }
    
     @FXML
@@ -150,7 +162,8 @@ public class PodcastCommentsFrontController implements Initializable {
                 clickedCommentId = -1;
                 deleteCheckedComment.setVisible(false);
                 editCommentButton.setVisible(false);
-                showComments();
+                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+                showComments(comList, 1, null);
                 searchInput.setText("");
             } else {
             Alert al = new Alert(Alert.AlertType.ERROR);
@@ -202,10 +215,9 @@ public class PodcastCommentsFrontController implements Initializable {
                 clickedCommentId = -1;
                 deleteCheckedComment.setVisible(false);
                 editCommentButton.setVisible(false);
-                showComments();
+                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+                showComments(comList , 1, null);
                 searchInput.setText("");
-                commentsContainer.getSelectionModel().clearSelection();
-                commentsContainer.refresh();
                 
             } else {
             Alert al = new Alert(Alert.AlertType.ERROR);
@@ -218,14 +230,13 @@ public class PodcastCommentsFrontController implements Initializable {
     }
     
 
-    @FXML
     private void tblViewCurrentStoreOnClick(MouseEvent event) {
-        if (commentsContainer.getSelectionModel().getSelectedItem() != null) {
-         PodcastComment com =commentsContainer.getSelectionModel().getSelectedItem();
-         clickedCommentId = com.getId();
-         deleteCheckedComment.setVisible(true);
-        editCommentButton.setVisible(true);
-        }
+//        if (commentsContainer.getSelectionModel().getSelectedItem() != null) {
+//         PodcastComment com =commentsContainer.getSelectionModel().getSelectedItem();
+//         clickedCommentId = com.getId();
+//         deleteCheckedComment.setVisible(true);
+//        editCommentButton.setVisible(true);
+//        }
     }
 
     @FXML
@@ -241,7 +252,8 @@ public class PodcastCommentsFrontController implements Initializable {
         addCommentButton.setDisable(true);
         CRUDComments cr = new CRUDComments();
         cr.addComment(com);
-        showComments();
+        ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+        showComments(comList, 1, null);
         searchInput.setText("");
         
     }
@@ -288,19 +300,13 @@ public class PodcastCommentsFrontController implements Initializable {
             if (filtered) {
                 CRUDComments cr = new CRUDComments();
                 ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
-                 FXCollections.reverse(comList);
-                commentsContainer.setItems(comList);
-                commentsContainer.refresh();
+                 showComments(comList, 1, null);
             }
         } else {
             filtered = true;
             CRUDComments rc = new CRUDComments();
             ObservableList<PodcastComment> fileredComments = rc.getCommentsByComText(p,searchInput.getText());
-            if(!fileredComments.isEmpty()) {
-            FXCollections.reverse(fileredComments);
-            }
-            commentsContainer.setItems(fileredComments);
-            commentsContainer.refresh();
+            showComments(fileredComments ,2, searchInput.getText());
         }
      }
     @FXML
@@ -320,6 +326,16 @@ public class PodcastCommentsFrontController implements Initializable {
         removeFavoriteButt.setVisible(false);
         addFavoriteButt.setVisible(true);
     }
-     
-     
+
+    @FXML
+    private void playAudioClick(MouseEvent event) {
+        audioLoader.startAudio();
+        
+    }
+
+    @FXML
+    private void stopAudioClick(MouseEvent event) throws InterruptedException {
+        audioLoader.pauseAudio();
+    }
+         
 }

@@ -4,15 +4,9 @@
  * and open the template in the editor.
  */
 package podtasty;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,33 +20,34 @@ import javafx.stage.Stage;
 public class PodTasty extends Application {
     
     @Override
+    public void stop() {
+        LoadAudio ld = LoadAudio.getInstance();
+        try {
+            ld.stopAudio();
+        } catch (IOException ex) {
+            Logger.getLogger(PodTasty.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        LoadAudio.destroyInstance();
+    }
+    @Override
     public void start(Stage stage) throws Exception {
-       
-//         URL url = new URL("http://127.0.0.1:8000/Files/podcastFiles/"+podcast.getSource());
-//
-//         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//
-//         connection.setRequestProperty("accept", "application/json");
-//
-//         // This line makes the request
-//         InputStream responseStream = connection.getInputStream();
-//       
-//         System.out.println("____________________________________");
-//         int i;
-//         byte[] b = new byte[2048];
-//        while ((i = responseStream.read(b)) != -1)
-//            System.out.println(b);
-//        responseStream.close();
-         
+            
+          
+//        Parent root = FXMLLoader.load(getClass().getResource("PodcastComments.fxml"));
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("TagsFxmlDocument.fxml"));
+        
         
         Parent root = FXMLLoader.load(getClass().getResource("PodcastCommentsFront.fxml"));
+        
+        
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+  
     }
-
     /**
      * @param args the command line arguments
      */
