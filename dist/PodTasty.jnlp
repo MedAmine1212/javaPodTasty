@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PodTasty.jar" size="258656" download="eager" />
+    <jar href="PodTasty.jar" size="258570" download="eager" />
     <jar href="lib\javax.persistence-2.2.1.jar" size="203426" download="eager" />
     <jar href="lib\jl1.0.jar" size="105446" download="eager" />
     <jar href="lib\jogg-0.0.7.jar" size="6839" download="eager" />

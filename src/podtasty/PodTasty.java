@@ -21,11 +21,13 @@ public class PodTasty extends Application {
     
     @Override
     public void stop() {
+        System.out.println("destroying");
         LoadAudio ld = LoadAudio.getInstance();
+            ld.startAudio();
         try {
             ld.stopAudio();
         } catch (IOException ex) {
-            Logger.getLogger(PodTasty.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         LoadAudio.destroyInstance();
     }
