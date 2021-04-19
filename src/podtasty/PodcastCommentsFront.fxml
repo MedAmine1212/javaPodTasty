@@ -5,15 +5,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="container" prefHeight="566.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastCommentsFrontController">
+<AnchorPane id="AnchorPane" fx:id="container" prefHeight="711.0" prefWidth="1200.0" style="-fx-background-color: rgba(0,0,0,0.5);;" stylesheets="@../styles/podcastComments.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastCommentsFrontController">
    <children>
+      <Label fx:id="podcastRating" layoutX="968.0" layoutY="172.0" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
       <GridPane layoutX="10.0" layoutY="228.0" prefHeight="79.0" prefWidth="1158.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.4000244140625" minWidth="0.0" prefWidth="11.200018310546874" />
@@ -30,30 +37,23 @@
                <buttons>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                      <buttons>
-                        <Button fx:id="editCommentButton" mnemonicParsing="false" onMouseClicked="#editCommentClick" prefHeight="26.0" prefWidth="266.0" text="Edit" />
-                        <Button fx:id="deleteCheckedComment" mnemonicParsing="false" onMouseClicked="#deleteCommentClick" text="Delete" />
+                        <Button fx:id="editCommentButton" mnemonicParsing="false" onMouseClicked="#editCommentClick" prefHeight="26.0" prefWidth="266.0" text="Edit" textFill="WHITE" />
+                        <Button fx:id="deleteCheckedComment" mnemonicParsing="false" onMouseClicked="#deleteCommentClick" text="Delete" textFill="WHITE" />
                      </buttons>
                   </ButtonBar>
                </buttons>
             </ButtonBar>
-            <Label fx:id="comnumberLabel" prefHeight="85.0" prefWidth="326.0" GridPane.columnIndex="1">
+            <Label fx:id="comnumberLabel" prefHeight="85.0" prefWidth="326.0" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="addCommentButton" mnemonicParsing="false" onMouseClicked="#addCommentAction" prefHeight="26.0" prefWidth="138.0" text="Add comment" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="addCommentButton" mnemonicParsing="false" onMouseClicked="#addCommentAction" prefHeight="26.0" prefWidth="138.0" text="Add comment" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="commentTextInput" onKeyPressed="#deactivateButton" onKeyTyped="#activateButton" prefHeight="26.0" prefWidth="378.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="searchInput" onKeyReleased="#filerComments" GridPane.columnIndex="3" />
          </children>
       </GridPane>
-      <Button layoutX="1012.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#openRateView" text="Rate" />
-      <Button fx:id="addFavoriteButt" layoutX="1069.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#addFavoriteAction" text="Save to favorites" />
-      <Button layoutX="942.0" layoutY="35.0" mnemonicParsing="false" text="Report" />
-      <Button fx:id="removeFavoriteButt" layoutX="1070.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#removeFavoriteAction" text="Remove favorite">
-         <effect>
-            <Glow />
-         </effect></Button>
-      <ScrollPane layoutX="32.0" layoutY="311.0" prefHeight="254.0" prefWidth="1167.0" style="-fx-border-color: rgb(244,244,244);">
+      <ScrollPane fx:id="commentsScroll" layoutX="21.0" layoutY="322.0" prefHeight="393.0" prefWidth="1178.0" style="-fx-border-color: rgba(0,0,0,0.1); -fx-background-color: transparent;">
          <content>
             <GridPane fx:id="commentsContainer" prefHeight="116.0" prefWidth="1001.0">
                <columnConstraints>
@@ -67,5 +67,45 @@
       </ScrollPane>
       <Button layoutX="225.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#playAudioClick" text="Play" />
       <Button layoutX="277.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#stopAudioClick" text="Stop" />
+      <ImageView fx:id="removeFavoriteButt" fitHeight="34.0" fitWidth="38.0" layoutX="1087.0" layoutY="35.0" onMouseClicked="#removeFavoriteAction" onMouseEntered="#hoverButton" onMouseExited="#unhoverButton" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/removeFavoriteButt.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="addFavoriteButt" fitHeight="34.0" fitWidth="38.0" layoutX="1087.0" layoutY="35.0" onMouseClicked="#addFavoriteAction" onMouseEntered="#hoverButton" onMouseExited="#unhoverButton" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/addFavoriteButt.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="report" fitHeight="34.0" fitWidth="38.0" layoutX="970.0" layoutY="33.0" onMouseEntered="#hoverButton" onMouseExited="#unhoverButton" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/report.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="1026.0" layoutY="33.0" prefHeight="63.0" prefWidth="41.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <ImageView fx:id="rate" fitHeight="34.0" fitWidth="38.0" onMouseClicked="#openRateView" onMouseEntered="#hoverButton" onMouseExited="#unhoverButton" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../images/rate.png" />
+                     </image>
+                  </ImageView>
+               </top>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="33.0" GridPane.rowIndex="1">
+               <center>
+                  <Label fx:id="userRating" textFill="WHITE" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

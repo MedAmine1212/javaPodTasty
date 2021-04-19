@@ -63,7 +63,7 @@ public class LoadAudio extends Thread{
                 data = new byte[4096];
                 while ((nBytesRead = din.read(data, 0, data.length)) != -1) {
                    while (!play) {
-                       System.out.println("stopped");
+                       System.out.print("");
                    }
                         line.write(data, 0, nBytesRead);
                 }

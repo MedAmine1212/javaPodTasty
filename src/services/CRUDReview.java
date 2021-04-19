@@ -6,9 +6,13 @@
 package services;
 
 import DBConnection.MyConnection;
+import entities.Podcast;
 import entities.PodcastReview;
 import interfaces.IReview;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -50,6 +54,36 @@ public class CRUDReview implements IReview{
             System.out.println(e);
             return false;
         }    
+    }
+
+    @Override
+    public ObservableList<PodcastReview> getReviewsByPodcast(Podcast pod) {
+        
+         ObservableList<PodcastReview> reviews = FXCollections.observableArrayList();
+        try {
+            String requete = "SELECT * FROM podcast_review p WHERE p.podcast_id_id=? ";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete); 
+            pst.setInt(1, pod.getId());
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                PodcastReview review = new PodcastReview();
+                review.setId(rs.getInt("id"));
+                review.setRating(rs.getFloat("rating"));
+                CRUDUser cu = new CRUDUser();
+                review.setUserIdId(cu.getUserById(rs.getInt("user_id_id")));
+                review.setPodcastIdId(pod);
+                reviews.add(review);
+                
+        }
+            return reviews;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return null;
+        }
+        
     }
     
 }

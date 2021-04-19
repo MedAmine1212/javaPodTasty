@@ -91,7 +91,7 @@ public class PodcastReviewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        reviewIsSubmitted = true;
+        reviewIsSubmitted = false;
         submittedRating = 10.0f;
         setView();
     }    

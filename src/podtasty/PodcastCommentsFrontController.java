@@ -7,14 +7,22 @@ package podtasty;
 
 import entities.Podcast;
 import entities.PodcastComment;
+import entities.PodcastReview;
 import entities.User;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,16 +36,22 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import services.CRUDComments;
 import services.CRUDFavorite;
+import services.CRUDReview;
 
 /**
  * FXML Controller class
@@ -67,14 +81,27 @@ public class PodcastCommentsFrontController implements Initializable {
     private int clickedCommentId = -1;
     private boolean filtered = false;
     private boolean isFavorite = false;
+    private boolean ratingSaved = false;
     @FXML
-    private Button addFavoriteButt;
+    private ImageView addFavoriteButt;
     @FXML
-    private Button removeFavoriteButt;
+    private ImageView removeFavoriteButt;
     @FXML
     private GridPane commentsContainer;
     
     LoadAudio audioLoader;
+    @FXML
+    private ImageView rate;
+    @FXML
+    private ImageView report;
+    @FXML
+    private Label podcastRating;
+    @FXML
+    private Label userRating;
+    
+    private Pane selectedCom;
+    @FXML
+    private ScrollPane commentsScroll;
     /**
      * Initializes the controller class.
      * @param url
@@ -92,10 +119,32 @@ public class PodcastCommentsFrontController implements Initializable {
             removeFavoriteButt.setVisible(false);
         }
         CRUDComments cr = new CRUDComments();
+        CRUDReview crr = new CRUDReview();
         p = new Podcast();
         p.setId(1);
         p.setCommentsAllowed(0);
-        
+         ObservableList<PodcastReview> reviewList = crr.getReviewsByPodcast(p);
+        if(!reviewList.isEmpty()) {
+            float rating = 0;
+            rating = reviewList.stream().map(rv -> rv.getRating()).reduce(rating, (accumulator, _item) -> accumulator + _item);
+            
+            reviewList.stream().filter(rv -> (Objects.equals(rv.getUserIdId().getId(), u.getId()))).map(rv -> {
+                ratingSaved = true;
+                return rv;
+            }).forEachOrdered(rv -> {
+                try {
+                    String strDouble = String.format("%.1f", rv.getRating());
+                    userRating.setText(strDouble);
+                    setImage(rate,  1);
+                } catch (IOException ex) {
+                    Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            System.out.println(rating);
+            rating/=reviewList.size();
+            String strDouble = String.format("%.1f", rating);
+            podcastRating.setText("Rating: "+strDouble+"/10");
+        }
         audioLoader = LoadAudio.getInstance();
         audioLoader.start();
         
@@ -139,6 +188,22 @@ public class PodcastCommentsFrontController implements Initializable {
             Pane p = fx.load();
             CommentViewController controller = fx.getController();
             controller.setView(com);
+            p.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (selectedCom != null) {
+                        selectedCom.opacityProperty().set(1);
+                    selectedCom.setStyle("");
+                    p.setStyle("");
+                    }
+                    selectedCom = p;
+                    p.opacityProperty().set(0.6);
+                    p.setStyle("-fx-border-color:  white");
+                    clickedCommentId = com.getId();
+                    deleteCheckedComment.setVisible(true);
+                    editCommentButton.setVisible(true);
+                } 
+            });
             commentsContainer.add(p, 0, i);
             i++;
         } catch (IOException e ) {
@@ -164,6 +229,9 @@ public class PodcastCommentsFrontController implements Initializable {
                 editCommentButton.setVisible(false);
                 ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
                 showComments(comList, 1, null);
+                selectedCom.opacityProperty().set(1);
+                selectedCom.setStyle("");
+                selectedCom = null;
                 searchInput.setText("");
             } else {
             Alert al = new Alert(Alert.AlertType.ERROR);
@@ -228,17 +296,6 @@ public class PodcastCommentsFrontController implements Initializable {
     }
     );
     }
-    
-
-    private void tblViewCurrentStoreOnClick(MouseEvent event) {
-//        if (commentsContainer.getSelectionModel().getSelectedItem() != null) {
-//         PodcastComment com =commentsContainer.getSelectionModel().getSelectedItem();
-//         clickedCommentId = com.getId();
-//         deleteCheckedComment.setVisible(true);
-//        editCommentButton.setVisible(true);
-//        }
-    }
-
     @FXML
     private void addCommentAction(MouseEvent event) {
         searchInput.setText("");
@@ -254,6 +311,9 @@ public class PodcastCommentsFrontController implements Initializable {
         cr.addComment(com);
         ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
         showComments(comList, 1, null);
+        selectedCom.opacityProperty().set(1);
+        selectedCom.setStyle("");
+        selectedCom = null;
         searchInput.setText("");
         
     }
@@ -296,6 +356,7 @@ public class PodcastCommentsFrontController implements Initializable {
      
     @FXML
     private void filerComments(KeyEvent event) {
+
         if ( searchInput.getText().length() == 0) {
             if (filtered) {
                 CRUDComments cr = new CRUDComments();
@@ -336,6 +397,42 @@ public class PodcastCommentsFrontController implements Initializable {
     @FXML
     private void stopAudioClick(MouseEvent event) throws InterruptedException {
         audioLoader.pauseAudio();
+    }
+
+    @FXML
+    private void unhoverButton(MouseEvent event) throws IOException {
+    int sender = 2;
+    if (((ImageView)event.getTarget()).getId().equals("rate") && ratingSaved) {
+        sender = 1;
+    }
+    setImage(((ImageView)event.getTarget()), sender);
+
+    }
+
+    @FXML
+    private void hoverButton(MouseEvent event) throws IOException {
+        int sender = 1;
+    if (((ImageView)event.getTarget()).getId().equals("rate") && ratingSaved) {
+        sender = 2;
+    }
+            setImage(((ImageView)event.getTarget()), sender);
+
+    }
+    
+     private void setImage(ImageView imageView, int sender) throws IOException {
+    String src = "src/images/";
+    if(sender == 1) {
+        src +=imageView.getId()+"Hover";
+    } else {
+        src +=imageView.getId();
+    }
+    src+=".png";
+    
+    BufferedImage image;
+    image = ImageIO.read(new File(src));
+    WritableImage img = SwingFXUtils.toFXImage(image, null);
+    imageView.setImage(img);
+        
     }
          
 }
