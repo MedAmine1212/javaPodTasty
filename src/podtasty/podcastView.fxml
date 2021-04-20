@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -11,7 +12,10 @@
    <children>
       <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="190.0">
          <left>
-            <ImageView fx:id="podcastImg" fitHeight="82.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="podcastImg" fitHeight="82.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/defPod.png" />
+               </image></ImageView>
          </left>
          <right>
             <Pane prefHeight="94.0" prefWidth="102.0" BorderPane.alignment="CENTER">

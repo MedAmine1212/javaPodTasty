@@ -134,6 +134,8 @@ public class PodcastCommentsFrontController implements Initializable {
     private Label playlistLabel;
     @FXML
     private BorderPane loading;
+    
+    private ObservableList<Podcast> playlist;
     /**
      * Initializes the controller class.
      * @param url
@@ -162,7 +164,9 @@ public class PodcastCommentsFrontController implements Initializable {
         currentPodcast.setPodcastName("Podcast 1");
         currentPodcast.setPodcastViews(120);
         currentPodcast.setPodcastImage("1.jpeg");
-        currentPodcast.setPodcastSource("1.mp3");
+        currentPodcast.setPodcastSource("6074b2a184d44.mp3");
+        CRUDComments cr = new CRUDComments();
+        playlist = cr.getPodcastByPlaylist(1, currentPodcast.getId());
         try {
 
                setUpView();
@@ -178,6 +182,10 @@ public class PodcastCommentsFrontController implements Initializable {
     }  
     
    public void setUpView() throws IOException {
+       
+        audioLoader = LoadAudio.getInstance();
+        audioLoader.setAudioUrl(currentPodcast.getPodcastSource());
+        audioLoader.start();
         BufferedImage imgg;
         imgg = ImageIO.read(new File("src/images/play.png"));
         WritableImage im = SwingFXUtils.toFXImage(imgg, null);
@@ -222,9 +230,6 @@ public class PodcastCommentsFrontController implements Initializable {
             String strDouble = String.format("%.1f", rating);
             podcastRating.setText("Rating: "+strDouble+"/10");
         }
-        audioLoader = LoadAudio.getInstance();
-        audioLoader.setAudioUrl(currentPodcast.getPodcastSource());
-        audioLoader.start();
         
 //        if(p.getCommentsAllowed() == 0) {
 //        } else {
@@ -236,9 +241,6 @@ public class PodcastCommentsFrontController implements Initializable {
         deleteCheckedComment.setVisible(false);
         editCommentButton.setVisible(false);
         addCommentButton.setDisable(true);
-        
-        ObservableList<Podcast> playlist = cr.getPodcastByPlaylist(1, currentPodcast.getId());
-        
        if(!playlist.isEmpty()) {
            playlistLabel.setText("Other podcasts you might like");
             showPlaylist(playlist);
@@ -259,37 +261,7 @@ public class PodcastCommentsFrontController implements Initializable {
             pn.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                     audioLoader.startAudio();
-                    try {
-                        audioLoader.stopAudio();
-                    } catch (IOException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                    LoadAudio.destroyInstance();
-
-                   PodcastCommentsFrontController.currentPodcast = pod;
-                    
-                         loading.setVisible(true);
-                            new Thread(new Runnable() {
-
-                        @Override
-                        public void run() {
-
-                            loading.setVisible(true);
-                            Platform.runLater(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    try {
-                                            setUpView();
-                                            } catch (IOException ex) {
-                                            Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
-                                        }
-                                        }
-                                        });  
-                                    }
-                                }).start();
-
+                     gotToNext(pod);
                 } 
             });
             playlistContainer.add(pn, 0, i);
@@ -299,7 +271,40 @@ public class PodcastCommentsFrontController implements Initializable {
         }
     }
    }
-   
+   public void gotToNext(Podcast pod) {
+             try {
+                 audioLoader.stopAudio();
+             } catch (IOException ex) {
+                 System.out.println(ex.getMessage());
+             }
+             LoadAudio.destroyInstance();
+                
+                playlist.add(PodcastCommentsFrontController.currentPodcast);
+                playlist.remove(pod);
+                PodcastCommentsFrontController.currentPodcast = pod;
+                
+                loading.setVisible(true);
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                     loading.setVisible(true);
+                     Platform.runLater(new Runnable() {
+
+                         @Override
+                         public void run() {
+                             try {
+                                     setUpView();
+                                     } catch (IOException ex) {
+                                     Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+                                 }
+                                 }
+                                 });  
+                             }
+    }).start();
+
+   }
    public void showComments(ObservableList<PodcastComment> comList, int caller, String text) {
        System.out.println("whut");
        commentsContainer.getChildren().clear();
@@ -603,6 +608,24 @@ public class PodcastCommentsFrontController implements Initializable {
             image = ImageIO.read(new File(src));
             WritableImage img = SwingFXUtils.toFXImage(image, null);
             palyStopImg.setImage(img);
+    }
+
+    @FXML
+    private void repeatAudio(MouseEvent event) throws IOException {
+        audioLoader.repeat();
+        
+            playing = true;
+            BufferedImage image;
+            image = ImageIO.read(new File("src/images/pause.png"));
+            WritableImage img = SwingFXUtils.toFXImage(image, null);
+            palyStopImg.setImage(img);
+            
+    }
+
+    @FXML
+    private void nextPodcast(MouseEvent event) {
+        playing = false;
+        gotToNext(playlist.get(0));
     }
          
 }

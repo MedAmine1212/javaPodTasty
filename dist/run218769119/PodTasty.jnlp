@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PodTasty.jar" size="1855382" download="eager" />
+    <jar href="PodTasty.jar" size="1855381" download="eager" />
     <jar href="lib\jaco-mp3-player-0.9.3.jar" size="90069" download="eager" />
     <jar href="lib\javax.persistence-2.2.1.jar" size="203426" download="eager" />
     <jar href="lib\jl1.0.jar" size="105446" download="eager" />

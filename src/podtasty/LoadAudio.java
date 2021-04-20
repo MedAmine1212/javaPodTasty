@@ -5,30 +5,28 @@
  */
 package podtasty;
 
+import jaco.mp3.player.MP3Player;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
-import javax.sound.sampled.AudioFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.Clip;
 
 /**
  *
  * @author khail
  */
 public class LoadAudio extends Thread{
-    private SourceDataLine line = null;
-    private AudioInputStream din = null;
+    private Clip line = null;
     public static LoadAudio instance;
-    private boolean play = false;
-    private byte[] data;
-    private int nBytesRead;
+    private MP3Player mp3Player;
+    private boolean isMp3;
     private String audioUrl;
     public static LoadAudio getInstance() {
         if(instance == null){
@@ -44,35 +42,29 @@ public class LoadAudio extends Thread{
     
     @Override
     public void run(){
-         try{      
+        if  (!audioUrl.contains("mp3")) {
+            isMp3= false;
+         try{
          URL url = new URL("http://127.0.0.1:8000/Files/podcastFiles/"+audioUrl);
           HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
             InputStream bufferedIn = new BufferedInputStream(httpcon.getInputStream());
             AudioInputStream in = AudioSystem.getAudioInputStream(bufferedIn);
-            AudioFormat baseFormat = in.getFormat();
-            AudioFormat decodedFormat = new AudioFormat(
-                    AudioFormat.Encoding.PCM_SIGNED,
-                    baseFormat.getSampleRate(), 16, baseFormat.getChannels(),
-                    baseFormat.getChannels() * 2, baseFormat.getSampleRate(),
-                    false);
-            din = AudioSystem.getAudioInputStream(decodedFormat, in);
-            DataLine.Info info = new DataLine.Info(SourceDataLine.class, decodedFormat);
-            line = (SourceDataLine) AudioSystem.getLine(info);
-            if(line != null) {
-                line.start();
-                line.open(decodedFormat);
-                data = new byte[4096];
-                while ((nBytesRead = din.read(data, 0, data.length)) != -1) {
-                   while (!play) {
-                       System.out.print("");
-                   }
-                        line.write(data, 0, nBytesRead);
-                }
-            }
+            line = AudioSystem.getClip();
+            line.open(in);
+          
 
         }
-        catch(IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+        catch(Exception e) {
             System.out.println(e.getMessage());
+        }
+        } else {
+            
+            isMp3= true;
+            try {
+                mp3Player = new MP3Player(new URL("http://127.0.0.1:8000/Files/podcastFiles/"+audioUrl));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(LoadAudio.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     public static void main(String[] args) {
@@ -81,21 +73,41 @@ public class LoadAudio extends Thread{
     
     public void startAudio() {
         // Start
-        play = true;
-        line.start();
+        if(!isMp3 && line!=null) {
+            line.start();
+        } else if(mp3Player!= null){
+            mp3Player.play();
+        }
     }
     public void pauseAudio() {
-        play = false;
-        line.stop();
+        if(!isMp3 && line!=null) {
+            line.stop();
+        } else if(mp3Player!= null){
+            mp3Player.pause();
+        }
     }
     
     public void stopAudio() throws IOException {
-        line.stop();
-        line.close();
-        din.close();
+        if(!isMp3 && line!=null) {
+            line.stop();
+            line.close();
+        } else if(mp3Player!= null){
+            mp3Player.stop();
+            mp3Player = null;
+        }
     }
     
     public void setAudioUrl(String url) {
         audioUrl = url;
+    }
+    
+    public void repeat() throws IOException {
+        if(isMp3 && mp3Player!= null) {
+            mp3Player.stop();
+            mp3Player.play();
+            } else if (line!=null) {
+            line.setMicrosecondPosition(0);
+            line.start();
+            }
     }
 }

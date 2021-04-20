@@ -22,7 +22,6 @@ public class PodTasty extends Application {
     public void stop() {
         System.out.println("destroying");
         LoadAudio ld = LoadAudio.getInstance();
-            ld.startAudio();
         try {
             ld.stopAudio();
         } catch (IOException ex) {
