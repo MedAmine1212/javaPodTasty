@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -11,17 +12,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="container" prefHeight="711.0" prefWidth="1200.0" style="-fx-background-color: rgba(0,0,0,0.5);;" stylesheets="@../styles/podcastComments.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastCommentsFrontController">
+<AnchorPane id="AnchorPane" fx:id="container" prefHeight="752.0" prefWidth="1200.0" stylesheets="@../styles/podcastComments.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastCommentsFrontController">
    <children>
-      <Label fx:id="podcastRating" layoutX="968.0" layoutY="172.0" textFill="WHITE">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <GridPane layoutX="10.0" layoutY="228.0" prefHeight="79.0" prefWidth="1158.0">
+      <GridPane layoutX="5.0" layoutY="250.0" prefHeight="93.0" prefWidth="1158.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.4000244140625" minWidth="0.0" prefWidth="11.200018310546874" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.2" minWidth="10.0" prefWidth="582.3999816894532" />
@@ -29,8 +26,8 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="540.2000122070312" minWidth="10.0" prefWidth="286.1999633789062" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="53.000006103515624" minHeight="10.0" prefHeight="38.199990844726564" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="48.599996948242186" minHeight="10.0" prefHeight="47.800009155273436" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="53.000006103515624" minHeight="10.0" prefHeight="22.4" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="56.00000000000001" minHeight="10.0" prefHeight="56.00000000000001" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <ButtonBar GridPane.columnIndex="3" GridPane.rowIndex="1">
@@ -53,9 +50,9 @@
             <TextField fx:id="searchInput" onKeyReleased="#filerComments" GridPane.columnIndex="3" />
          </children>
       </GridPane>
-      <ScrollPane fx:id="commentsScroll" layoutX="21.0" layoutY="322.0" prefHeight="393.0" prefWidth="1178.0" style="-fx-border-color: rgba(0,0,0,0.1); -fx-background-color: transparent;">
+      <ScrollPane fx:id="commentsScroll" layoutX="277.0" layoutY="358.0" prefHeight="394.0" prefWidth="917.0" style="-fx-border-color: rgba(0,0,0,0.1); -fx-background-color: transparent;">
          <content>
-            <GridPane fx:id="commentsContainer" prefHeight="116.0" prefWidth="1001.0">
+            <GridPane fx:id="commentsContainer" prefHeight="116.0" prefWidth="863.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -65,8 +62,6 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Button layoutX="225.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#playAudioClick" text="Play" />
-      <Button layoutX="277.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#stopAudioClick" text="Stop" />
       <ImageView fx:id="removeFavoriteButt" fitHeight="34.0" fitWidth="38.0" layoutX="1087.0" layoutY="35.0" onMouseClicked="#removeFavoriteAction" onMouseEntered="#hoverButton" onMouseExited="#unhoverButton" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/removeFavoriteButt.png" />
@@ -107,5 +102,102 @@
             </BorderPane>
          </children>
       </GridPane>
+      <Pane fx:id="playerContainer" layoutX="8.0" layoutY="22.0" prefHeight="222.0" prefWidth="936.0">
+         <children>
+            <BorderPane prefHeight="222.0" prefWidth="298.0">
+               <center>
+                  <ImageView fx:id="podcastImage" fitHeight="191.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" style="fx-border-color: black;" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../images/defPod.png" />
+                     </image>
+                  </ImageView>
+               </center>
+            </BorderPane>
+            <BorderPane layoutX="313.0" layoutY="159.0" prefHeight="56.0" prefWidth="132.0">
+               <left>
+                  <Button fx:id="prevButton" mnemonicParsing="false" onAction="#prevClicked" prefHeight="20.0" prefWidth="32.0" style="-fx-background-color: white;" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/prev.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </left>
+               <right>
+                  <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextClicked" prefHeight="20.0" prefWidth="32.0" style="-fx-background-color: white;" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/next.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </right>
+               <center>
+                  <Button fx:id="stopPlayButton" mnemonicParsing="false" onMouseClicked="#stopPlayAudio" prefHeight="34.0" prefWidth="45.0" style="-fx-background-color: white;" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <ImageView fx:id="palyStopImg" fitHeight="28.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/play.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </center>
+            </BorderPane>
+            <Label fx:id="podcastName" layoutX="299.0" layoutY="31.0" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="podcastViews" layoutX="307.0" layoutY="71.0" prefWidth="176.0" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="podcastDesc" layoutX="330.0" layoutY="127.0" prefHeight="26.0" prefWidth="592.0" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="podcastRating" layoutX="842.0" layoutY="155.0" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ScrollPane fx:id="playlistScroll" layoutX="14.0" layoutY="438.0" prefHeight="311.0" prefWidth="215.0" style="-fx-border-color: rgba(0,0,0,0.1); -fx-background-color: transparent;">
+         <content>
+            <GridPane fx:id="playlistContainer" prefHeight="88.0" prefWidth="186.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Label fx:id="playlistLabel" layoutX="14.0" layoutY="397.0" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <BorderPane fx:id="loading" prefHeight="752.0" prefWidth="1200.0">
+         <center>
+            <ImageView fitHeight="286.0" fitWidth="373.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/loading.png" />
+               </image>
+            </ImageView>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

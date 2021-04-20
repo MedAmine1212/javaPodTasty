@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="102.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastViewController">
+   <children>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="190.0">
+         <left>
+            <ImageView fx:id="podcastImg" fitHeight="82.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Pane prefHeight="94.0" prefWidth="102.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="podcastName" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="podcastDesc" layoutY="62.0" prefHeight="40.0" prefWidth="102.0" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="podcastViews" layoutX="2.0" layoutY="40.0" prefHeight="20.0" prefWidth="96.0" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </right>
+         <center>
+            <FlowPane prefHeight="82.0" prefWidth="26.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</Pane>

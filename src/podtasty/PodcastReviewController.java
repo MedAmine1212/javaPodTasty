@@ -17,6 +17,9 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
@@ -145,12 +148,29 @@ public class PodcastReviewController implements Initializable {
         }
         if(currentQs > 4) {
           
-            closeButton.setDisable(true);
+            new Thread(new Runnable() {
+                
+                @Override
+                public void run() {
+                     closeButton.setDisable(true);
+                    questionFour.setVisible(false);
+                    rateContainer.setVisible(false);
+                    sendingPane.setVisible(true);
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(PodcastReviewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Platform.runLater(new Runnable() {
+                         @Override
+                        public void run() {
+                            sendRate();
+                        }
+                }
+                );  
+                 }
+     }).start();
             
-            questionFour.setVisible(false);
-            rateContainer.setVisible(false);
-            sendingPane.setVisible(true);
-            sendRate();
           
         } else {
             qsList.get(currentQs-1).setVisible(false);
@@ -160,6 +180,7 @@ public class PodcastReviewController implements Initializable {
         
     }
    private void sendRate(){
+       
        rate /=4;
        String strDouble = String.format("%.1f", rate);
        rate = Float.parseFloat(strDouble);

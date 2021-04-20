@@ -149,5 +149,42 @@ public class CRUDComments implements IComments<PodcastComment> {
             return null;
         }
     }
+
+    @Override
+    public ObservableList<Podcast> getPodcastByPlaylist(int id, int podId) {
+        
+        ObservableList<Podcast> podcasts = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT * FROM podcast p WHERE p.playlist_id_id=? AND p.id <> ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            pst.setInt(2, podId);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Podcast pod = new Podcast();
+                pod.setId(rs.getInt("id"));
+                pod.setCommentsAllowed(rs.getInt("comments_allowed"));
+                pod.setCurrentlyLive(rs.getInt("currently_live"));
+                pod.setCurrentlyWatching(rs.getInt("currently_watching"));
+                pod.setIsBlocked(rs.getInt("is_blocked"));
+                pod.setPodcastDate(rs.getDate("podcast_date"));
+                pod.setPodcastImage(rs.getString("podcast_image"));
+                pod.setPodcastSource(rs.getString("podcast_source"));
+                pod.setPodcastViews(rs.getInt("podcast_views"));
+                pod.setPodcastName(rs.getString("podcast_name"));
+                pod.setPodcastDescription(rs.getString("podcast_description"));
+                podcasts.add(pod);
+                
+        }
+            return podcasts;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return null;
+        }
+    }
     
 }

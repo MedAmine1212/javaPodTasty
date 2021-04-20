@@ -5,12 +5,11 @@
  */
 package podtasty;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -45,7 +44,8 @@ public class PodTasty extends Application {
         
         
         Scene scene = new Scene(root);
-        
+        stage.setTitle("PodTasty");
+        stage.getIcons().add(new Image("/images/favicon.ico"));
         stage.setScene(scene);
         stage.show();
   

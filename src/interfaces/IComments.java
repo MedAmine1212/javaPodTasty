@@ -20,6 +20,6 @@ public interface IComments<PodcastComment> {
     public PodcastComment getCommentById(int id);
     public ObservableList<PodcastComment> getCommentsByPodcast(Podcast pod);
     public ObservableList<PodcastComment> getCommentsByComText(Podcast pod,String text);
-    
+    public ObservableList<Podcast> getPodcastByPlaylist(int id, int podId);
     
 }

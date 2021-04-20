@@ -29,6 +29,7 @@ public class LoadAudio extends Thread{
     private boolean play = false;
     private byte[] data;
     private int nBytesRead;
+    private String audioUrl;
     public static LoadAudio getInstance() {
         if(instance == null){
             instance = new LoadAudio();
@@ -44,7 +45,7 @@ public class LoadAudio extends Thread{
     @Override
     public void run(){
          try{      
-         URL url = new URL("http://127.0.0.1:8000/Files/podcastFiles/1.mp3");
+         URL url = new URL("http://127.0.0.1:8000/Files/podcastFiles/"+audioUrl);
           HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
             InputStream bufferedIn = new BufferedInputStream(httpcon.getInputStream());
             AudioInputStream in = AudioSystem.getAudioInputStream(bufferedIn);
@@ -92,5 +93,9 @@ public class LoadAudio extends Thread{
         line.stop();
         line.close();
         din.close();
+    }
+    
+    public void setAudioUrl(String url) {
+        audioUrl = url;
     }
 }

@@ -24,7 +24,12 @@
 	
 }
 
-#commentsScroll{
+#commentsScroll, #playlistScroll{
 
     -fx-background:transparent;
+}
+
+#loading{
+	
+    -fx-background-image: url("../images/bg.png");
 }

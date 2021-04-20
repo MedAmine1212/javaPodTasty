@@ -12,6 +12,7 @@ import entities.User;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,14 +40,16 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -77,7 +81,7 @@ public class PodcastCommentsFrontController implements Initializable {
     private TextField searchInput;
     
     private User u;
-    private Podcast p;
+    private static Podcast currentPodcast;
     private int clickedCommentId = -1;
     private boolean filtered = false;
     private boolean isFavorite = false;
@@ -88,7 +92,7 @@ public class PodcastCommentsFrontController implements Initializable {
     private ImageView removeFavoriteButt;
     @FXML
     private GridPane commentsContainer;
-    
+    private Thread loadingThread;
     LoadAudio audioLoader;
     @FXML
     private ImageView rate;
@@ -102,6 +106,34 @@ public class PodcastCommentsFrontController implements Initializable {
     private Pane selectedCom;
     @FXML
     private ScrollPane commentsScroll;
+    @FXML
+    private Pane playerContainer;
+    @FXML
+    private Button prevButton;
+    @FXML
+    private Button nextButton;
+    @FXML
+    private GridPane playlistContainer;
+    @FXML
+    private ScrollPane playlistScroll;
+    @FXML
+    private Button stopPlayButton;
+    
+    private boolean playing = false;
+    @FXML
+    private ImageView palyStopImg;
+    @FXML
+    private ImageView podcastImage;
+    @FXML
+    private Label podcastName;
+    @FXML
+    private Label podcastViews;
+    @FXML
+    private Label podcastDesc;
+    @FXML
+    private Label playlistLabel;
+    @FXML
+    private BorderPane loading;
     /**
      * Initializes the controller class.
      * @param url
@@ -109,21 +141,66 @@ public class PodcastCommentsFrontController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loading.setVisible(true);
+        new Thread(new Runnable() {
 
+    @Override
+    public void run() {
+        
+        loading.setVisible(true);
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() { 
         u = new User();
         u.setId(1);
         searchInput.setPromptText("Search comments...");
-        if(isFavorite) {
+        currentPodcast = new Podcast();
+        currentPodcast.setId(1);
+        currentPodcast.setCommentsAllowed(0);
+        currentPodcast.setPodcastDescription("Description Description Description Description ");
+        currentPodcast.setPodcastName("Podcast 1");
+        currentPodcast.setPodcastViews(120);
+        currentPodcast.setPodcastImage("1.jpeg");
+        currentPodcast.setPodcastSource("1.mp3");
+        try {
+
+               setUpView();
+           } catch (IOException ex) {
+               Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+           
+       }
+        }
+        });  
+    }
+}).start();
+       
+    }  
+    
+   public void setUpView() throws IOException {
+        BufferedImage imgg;
+        imgg = ImageIO.read(new File("src/images/play.png"));
+        WritableImage im = SwingFXUtils.toFXImage(imgg, null);
+        palyStopImg.setImage(im);
+       this.podcastDesc.setText(currentPodcast.getPodcastDescription());
+       this.podcastName.setText(currentPodcast.getPodcastName());
+       this.podcastViews.setText(currentPodcast.getPodcastViews()+" Views");
+       if(isFavorite) {
             addFavoriteButt.setVisible(false);
         } else {
             removeFavoriteButt.setVisible(false);
         }
         CRUDComments cr = new CRUDComments();
         CRUDReview crr = new CRUDReview();
-        p = new Podcast();
-        p.setId(1);
-        p.setCommentsAllowed(0);
-         ObservableList<PodcastReview> reviewList = crr.getReviewsByPodcast(p);
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new URL("http://127.0.0.1:8000/Files/podcastFiles/"+currentPodcast.getPodcastImage()));
+            WritableImage img = SwingFXUtils.toFXImage(image, null);
+            podcastImage.setImage(img);
+        } catch (Exception ex) {
+            Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         ObservableList<PodcastReview> reviewList = crr.getReviewsByPodcast(currentPodcast);
         if(!reviewList.isEmpty()) {
             float rating = 0;
             rating = reviewList.stream().map(rv -> rv.getRating()).reduce(rating, (accumulator, _item) -> accumulator + _item);
@@ -146,21 +223,85 @@ public class PodcastCommentsFrontController implements Initializable {
             podcastRating.setText("Rating: "+strDouble+"/10");
         }
         audioLoader = LoadAudio.getInstance();
+        audioLoader.setAudioUrl(currentPodcast.getPodcastSource());
         audioLoader.start();
         
 //        if(p.getCommentsAllowed() == 0) {
 //        } else {
 //
 //        }
-        ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+        ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
             
         showComments(comList ,1, null);
         deleteCheckedComment.setVisible(false);
         editCommentButton.setVisible(false);
         addCommentButton.setDisable(true);
-    }  
+        
+        ObservableList<Podcast> playlist = cr.getPodcastByPlaylist(1, currentPodcast.getId());
+        
+       if(!playlist.isEmpty()) {
+           playlistLabel.setText("Other podcasts you might like");
+            showPlaylist(playlist);
+       }
+        loading.setVisible(false);
+   } 
+   
+   public void showPlaylist(ObservableList<Podcast> playlist) {
+        playlistContainer.getChildren().clear();
+        int i = 3;
+        for(Podcast pod : playlist) {
+        try {   
+            
+            FXMLLoader fx = new FXMLLoader(getClass().getResource("podcastView.fxml"));
+            Pane pn = fx.load();
+            PodcastViewController controller = fx.getController();
+            controller.setView(pod);
+            pn.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                     audioLoader.startAudio();
+                    try {
+                        audioLoader.stopAudio();
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    LoadAudio.destroyInstance();
 
+                   PodcastCommentsFrontController.currentPodcast = pod;
+                    
+                         loading.setVisible(true);
+                            new Thread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            loading.setVisible(true);
+                            Platform.runLater(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    try {
+                                            setUpView();
+                                            } catch (IOException ex) {
+                                            Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+                                        }
+                                        }
+                                        });  
+                                    }
+                                }).start();
+
+                } 
+            });
+            playlistContainer.add(pn, 0, i);
+            i++;
+        } catch (IOException e ) {
+            System.out.println("error 1: "+e.getMessage());
+        }
+    }
+   }
+   
    public void showComments(ObservableList<PodcastComment> comList, int caller, String text) {
+       System.out.println("whut");
        commentsContainer.getChildren().clear();
        if (caller == 1) {
         if(comList.size() > 0) {
@@ -193,15 +334,22 @@ public class PodcastCommentsFrontController implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     if (selectedCom != null) {
                         selectedCom.opacityProperty().set(1);
-                    selectedCom.setStyle("");
-                    p.setStyle("");
+                        selectedCom.setStyle("");
                     }
+                    if (selectedCom == p) {
+                    
+                    clickedCommentId = -1;
+                    deleteCheckedComment.setVisible(false);
+                    editCommentButton.setVisible(false);
+                    selectedCom = null;
+                    } else { 
                     selectedCom = p;
                     p.opacityProperty().set(0.6);
                     p.setStyle("-fx-border-color:  white");
                     clickedCommentId = com.getId();
                     deleteCheckedComment.setVisible(true);
                     editCommentButton.setVisible(true);
+                    }
                 } 
             });
             commentsContainer.add(p, 0, i);
@@ -227,11 +375,13 @@ public class PodcastCommentsFrontController implements Initializable {
                 clickedCommentId = -1;
                 deleteCheckedComment.setVisible(false);
                 editCommentButton.setVisible(false);
-                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
                 showComments(comList, 1, null);
-                selectedCom.opacityProperty().set(1);
-                selectedCom.setStyle("");
-                selectedCom = null;
+                 if (selectedCom != null) {
+                    selectedCom.opacityProperty().set(1);
+                    selectedCom.setStyle("");
+                    selectedCom = null;
+                }
                 searchInput.setText("");
             } else {
             Alert al = new Alert(Alert.AlertType.ERROR);
@@ -283,7 +433,7 @@ public class PodcastCommentsFrontController implements Initializable {
                 clickedCommentId = -1;
                 deleteCheckedComment.setVisible(false);
                 editCommentButton.setVisible(false);
-                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
                 showComments(comList , 1, null);
                 searchInput.setText("");
                 
@@ -298,32 +448,37 @@ public class PodcastCommentsFrontController implements Initializable {
     }
     @FXML
     private void addCommentAction(MouseEvent event) {
-        searchInput.setText("");
         PodcastComment com = new PodcastComment();
-        Podcast pod = new Podcast();
-        pod.setId(1);
-        com.setPodcastIdId(pod);
+       
+        com.setPodcastIdId(currentPodcast);
         com.setCommentText(commentTextInput.getText());
         com.setUserIdId(u);
         commentTextInput.setText("");
         addCommentButton.setDisable(true);
         CRUDComments cr = new CRUDComments();
         cr.addComment(com);
-        ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+        ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
         showComments(comList, 1, null);
-        selectedCom.opacityProperty().set(1);
-        selectedCom.setStyle("");
-        selectedCom = null;
+        if (selectedCom != null) {
+            selectedCom.opacityProperty().set(1);
+            selectedCom.setStyle("");
+            selectedCom = null;
+        }
         searchInput.setText("");
         
     }
 
     @FXML
     private void deactivateButton(KeyEvent event) {
-        if(commentTextInput.getText().length() <3) {
+        if(event.getCode().toString().equals("ENTER") && !addCommentButton.isDisabled()){
             addCommentButton.setDisable(true);
-
-    }
+            addCommentAction(null);
+        } else {
+            
+            if(commentTextInput.getText().length() <3) {
+                addCommentButton.setDisable(true);
+            } 
+        }
     }
 
     @FXML
@@ -360,20 +515,20 @@ public class PodcastCommentsFrontController implements Initializable {
         if ( searchInput.getText().length() == 0) {
             if (filtered) {
                 CRUDComments cr = new CRUDComments();
-                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(p);
+                ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
                  showComments(comList, 1, null);
             }
         } else {
             filtered = true;
             CRUDComments rc = new CRUDComments();
-            ObservableList<PodcastComment> fileredComments = rc.getCommentsByComText(p,searchInput.getText());
+            ObservableList<PodcastComment> fileredComments = rc.getCommentsByComText(currentPodcast,searchInput.getText());
             showComments(fileredComments ,2, searchInput.getText());
         }
      }
     @FXML
     private void addFavoriteAction(MouseEvent event) {
         CRUDFavorite cr = new CRUDFavorite();
-        cr.addFavorite(p, u);
+        cr.addFavorite(currentPodcast, u);
         isFavorite = true;
         removeFavoriteButt.setVisible(true);
         addFavoriteButt.setVisible(false);
@@ -382,21 +537,10 @@ public class PodcastCommentsFrontController implements Initializable {
     @FXML
     private void removeFavoriteAction(MouseEvent event) {
         CRUDFavorite cr = new CRUDFavorite();
-        cr.removeFavorite(p, u);
+        cr.removeFavorite(currentPodcast, u);
         isFavorite = false;
         removeFavoriteButt.setVisible(false);
         addFavoriteButt.setVisible(true);
-    }
-
-    @FXML
-    private void playAudioClick(MouseEvent event) {
-        audioLoader.startAudio();
-        
-    }
-
-    @FXML
-    private void stopAudioClick(MouseEvent event) throws InterruptedException {
-        audioLoader.pauseAudio();
     }
 
     @FXML
@@ -433,6 +577,32 @@ public class PodcastCommentsFrontController implements Initializable {
     WritableImage img = SwingFXUtils.toFXImage(image, null);
     imageView.setImage(img);
         
+    }
+
+    @FXML
+    private void prevClicked(ActionEvent event) {
+    }
+
+    @FXML
+    private void nextClicked(ActionEvent event) {
+    }
+
+    @FXML
+    private void stopPlayAudio(MouseEvent event) throws IOException {
+       String src = "";
+        if (playing) {
+            audioLoader.pauseAudio();
+            playing = false;
+            src = "src/images/play.png";
+        } else {
+            audioLoader.startAudio();
+            playing = true;
+            src = "src/images/pause.png";
+        }
+            BufferedImage image;
+            image = ImageIO.read(new File(src));
+            WritableImage img = SwingFXUtils.toFXImage(image, null);
+            palyStopImg.setImage(img);
     }
          
 }
