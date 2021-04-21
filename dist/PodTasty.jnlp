@@ -8,10 +8,22 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PodTasty.jar" size="1880156" download="eager" />
+    <jar href="PodTasty.jar" size="1881571" download="eager" />
     <jar href="lib\TrayNotification-5393c3a54f.jar" size="42522" download="eager" />
     <jar href="lib\actlist-plugin-2.2.0.jar" size="122909" download="eager" />
+    <jar href="lib\ansi-regex-4.1.0.jar" size="5830" download="eager" />
+    <jar href="lib\ansi-styles-3.2.1.jar" size="7022" download="eager" />
+    <jar href="lib\base64-js-1.5.1.jar" size="7173" download="eager" />
+    <jar href="lib\buffer-5.7.1.jar" size="24259" download="eager" />
+    <jar href="lib\buffer-alloc-1.2.0.jar" size="4065" download="eager" />
+    <jar href="lib\buffer-alloc-unsafe-1.1.0.jar" size="4029" download="eager" />
+    <jar href="lib\buffer-fill-1.0.0.jar" size="4652" download="eager" />
+    <jar href="lib\buffer-from-1.1.1.jar" size="5349" download="eager" />
+    <jar href="lib\camelcase-5.3.1.jar" size="6549" download="eager" />
     <jar href="lib\centerdevice-nsmenufx-2.1.5.jar" size="38033" download="eager" />
+    <jar href="lib\cliui-5.0.0.jar" size="8851" download="eager" />
+    <jar href="lib\color-convert-1.9.3.jar" size="12961" download="eager" />
+    <jar href="lib\color-name-1.1.3.jar" size="7436" download="eager" />
     <jar href="lib\commonmark-0.13.1.jar" size="141622" download="eager" />
     <jar href="lib\commons-codec-1.11.jar" size="335042" download="eager" />
     <jar href="lib\commons-daemon-1.0.10.jar" size="24242" download="eager" />
@@ -20,10 +32,18 @@
     <jar href="lib\commons-logging-1.2.jar" size="61829" download="eager" />
     <jar href="lib\commons-net-3.3.jar" size="280983" download="eager" />
     <jar href="lib\controlsfx-8.40.16.jar" size="1416162" download="eager" />
+    <jar href="lib\decamelize-1.2.0.jar" size="4616" download="eager" />
+    <jar href="lib\dijkstrajs-1.0.1.jar" size="7445" download="eager" />
+    <jar href="lib\emoji-regex-7.0.3.jar" size="13469" download="eager" />
+    <jar href="lib\find-up-3.0.0.jar" size="5329" download="eager" />
+    <jar href="lib\get-caller-file-2.0.5.jar" size="6017" download="eager" />
     <jar href="lib\httpclient-4.5.12.jar" size="778156" download="eager" />
     <jar href="lib\httpcore-4.4.13.jar" size="328593" download="eager" />
     <jar href="lib\httpmime-4.5.12.jar" size="41792" download="eager" />
+    <jar href="lib\ieee754-1.2.1.jar" size="5640" download="eager" />
     <jar href="lib\ini4j-0.5.4.jar" size="102220" download="eager" />
+    <jar href="lib\is-fullwidth-code-point-2.0.0.jar" size="5246" download="eager" />
+    <jar href="lib\isarray-2.0.5.jar" size="4284" download="eager" />
     <jar href="lib\jackson-annotations-2.10.3.jar" size="68079" download="eager" />
     <jar href="lib\jackson-core-2.10.3.jar" size="349108" download="eager" />
     <jar href="lib\jackson-databind-2.10.3.jar" size="1404171" download="eager" />
@@ -37,6 +57,7 @@
     <jar href="lib\jogg-0.0.7.jar" size="6839" download="eager" />
     <jar href="lib\jorbis-0.0.15.jar" size="58917" download="eager" />
     <jar href="lib\json-20141113.jar" size="65050" download="eager" />
+    <jar href="lib\locate-path-3.0.0.jar" size="5116" download="eager" />
     <jar href="lib\logback-classic-1.2.3.jar" size="290339" download="eager" />
     <jar href="lib\logback-core-1.2.3.jar" size="471901" download="eager" />
     <jar href="lib\maven-model-3.6.0.jar" size="165965" download="eager" />
@@ -48,15 +69,32 @@
     <jar href="lib\org.eclipse.persistence.jpa-2.7.7.jar" size="1409185" download="eager" />
     <jar href="lib\org.eclipse.persistence.jpa.jpql-2.7.7.jar" size="1332996" download="eager" />
     <jar href="lib\org.eclipse.persistence.moxy-2.7.7.jar" size="621183" download="eager" />
+    <jar href="lib\p-limit-2.3.0.jar" size="6272" download="eager" />
+    <jar href="lib\p-locate-3.0.0.jar" size="5689" download="eager" />
+    <jar href="lib\p-try-2.2.0.jar" size="5579" download="eager" />
+    <jar href="lib\path-exists-3.0.0.jar" size="4795" download="eager" />
     <jar href="lib\plexus-utils-3.1.0.jar" size="261617" download="eager" />
+    <jar href="lib\pngjs-3.4.0.jar" size="170448" download="eager" />
     <jar href="lib\proxy-vole-1.0.3.jar" size="141203" download="eager" />
+    <jar href="lib\qrcode-1.4.4.jar" size="261424" download="eager" />
+    <jar href="lib\require-directory-2.1.1.jar" size="8122" download="eager" />
+    <jar href="lib\require-main-filename-2.0.0.jar" size="5504" download="eager" />
+    <jar href="lib\set-blocking-2.0.0.jar" size="5485" download="eager" />
     <jar href="lib\silentsoft-core-1.4.0.jar" size="62057" download="eager" />
     <jar href="lib\silentsoft-io-1.3.0.jar" size="12786" download="eager" />
     <jar href="lib\silentsoft-net-1.5.0.jar" size="20046" download="eager" />
     <jar href="lib\silentsoft-ui-1.3.0.jar" size="58403" download="eager" />
     <jar href="lib\slf4j-api-1.7.25.jar" size="41203" download="eager" />
+    <jar href="lib\string-width-3.1.0.jar" size="5282" download="eager" />
+    <jar href="lib\strip-ansi-5.2.0.jar" size="5557" download="eager" />
     <jar href="lib\tritonus_share.jar" size="102673" download="eager" />
     <jar href="lib\vorbisspi-1.0.3-1.jar" size="18826" download="eager" />
+    <jar href="lib\which-module-2.0.0.jar" size="5496" download="eager" />
+    <jar href="lib\wrap-ansi-5.1.0.jar" size="6652" download="eager" />
+    <jar href="lib\y18n-4.0.3.jar" size="6965" download="eager" />
+    <jar href="lib\yargs-13.3.2.jar" size="83502" download="eager" />
+    <jar href="lib\yargs-parser-13.1.2.jar" size="18988" download="eager" />
+    <jar href="lib\zxing.jar" size="191436" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="podtasty.PodTasty"  name="PodTasty" />
   <update check="always"/>

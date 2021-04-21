@@ -5,15 +5,26 @@
  */
 package podtasty;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.ByteMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import entities.BadWords;
+import entities.GenerateQRCode;
 import entities.Podcast;
 import entities.PodcastComment;
 import entities.PodcastReview;
 import entities.User;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Hashtable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -142,6 +153,8 @@ private final String pattern = "/\\(boobs)\b/i";
     private ObservableList<Podcast> playlist;
     @FXML
     private Label commentsDiabled;
+    @FXML
+    private ImageView qrCodeContainer;
     /**
      * Initializes the controller class.
      * @param url
@@ -180,17 +193,25 @@ private final String pattern = "/\\(boobs)\b/i";
            } catch (IOException ex) {
                Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
            
-       }
+       }        catch (WriterException ex) {
+                    Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         
         BadWords.loadConfigs();
         }
         });  
     }
-}).start();
+        }).start();
        
     }  
     
-   public void setUpView() throws IOException {
+    
+    
+   public void setUpView() throws IOException, WriterException {
+       
+        BufferedImage qrCode = GenerateQRCode.createQRImage(currentPodcast.getId().toString(), 125);
+        WritableImage qrCodeImg = SwingFXUtils.toFXImage(qrCode, null);
+        qrCodeContainer.setImage(qrCodeImg);
         reviewSubmitted = false;
         audioLoader = LoadAudio.getInstance();
         audioLoader.setAudioUrl(currentPodcast.getPodcastSource());
@@ -320,7 +341,9 @@ private final String pattern = "/\\(boobs)\b/i";
                                      setUpView();
                                      } catch (IOException ex) {
                                      Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
-                                 }
+                                 } catch (WriterException ex) {
+                                 Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+                             }
                                  }
                                  });  
                              }
@@ -501,6 +524,7 @@ private final String pattern = "/\\(boobs)\b/i";
             PodcastComment com = new PodcastComment();
             com.setPodcastIdId(currentPodcast);
             com.setUserIdId(currentUser);
+            com.setCommentText(commentTextInput.getText());
             commentTextInput.setText("");
             addCommentButton.setDisable(true);
             cr.addComment(com);
