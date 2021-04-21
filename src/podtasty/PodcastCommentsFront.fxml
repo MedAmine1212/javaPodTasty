@@ -166,7 +166,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ImageView fx:id="qrCodeContainer" fitHeight="120.0" fitWidth="138.0" layoutX="769.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="qrCodeContainer" fitHeight="94.0" fitWidth="105.0" layoutX="802.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="podcastDesc" layoutX="304.0" layoutY="128.0" prefHeight="27.0" prefWidth="397.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
@@ -177,14 +177,14 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="765.0" layoutY="153.0" text="Watch this on your" textFill="WHITE">
+            <Label layoutX="792.0" layoutY="128.0" text="Watch this on your" textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="806.0" layoutY="175.0" text="phone !" textFill="WHITE">
+            <Label layoutX="829.0" layoutY="152.0" text="phone !" textFill="WHITE">
                <font>
-                  <Font size="16.0" />
+                  <Font size="15.0" />
                </font>
             </Label>
          </children>
@@ -211,7 +211,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <BorderPane fx:id="loading" layoutX="5.0" layoutY="-2.0" prefHeight="765.0" prefWidth="1200.0">
+      <BorderPane fx:id="loading" layoutY="-2.0" prefHeight="765.0" prefWidth="1200.0">
          <center>
             <ImageView fitHeight="286.0" fitWidth="373.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
