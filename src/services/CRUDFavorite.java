@@ -10,6 +10,7 @@ import entities.Podcast;
 import entities.User;
 import java.sql.PreparedStatement;
 import interfaces.IFavorite;
+import java.sql.ResultSet;
 
 /**
  *
@@ -51,6 +52,27 @@ public class CRUDFavorite implements IFavorite{
             System.out.println(e);
             return false;
         }    
+    }
+
+    @Override
+    public boolean getFavoriteByPodcastAnduser(Podcast p, User u) {
+         try {
+            String requete = "SELECT * FROM user_podcast p WHERE p.podcast_id=? AND p.user_id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, p.getId());
+            pst.setInt(2, u.getId());
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+               return true;
+            }
+            return false;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return false;
+        }
     }
 }
   

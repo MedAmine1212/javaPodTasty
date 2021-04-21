@@ -5,6 +5,7 @@
  */
 package podtasty;
 
+import entities.BadWords;
 import entities.Podcast;
 import entities.PodcastComment;
 import entities.PodcastReview;
@@ -12,13 +13,13 @@ import entities.User;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,7 +42,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
@@ -49,10 +51,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import org.controlsfx.control.Notifications;
 import services.CRUDComments;
 import services.CRUDFavorite;
 import services.CRUDReview;
@@ -64,6 +66,8 @@ import services.CRUDReview;
  */
 public class PodcastCommentsFrontController implements Initializable {
 
+//        private final String pattern="/\\b(4r5e|5h1t|5hit|a55|badWord|badW0rd|anal|anus|ar5e|arrse|arse|ass|ass-fucker|asses|assfucker|assfukka|asshole|assholes|asswhole|a_s_s|b!tch|b00bs|b17ch|b1tch|ballbag|balls|ballsack|bastard|beastial|beastiality|bellend|bestial|bestiality|bi\\+ch|biatch|bitch|bitcher|bitchers|bitches|bitchin|bitching|bloody|blow job|blowjob|blowjobs|boiolas|bollock|bollok|boner|boob|boobs|booobs|boooobs|booooobs|booooooobs|breasts|buceta|bugger|bum|bunny fucker|butt|butthole|buttmuch|buttplug|c0ck|c0cksucker|carpet muncher|cawk|chink|cipa|cl1t|clit|clitoris|clits|cnut|cock|cock-sucker|cockface|cockhead|cockmunch|cockmuncher|cocks|cocksuck|cocksucked|cocksucker|cocksucking|cocksucks|cocksuka|cocksukka|cok|cokmuncher|coksucka|coon|cox|crap|cum|cummer|cumming|cums|cumshot|cunilingus|cunillingus|cunnilingus|cunt|cuntlick|cuntlicker|cuntlicking|cunts|cyalis|cyberfuc|cyberfuck|cyberfucked|cyberfucker|cyberfuckers|cyberfucking|d1ck|damn|dick|dickhead|dildo|dildos|dink|dinks|dirsa|dlck|dog-fucker|doggin|dogging|donkeyribber|doosh|duche|dyke|ejaculate|ejaculated|ejaculates|ejaculating|ejaculatings|ejaculation|ejakulate|f u c k|f u c k e r|f4nny|fag|fagging|faggitt|faggot|faggs|fagot|fagots|fags|fanny|fannyflaps|fannyfucker|fanyy|fatass|fcuk|fcuker|fcuking|feck|fecker|felching|fellate|fellatio|fingerfuck|fingerfucked|fingerfucker|fingerfuckers|fingerfucking|fingerfucks|fistfuck|fistfucked|fistfucker|fistfuckers|fistfucking|fistfuckings|fistfucks|flange|fook|fooker|fuck|fucka|fucked|fucker|fuckers|fuckhead|fuckheads|fuckin|fucking|fuckings|fuckingshitmotherfucker|fuckme|fucks|fuckwhit|fuckwit|fudge packer|fudgepacker|fuk|fuker|fukker|fukkin|fuks|fukwhit|fukwit|fux|fux0r|f_u_c_k|gangbang|gangbanged|gangbangs|gaylord|gaysex|goatse|God|god-dam|god-damned|goddamn|goddamned|hardcoresex|hell|heshe|hoar|hoare|hoer|homo|hore|horniest|horny|hotsex|jack-off|jackoff|jap|jerk-off|jism|jiz|jizm|jizz|kawk|knob|knobead|knobed|knobend|knobhead|knobjocky|knobjokey|kock|kondum|kondums|kum|kummer|kumming|kums|kunilingus|l3i\\+ch|l3itch|labia|lust|lusting|m0f0|m0fo|m45terbate|ma5terb8|ma5terbate|masochist|master-bate|masterb8|masterbat*|masterbat3|masterbate|masterbation|masterbations|masturbate|mo-fo|mof0|mofo|mothafuck|mothafucka|mothafuckas|mothafuckaz|mothafucked|mothafucker|mothafuckers|mothafuckin|mothafucking|mothafuckings|mothafucks|mother fucker|motherfuck|motherfucked|motherfucker|motherfuckers|motherfuckin|motherfucking|motherfuckings|motherfuckka|motherfucks|muff|mutha|muthafecker|muthafuckker|muther|mutherfucker|n1gga|n1gger|nazi|nigg3r|nigg4h|nigga|niggah|niggas|niggaz|nigger|niggers|nob|nob jokey|nobhead|nobjocky|nobjokey|numbnuts|nutsack|orgasim|orgasims|orgasm|orgasms|p0rn|pawn|pecker|penis|penisfucker|phonesex|phuck|phuk|phuked|phuking|phukked|phukking|phuks|phuq|pigfucker|pimpis|piss|pissed|pisser|pissers|pisses|pissflaps|pissin|pissing|pissoff|poop|porn|porno|pornography|pornos|prick|pricks|pron|pube|pusse|pussi|pussies|pussy|pussys|rectum|retard|rimjaw|rimming|s hit|s.o.b.|sadist|schlong|screwing|scroat|scrote|scrotum|semen|sex|sh!\\+|sh!t|sh1t|shag|shagger|shaggin|shagging|shemale|shi\\+|shit|shitdick|shite|shited|shitey|shitfuck|shitfull|shithead|shiting|shitings|shits|shitted|shitter|shitters|shitting|shittings|shitty|skank|slut|sluts|smegma|smut|snatch|son-of-a-bitch|spac|spunk|s_h_i_t|t1tt1e5|t1tties|teets|teez|testical|testicle|tit|titfuck|tits|titt|tittie5|tittiefucker|titties|tittyfuck|tittywank|titwank|tosser|turd|tw4t|twat|twathead|twatty|twunt|twunter|v14gra|v1gra|vagina|viagra|vulva|w00se|wang|wank|wanker|wanky|whoar|whore|willies|willy|xrated|xxx)\\b/i";
+private final String pattern = "/\\(boobs)\b/i";
     @FXML
     private AnchorPane container;
     @FXML
@@ -76,16 +80,16 @@ public class PodcastCommentsFrontController implements Initializable {
     private Button addCommentButton;
     @FXML
     private TextField commentTextInput;
-    private static Stage reviwStage;
+    private static Stage reviewStage;
     @FXML
     private TextField searchInput;
-    
-    private User u;
+    private static boolean reviewChanged = false;
+    private static User currentUser;
     private static Podcast currentPodcast;
     private int clickedCommentId = -1;
     private boolean filtered = false;
-    private boolean isFavorite = false;
     private boolean ratingSaved = false;
+    private static boolean reviewSubmitted;
     @FXML
     private ImageView addFavoriteButt;
     @FXML
@@ -136,6 +140,8 @@ public class PodcastCommentsFrontController implements Initializable {
     private BorderPane loading;
     
     private ObservableList<Podcast> playlist;
+    @FXML
+    private Label commentsDiabled;
     /**
      * Initializes the controller class.
      * @param url
@@ -154,12 +160,13 @@ public class PodcastCommentsFrontController implements Initializable {
 
             @Override
             public void run() { 
-        u = new User();
-        u.setId(1);
+                
+        currentUser = new User();
+        currentUser.setId(1);
         searchInput.setPromptText("Search comments...");
         currentPodcast = new Podcast();
         currentPodcast.setId(1);
-        currentPodcast.setCommentsAllowed(0);
+        currentPodcast.setCommentsAllowed(1);
         currentPodcast.setPodcastDescription("Description Description Description Description ");
         currentPodcast.setPodcastName("Podcast 1");
         currentPodcast.setPodcastViews(120);
@@ -174,6 +181,8 @@ public class PodcastCommentsFrontController implements Initializable {
                Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
            
        }
+        
+        BadWords.loadConfigs();
         }
         });  
     }
@@ -182,7 +191,7 @@ public class PodcastCommentsFrontController implements Initializable {
     }  
     
    public void setUpView() throws IOException {
-       
+        reviewSubmitted = false;
         audioLoader = LoadAudio.getInstance();
         audioLoader.setAudioUrl(currentPodcast.getPodcastSource());
         audioLoader.start();
@@ -193,10 +202,13 @@ public class PodcastCommentsFrontController implements Initializable {
        this.podcastDesc.setText(currentPodcast.getPodcastDescription());
        this.podcastName.setText(currentPodcast.getPodcastName());
        this.podcastViews.setText(currentPodcast.getPodcastViews()+" Views");
-       if(isFavorite) {
+       CRUDFavorite cf = new CRUDFavorite();
+       if(cf.getFavoriteByPodcastAnduser(currentPodcast, currentUser)) {
             addFavoriteButt.setVisible(false);
+            removeFavoriteButt.setVisible(true);
         } else {
             removeFavoriteButt.setVisible(false);
+            addFavoriteButt.setVisible(true);
         }
         CRUDComments cr = new CRUDComments();
         CRUDReview crr = new CRUDReview();
@@ -213,11 +225,12 @@ public class PodcastCommentsFrontController implements Initializable {
             float rating = 0;
             rating = reviewList.stream().map(rv -> rv.getRating()).reduce(rating, (accumulator, _item) -> accumulator + _item);
             
-            reviewList.stream().filter(rv -> (Objects.equals(rv.getUserIdId().getId(), u.getId()))).map(rv -> {
+            reviewList.stream().filter(rv -> (Objects.equals(rv.getUserIdId().getId(), currentUser.getId()))).map(rv -> {
                 ratingSaved = true;
                 return rv;
             }).forEachOrdered(rv -> {
                 try {
+                    reviewSubmitted = true;
                     String strDouble = String.format("%.1f", rv.getRating());
                     userRating.setText(strDouble);
                     setImage(rate,  1);
@@ -231,10 +244,15 @@ public class PodcastCommentsFrontController implements Initializable {
             podcastRating.setText("Rating: "+strDouble+"/10");
         }
         
-//        if(p.getCommentsAllowed() == 0) {
-//        } else {
-//
-//        }
+        if(currentPodcast.getCommentsAllowed() == 0) {
+            this.commentTextInput.setVisible(false);
+            this.addCommentButton.setVisible(false);
+            commentsDiabled.setVisible(true);
+        } else {
+            this.commentTextInput.setVisible(true);
+            this.addCommentButton.setVisible(true);
+            commentsDiabled.setVisible(false);
+        }
         ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
             
         showComments(comList ,1, null);
@@ -281,6 +299,10 @@ public class PodcastCommentsFrontController implements Initializable {
                 
                 playlist.add(PodcastCommentsFrontController.currentPodcast);
                 playlist.remove(pod);
+                CRUDComments cr = new CRUDComments();
+                for(Podcast p: playlist) {
+                    p.setCommentsAllowed(cr.getCommentsAllowedForPod(p));
+                }
                 PodcastCommentsFrontController.currentPodcast = pod;
                 
                 loading.setVisible(true);
@@ -306,7 +328,6 @@ public class PodcastCommentsFrontController implements Initializable {
 
    }
    public void showComments(ObservableList<PodcastComment> comList, int caller, String text) {
-       System.out.println("whut");
        commentsContainer.getChildren().clear();
        if (caller == 1) {
         if(comList.size() > 0) {
@@ -337,6 +358,7 @@ public class PodcastCommentsFrontController implements Initializable {
             p.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+                    
                     if (selectedCom != null) {
                         selectedCom.opacityProperty().set(1);
                         selectedCom.setStyle("");
@@ -377,6 +399,13 @@ public class PodcastCommentsFrontController implements Initializable {
             if (result.get() == ButtonType.OK){
             CRUDComments cr = new CRUDComments();
             if(cr.deleteComment(clickedCommentId)) {
+                Image img = new Image("/images/commentDeleted.png", true);
+                Notifications notificationBuilder = Notifications.create()
+                   .title("Comment").text("Comment deleted successfully").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+                   .graphic(new ImageView(img))
+                   .position(Pos.BOTTOM_RIGHT);
+           notificationBuilder.darkStyle();
+           notificationBuilder.show();
                 clickedCommentId = -1;
                 deleteCheckedComment.setVisible(false);
                 editCommentButton.setVisible(false);
@@ -453,21 +482,46 @@ public class PodcastCommentsFrontController implements Initializable {
     }
     @FXML
     private void addCommentAction(MouseEvent event) {
-        PodcastComment com = new PodcastComment();
-       
-        com.setPodcastIdId(currentPodcast);
-        com.setCommentText(commentTextInput.getText());
-        com.setUserIdId(u);
-        commentTextInput.setText("");
-        addCommentButton.setDisable(true);
-        CRUDComments cr = new CRUDComments();
-        cr.addComment(com);
-        ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
-        showComments(comList, 1, null);
-        if (selectedCom != null) {
-            selectedCom.opacityProperty().set(1);
-            selectedCom.setStyle("");
-            selectedCom = null;
+        
+            CRUDComments cr = new CRUDComments();
+        if (cr.getCommentsAllowedForPod(currentPodcast) == 1) {
+            if (BadWords.filterText(commentTextInput.getText())) {
+            commentTextInput.setText("");
+            addCommentButton.setDisable(true);
+            
+        Image img = new Image("/images/commentBlocked.png", true);
+            Notifications notificationBuilder = Notifications.create()
+               .title("Comment").text("Hey watch your language !").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+               .graphic(new ImageView(img))
+               .position(Pos.BOTTOM_RIGHT);
+       notificationBuilder.darkStyle();
+       notificationBuilder.show();
+            
+            } else {
+            PodcastComment com = new PodcastComment();
+            com.setPodcastIdId(currentPodcast);
+            com.setUserIdId(currentUser);
+            commentTextInput.setText("");
+            addCommentButton.setDisable(true);
+            cr.addComment(com);
+            ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
+            showComments(comList, 1, null);
+            if (selectedCom != null) {
+                selectedCom.opacityProperty().set(1);
+                selectedCom.setStyle("");
+                selectedCom = null;
+            }
+            
+            }
+            } else {
+            
+            commentTextInput.setText("");
+            addCommentButton.setDisable(true);
+            Notifications notificationBuilder = Notifications.create()
+               .title("Comment").text("Comments are currently diabled for this podcast !").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+               .position(Pos.BOTTOM_RIGHT);
+       notificationBuilder.darkStyle();
+       notificationBuilder.show();
         }
         searchInput.setText("");
         
@@ -475,6 +529,7 @@ public class PodcastCommentsFrontController implements Initializable {
 
     @FXML
     private void deactivateButton(KeyEvent event) {
+        
         if(event.getCode().toString().equals("ENTER") && !addCommentButton.isDisabled()){
             addCommentButton.setDisable(true);
             addCommentAction(null);
@@ -488,6 +543,7 @@ public class PodcastCommentsFrontController implements Initializable {
 
     @FXML
     private void activateButton(KeyEvent event) {
+        
             if(addCommentButton.isDisabled() && commentTextInput.getText().length() >= 2) {
                 addCommentButton.setDisable(false);
             }
@@ -498,12 +554,41 @@ public class PodcastCommentsFrontController implements Initializable {
         Parent root;
         try {            
             root = FXMLLoader.load(getClass().getResource("PodcastReview.fxml"));
-            reviwStage = new Stage();
-            reviwStage.setTitle("Podcast review");
-            reviwStage.setScene(new Scene(root));
-            reviwStage.initModality(Modality.WINDOW_MODAL);
-            reviwStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
-            reviwStage.show();
+            reviewStage = new Stage();
+            reviewStage.setTitle("Podcast review");
+            reviewStage.setScene(new Scene(root));
+            reviewStage.initModality(Modality.WINDOW_MODAL);
+            reviewStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+            reviewStage.show();
+            try {
+            reviewStage.setOnHiding(ev -> {
+                if (reviewChanged) {
+                    CRUDReview cr = new CRUDReview();
+                    PodcastReview rv = cr.getReviewByUserAndPodcast(currentUser, currentPodcast);
+                    if (rv != null) {
+                        ratingSaved = true;
+                        reviewSubmitted = true;
+                        String strDouble = String.format("%.1f", rv.getRating());
+                        userRating.setText(strDouble);
+                        try {
+                            setImage(rate,  1);
+                        } catch (IOException ex) {
+                            Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        ratingSaved = false;
+                        reviewSubmitted = false;
+                        userRating.setText("");
+                        try {
+                            setImage(rate,  2);
+                        } catch (IOException ex) {
+                            Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            });
+            }catch(Exception e) {}
+           
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -511,12 +596,12 @@ public class PodcastCommentsFrontController implements Initializable {
     }
     
      public static Stage getReviwStage() {
-        return reviwStage;
+        return reviewStage;
     }
      
     @FXML
     private void filerComments(KeyEvent event) {
-
+        
         if ( searchInput.getText().length() == 0) {
             if (filtered) {
                 CRUDComments cr = new CRUDComments();
@@ -533,19 +618,31 @@ public class PodcastCommentsFrontController implements Initializable {
     @FXML
     private void addFavoriteAction(MouseEvent event) {
         CRUDFavorite cr = new CRUDFavorite();
-        cr.addFavorite(currentPodcast, u);
-        isFavorite = true;
+        cr.addFavorite(currentPodcast, currentUser);
         removeFavoriteButt.setVisible(true);
         addFavoriteButt.setVisible(false);
+        Image img = new Image("/images/favAdded.png", true);
+         Notifications notificationBuilder = Notifications.create()
+               .title("Favorites").text("Podcast saved to favotites").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+                .graphic(new ImageView(img))
+               .position(Pos.BOTTOM_RIGHT);
+       notificationBuilder.darkStyle();
+       notificationBuilder.show();
         
     }
     @FXML
     private void removeFavoriteAction(MouseEvent event) {
         CRUDFavorite cr = new CRUDFavorite();
-        cr.removeFavorite(currentPodcast, u);
-        isFavorite = false;
+        cr.removeFavorite(currentPodcast, currentUser);
         removeFavoriteButt.setVisible(false);
         addFavoriteButt.setVisible(true);
+        Image img = new Image("/images/favRemoved.png", true);
+        Notifications notificationBuilder = Notifications.create()
+               .title("Favorites").text("Podcast removed from favotites").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+                .graphic(new ImageView(img))
+               .position(Pos.BOTTOM_RIGHT);
+       notificationBuilder.darkStyle();
+       notificationBuilder.show();
     }
 
     @FXML
@@ -585,14 +682,6 @@ public class PodcastCommentsFrontController implements Initializable {
     }
 
     @FXML
-    private void prevClicked(ActionEvent event) {
-    }
-
-    @FXML
-    private void nextClicked(ActionEvent event) {
-    }
-
-    @FXML
     private void stopPlayAudio(MouseEvent event) throws IOException {
        String src = "";
         if (playing) {
@@ -627,5 +716,27 @@ public class PodcastCommentsFrontController implements Initializable {
         playing = false;
         gotToNext(playlist.get(0));
     }
-         
+    
+    public static boolean getReviewSubmitted() {
+        return reviewSubmitted;
+    }
+    
+     public static void setReviewSubmitted(boolean status) {
+        reviewSubmitted = status;
+    }
+     
+    
+     public static void setReviewChanged(boolean status) {
+        reviewChanged = status;
+    }
+     
+     
+     
+     public static User getCurrentUser() {
+         return currentUser;
+     }
+     
+     public static Podcast getCurrentPodcast() {
+         return currentPodcast;
+     }   
 }

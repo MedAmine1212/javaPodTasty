@@ -7,6 +7,7 @@ package interfaces;
 
 import entities.Podcast;
 import entities.PodcastReview;
+import entities.User;
 import javafx.collections.ObservableList;
 
 /**
@@ -17,4 +18,5 @@ public interface IReview {
     public boolean addReview(PodcastReview review);
     public boolean deleteReview(int id);
     public ObservableList<PodcastReview> getReviewsByPodcast(Podcast pod);
+    public PodcastReview getReviewByUserAndPodcast(User user,Podcast pod);
 }

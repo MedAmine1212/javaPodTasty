@@ -156,7 +156,7 @@ public class CRUDComments implements IComments<PodcastComment> {
         ObservableList<Podcast> podcasts = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT * FROM podcast p WHERE p.playlist_id_id=? AND p.id <> ?";
+            String requete = "SELECT * FROM podcast p WHERE p.playlist_id_id=? AND p.id <> ? AND currently_live=0 AND is_blocked=0";
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
             pst.setInt(1, id);
@@ -186,5 +186,24 @@ public class CRUDComments implements IComments<PodcastComment> {
             return null;
         }
     }
-    
+
+    @Override
+    public int getCommentsAllowedForPod(Podcast pod) {
+        try {
+            String requete = "SELECT comments_allowed FROM podcast p WHERE p.id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, pod.getId());
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+               return rs.getInt("comments_allowed");
+            }
+            return 0;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return 0;
+        }
+}
 }

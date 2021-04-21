@@ -11,24 +11,17 @@ import entities.User;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import static java.lang.Thread.sleep;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
@@ -36,7 +29,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import services.CRUDReview;
 
@@ -87,15 +79,20 @@ public class PodcastReviewController implements Initializable {
     private boolean reviewIsSubmitted;
     @FXML
     private Pane notSubmittedContainer;
-    private float submittedRating;
-
+    private String submittedRating = "";
+   private PodcastReview review;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        reviewIsSubmitted = false;
-        submittedRating = 10.0f;
+        reviewIsSubmitted = PodcastCommentsFrontController.getReviewSubmitted();
+        if(reviewIsSubmitted) {
+            CRUDReview cr = new CRUDReview();
+            review = cr.getReviewByUserAndPodcast(PodcastCommentsFrontController.getCurrentUser(), PodcastCommentsFrontController.getCurrentPodcast());
+        
+        submittedRating = String.format("%.1f", review.getRating());
+        }
         setView();
     }    
     private void setView() {
@@ -195,7 +192,10 @@ public class PodcastReviewController implements Initializable {
        review.setRating(rate);
        CRUDReview cr = new CRUDReview(); 
        if(cr.addReview(review)) {
-                     
+                
+        PodcastCommentsFrontController.setReviewChanged(true);
+                reviewIsSubmitted = true;
+        PodcastCommentsFrontController.setReviewSubmitted(true);
                 Alert al = new Alert(Alert.AlertType.INFORMATION);
                 al.setTitle("Success");
                 al.setHeaderText("Review added successfully");
@@ -233,9 +233,11 @@ public class PodcastReviewController implements Initializable {
 
     @FXML
     private void deleteReviewAction(MouseEvent event) {
-//        CRUDReview cr = new CRUDReview();
-//        cr.deleteReview(reviewId);
+        CRUDReview cr = new CRUDReview();
+        cr.deleteReview(review.getId());
         reviewIsSubmitted = false;
+        PodcastCommentsFrontController.setReviewSubmitted(false);
+        PodcastCommentsFrontController.setReviewChanged(true);
         setView();
     }
     

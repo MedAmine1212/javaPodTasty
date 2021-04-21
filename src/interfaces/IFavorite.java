@@ -15,4 +15,5 @@ import entities.User;
 public interface IFavorite {
     public boolean addFavorite(Podcast p, User u);
     public boolean removeFavorite(Podcast p, User u);
+    public boolean getFavoriteByPodcastAnduser(Podcast p, User u);
 }
