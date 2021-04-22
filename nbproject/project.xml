@@ -10,6 +10,7 @@
                 <dependency dependsOn="jar" target="debug"/>
                 <dependency dependsOn="jar" target="profile"/>
                 <dependency dependsOn="jar" target="run"/>
+                
             </extension>
         </buildExtensions>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">

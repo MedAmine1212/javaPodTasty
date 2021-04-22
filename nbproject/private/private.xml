@@ -4,15 +4,24 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/GestionUsersController.java</file>
-            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/LogRegController.java</file>
             <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/interfaces/ITag.java</file>
             <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/TagsListController.java</file>
             <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/interfaces/IUser.java</file>
-            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/entities/User.java</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/UserSettingsController.java</file>
             <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/entities/UserInfo.java</file>
-            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/services/CRUDUser.java</file>
             <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/PodTasty.java</file>
-            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/GestionUsers.fxml</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/build.xml</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/nbproject/project.xml</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/ProfileController.java</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/LogRegController.java</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/entities/User.java</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/profile.css</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/services/CRUDUser.java</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/Profile.fxml</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/entities/UserHolder.java</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/podtasty/UserSettings.fxml</file>
+            <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/services/UpdatableBCrypt.java</file>
             <file>file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Java/javaPodTasty/src/services/CRUDTag.java</file>
         </group>
     </open-files>
