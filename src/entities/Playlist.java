@@ -69,6 +69,15 @@ public class Playlist implements Serializable {
     @OneToMany(mappedBy = "playlistIdId")
     private Collection<Podcast> podcastCollection;
 
+    
+    
+    
+    public Playlist(Integer id, String playlistName, String playlistDescription, Date playlistCreationDate) {
+        this.id = id;
+        this.playlistName = playlistName;
+        this.playlistDescription = playlistDescription;
+        this.playlistCreationDate = playlistCreationDate;
+    }
     public Playlist() {
     }
 
@@ -80,12 +89,10 @@ public class Playlist implements Serializable {
          this.playlistName = playlistName;
     }
 
-    public Playlist(Integer id, String playlistName, Date playlistCreationDate, Date updatedAt) {
-        this.id = id;
-        this.playlistName = playlistName;
-        this.playlistCreationDate = playlistCreationDate;
-        this.updatedAt = updatedAt;
-    }
+   
+
+    
+    
 
     public Integer getId() {
         return id;
@@ -174,7 +181,8 @@ public class Playlist implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Playlist[ id=" + id + " ]";
+        return "Playlist{" + "id=" + id + ", playlistName=" + playlistName + ", playlistDescription=" + playlistDescription + ", playlistCreationDate=" + playlistCreationDate + ", imageName=" + imageName + ", updatedAt=" + updatedAt + ", channelIdId=" + channelIdId + ", podcastCollection=" + podcastCollection + '}';
     }
+
     
 }

@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -42,6 +44,74 @@ public class PlaylistService {
             Logger.getLogger(PlaylistService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public boolean updatePlaylist(int id, Playlist p){
+    String req;
+        req = "update playlist set playlist_name=?, playlist_description=? where id = ?";
+        try {
+            pst=connection.prepareStatement(req);
+            pst.setString(1,p.getPlaylistName());
+            pst.setString(2,p.getPlaylistDescription());
+            pst.setInt(3, id);
+            pst.executeUpdate();
+            return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PlaylistService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    
+    
+    
+    
+    public boolean deletePlaylist(int id){
+        String req= "delete from playlist where id = ?";
+        try {
+            pst=connection.prepareStatement(req);
+            pst.setInt(1, id);
+             pst.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }      
+    }
+    
+    
+    
+    
+    public ObservableList<Playlist> getAllPlaylists(){
+        ObservableList<Playlist> PlaylistList = FXCollections.observableArrayList();
+        String query ="SELECT * FROM playlist";
+        Statement st;
+        ResultSet rs;
+        
+        try {
+            st=connection.createStatement();
+            rs=st.executeQuery(query);
+            Playlist playlist;
+            while (rs.next()) {
+                playlist= new Playlist(rs.getInt("id"),rs.getString("playlist_name"),rs.getString("playlist_description"),rs.getDate("playlist_creation_date"));
+            
+                
+                PlaylistList.add(playlist);
+            }
+        } catch (Exception e) {
+            
+        }
+       return PlaylistList;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

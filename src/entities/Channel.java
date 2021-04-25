@@ -80,6 +80,15 @@ public class Channel implements Serializable {
         this.id = id;
     }
 
+    public Channel(Integer id, String channelName, String channelDescription, Date channelCreationDate, int channelStatus, Collection<Playlist> playlistCollection) {
+        this.id = id;
+        this.channelName = channelName;
+        this.channelDescription = channelDescription;
+        this.channelCreationDate = channelCreationDate;
+        this.channelStatus = channelStatus;
+        this.playlistCollection = playlistCollection;
+    }
+
     public Channel(Integer id, String channelName, String channelDescription, Date channelCreationDate, int channelStatus) {
         this.id = id;
         this.channelName = channelName;
@@ -96,35 +105,35 @@ public class Channel implements Serializable {
         this.id = id;
     }
 
-    public String getChannelName() {
+    public String getChannel_Name() {
         return channelName;
     }
 
-    public void setChannelName(String channelName) {
+    public void setChannel_Name(String channelName) {
         this.channelName = channelName;
     }
 
-    public String getChannelDescription() {
+    public String getChannel_Description() {
         return channelDescription;
     }
 
-    public void setChannelDescription(String channelDescription) {
+    public void setChannel_Description(String channelDescription) {
         this.channelDescription = channelDescription;
     }
 
-    public Date getChannelCreationDate() {
+    public Date getChannel_CreationDate() {
         return channelCreationDate;
     }
 
-    public void setChannelCreationDate(Date channelCreationDate) {
+    public void setChannel_CreationDate(Date channelCreationDate) {
         this.channelCreationDate = channelCreationDate;
     }
 
-    public int getChannelStatus() {
+    public int getChannel_Status() {
         return channelStatus;
     }
 
-    public void setChannelStatus(int channelStatus) {
+    public void setChannel_Status(int channelStatus) {
         this.channelStatus = channelStatus;
     }
 
@@ -176,7 +185,9 @@ public class Channel implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Channel[ id=" + id + " ]";
+        return "Channel{" + "id=" + id + ", channelName=" + channelName + ", channelDescription=" + channelDescription + ", channelCreationDate=" + channelCreationDate + ", channelStatus=" + channelStatus + ", userCollection=" + userCollection + ", playlistCollection=" + playlistCollection + ", user=" + user + '}';
     }
+
+   
     
 }

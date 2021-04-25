@@ -10,20 +10,20 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistViewController">
+<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="670.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistViewController">
    <children>
       <StackPane layoutX="2.0" layoutY="3.0" prefHeight="438.0" prefWidth="659.0">
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <top>
-                  <Label prefHeight="62.0" prefWidth="88.0" text="Playlists list" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                  <Label id="title" alignment="CENTER" prefHeight="62.0" prefWidth="443.0" text="Playlists list" textAlignment="CENTER" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
                </top>
                <center>
-                  <TableView fx:id="PlaylistList" prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="PlaylistList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f0a7f2;">
                     <columns>
                       <TableColumn fx:id="PlaylistId" prefWidth="35.19998240470886" text="ID" />
                       <TableColumn fx:id="PlaylistName" prefWidth="96.79998397827148" text="Playlist Name" />
@@ -35,9 +35,9 @@
                <bottom>
                   <HBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="659.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="btnAddPlaylist" mnemonicParsing="false" onAction="#AddAction" text="Add" />
-                        <Button fx:id="btnUpdatePlaylist" mnemonicParsing="false" text="Update" />
-                        <Button fx:id="btnDeletePlaylist" mnemonicParsing="false" text="Delete" />
+                        <Button fx:id="btnAddPlaylist" mnemonicParsing="false" onAction="#AddAction" text="Add" visible="false" />
+                        <Button fx:id="btnUpdatePlaylist" mnemonicParsing="false" onAction="#updateAction" text="Update" />
+                        <Button fx:id="btnDeletePlaylist" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
                      </children>
                   </HBox>
                </bottom>

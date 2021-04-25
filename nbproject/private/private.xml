@@ -3,11 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Tag.java</file>
-            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/PodTasty.java</file>
-            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Playlist.java</file>
-            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/PlaylistViewController.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/ChannelViewController.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/DBConnection/MyConnection.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/services/CRUDTag.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/SingleChannelViewController.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Story.java</file>
             <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/services/PlaylistService.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/PlaylistViewController.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/ChannelBrowserController.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/User.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/services/ChannelService.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/AddChannelController.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/PodTasty.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Channel.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/podtasty/SingleChannelView.fxml</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Playlist.java</file>
+            <file>file:/C:/Users/Lwiss/Documents/GitHub/javaPodTasty/src/entities/Post.java</file>
         </group>
     </open-files>
 </project-private>

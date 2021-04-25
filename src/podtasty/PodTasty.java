@@ -28,10 +28,7 @@ public class PodTasty extends Application {
         stage.setScene(scene);
         stage.show();
         
-         Playlist p=new Playlist("AAAAAAAAGGGGGGG");
-        PlaylistService ps=new PlaylistService();
-        ps.AddPlaylist(p);
-        System.out.println("done");
+         
     }
 
     /**
