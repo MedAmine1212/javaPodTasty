@@ -24,6 +24,8 @@ public class MyConnection {
             System.out.println("Connexion établie!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            
         }
     }
 

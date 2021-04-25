@@ -55,7 +55,7 @@ public class Post implements Serializable {
     private String postImage;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private UserInfo userId;
+    private int userId;
 
     public Post() {
     }
@@ -64,10 +64,10 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public Post(Integer id, String text, Date createdAt) {
-        this.id = id;
+    public Post(String text ) {
+        
         this.text = text;
-        this.createdAt = createdAt;
+        
     }
 
     public Integer getId() {
@@ -102,11 +102,11 @@ public class Post implements Serializable {
         this.postImage = postImage;
     }
 
-    public UserInfo getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(UserInfo userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
