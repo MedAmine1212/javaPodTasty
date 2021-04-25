@@ -138,6 +138,8 @@ public class ChannelViewController implements Initializable {
         AddChannelController.setbtnaddChannel("Update");
         AddChannelController.setaddChannelNameLabel("Update the channel's name");
         AddChannelController.setaddChannelDescriptionLabel("Edit the channel's description");
+        AddChannelController.setChannelNameField(ChannelList.getSelectionModel().getSelectedItem().getChannel_Name());
+        AddChannelController.setChannelDescriptionField(ChannelList.getSelectionModel().getSelectedItem().getChannel_Description());
         testBtn=1;
         AddChannelController.setselectedValue(ChannelList.getSelectionModel().getSelectedItem().getId());
         stage.setScene(new Scene(parent));

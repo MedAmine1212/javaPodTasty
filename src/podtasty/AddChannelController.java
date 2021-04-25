@@ -74,6 +74,12 @@ public class AddChannelController implements Initializable {
     }    
     
    
+    public void setChannelNameField(String s){
+        this.ChannelNameField.setText(s);
+    }
+    public void setChannelDescriptionField(String s){
+        this.ChannelDescriptionField.setText(s);
+    }
     
     public void setselectedValue(int selectedValue){
     this.selectedValue=selectedValue;}
