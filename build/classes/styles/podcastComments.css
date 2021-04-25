@@ -11,6 +11,12 @@
 
 }
 
+#commentDetails{
+    -fx-background-color:lightgray;
+    -fx-border-radius:12px;
+
+}
+
 #deleteCheckedComment{
 
 	-fx-background-color:#dc3545;

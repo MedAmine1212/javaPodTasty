@@ -7,6 +7,7 @@ package services;
 
 import DBConnection.MyConnection;
 import entities.User;
+import entities.UserInfo;
 import interfaces.IUser;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,6 +50,29 @@ public class CRUDUser implements IUser<User>{
             while(res.next()) { 
             User user = new User();
             user.setId(res.getInt("id"));
+            user.setUserInfoIdId(geUserInfoById(user.getId()));
+            return user;
+            }
+            return null;
+        }catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    @Override
+    public UserInfo geUserInfoById(int id) {
+          try{
+        String requete= "select * from user_info where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet res = pst.executeQuery();
+            while(res.next()) { 
+            UserInfo user = new UserInfo();
+            user.setId(res.getInt("id"));
+            user.setUserFirstName(res.getString("user_first_name"));
+            user.setUserLastName(res.getString("user_last_name"));
             return user;
             }
             return null;

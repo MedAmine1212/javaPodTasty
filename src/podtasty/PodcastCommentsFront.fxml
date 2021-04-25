@@ -32,10 +32,11 @@
          <children>
             <ButtonBar GridPane.columnIndex="3" GridPane.rowIndex="1">
                <buttons>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                  <ButtonBar prefHeight="48.0" prefWidth="285.0">
                      <buttons>
                         <Button fx:id="editCommentButton" mnemonicParsing="false" onMouseClicked="#editCommentClick" prefHeight="26.0" prefWidth="266.0" text="Edit" textFill="WHITE" />
                         <Button fx:id="deleteCheckedComment" mnemonicParsing="false" onMouseClicked="#deleteCommentClick" text="Delete" textFill="WHITE" />
+                        <Button fx:id="commentDetails" mnemonicParsing="false" onMouseClicked="#showCommentDetails" text="Details" />
                      </buttons>
                   </ButtonBar>
                </buttons>
@@ -211,7 +212,7 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <BorderPane fx:id="loading" layoutY="-2.0" prefHeight="765.0" prefWidth="1200.0">
+      <BorderPane fx:id="loading" layoutX="-7.0" layoutY="-2.0" prefHeight="765.0" prefWidth="1200.0">
          <center>
             <ImageView fitHeight="286.0" fitWidth="373.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>

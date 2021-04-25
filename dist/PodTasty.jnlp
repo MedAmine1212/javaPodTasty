@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PodTasty.jar" size="1881575" download="eager" />
+    <jar href="PodTasty.jar" size="1883128" download="eager" />
     <jar href="lib\TrayNotification-5393c3a54f.jar" size="42522" download="eager" />
     <jar href="lib\actlist-plugin-2.2.0.jar" size="122909" download="eager" />
     <jar href="lib\ansi-regex-4.1.0.jar" size="5830" download="eager" />

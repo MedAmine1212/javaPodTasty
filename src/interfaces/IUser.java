@@ -6,6 +6,7 @@
 package interfaces;
 
 import entities.User;
+import entities.UserInfo;
 import javafx.collections.ObservableList;
 
 /**
@@ -19,6 +20,7 @@ public interface IUser<User> {
     public boolean deleteUser(int id);
     public boolean updateUser(User user, int id);
     public User getUserById(int id);
+    public UserInfo geUserInfoById(int id);
     
     
 }

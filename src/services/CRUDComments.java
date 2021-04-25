@@ -9,6 +9,8 @@ import DBConnection.MyConnection;
 import entities.Podcast;
 import entities.PodcastComment;
 import interfaces.IComments;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -28,7 +30,7 @@ public class CRUDComments implements IComments<PodcastComment> {
     @Override
     public boolean addComment(PodcastComment com) {
         try{
-            String requete= "INSERT INTO podcast_comment (podcast_id_id, user_id_id, comment_text, comment_date)"+ "VALUES (?,?,?,?)";
+            String requete= "INSERT INTO podcast_comment (podcast_id_id, user_id_id, comment_text, comment_date) VALUES (?,?,?,?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
            // pst.setInt(1, t.getId());
@@ -38,6 +40,20 @@ public class CRUDComments implements IComments<PodcastComment> {
             pst.setDate(4,java.sql.Date.valueOf(LocalDate.now()));
             //executeupdate
             pst.executeUpdate();
+            String rq = "Select MAX(id) from podcast_comment";
+            PreparedStatement st = MyConnection.getInstance().getCnx()
+                    .prepareStatement(rq);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                URL url = new URL("http://127.0.0.1:8000/callMercure/comments/"+rs.getInt(1)+"/"+com.getPodcastIdId().getId());
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                int status = con.getResponseCode();
+                System.out.println(status);
+                
+            }
+            
+            
             return true;
             
             
@@ -83,7 +99,32 @@ public class CRUDComments implements IComments<PodcastComment> {
 
     @Override
     public PodcastComment getCommentById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String requete = "SELECT * FROM podcast_comment p WHERE p.id=? ";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                PodcastComment comment = new PodcastComment();
+                comment.setId(rs.getInt("id"));
+                comment.setCommentDate(rs.getDate("comment_date"));
+                comment.setCommentText(rs.getString("comment_text"));
+                CRUDUser cu = new CRUDUser();
+                comment.setUserIdId(cu.getUserById(rs.getInt("user_id_id")));
+                comment.setUserName(comment.getUserIdId().getUserInfoIdId().getUserFirstName()+" "+comment.getUserIdId().getUserInfoIdId().getUserLastName());
+                return comment;
+                
+        }
+            return null;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return null;
+        }
+        
+
     }
 
     @Override
@@ -104,7 +145,7 @@ public class CRUDComments implements IComments<PodcastComment> {
                 comment.setCommentText(rs.getString("comment_text"));
                 CRUDUser cu = new CRUDUser();
                 comment.setUserIdId(cu.getUserById(rs.getInt("user_id_id")));
-                comment.setUserName("Test");
+                comment.setUserName(comment.getUserIdId().getUserInfoIdId().getUserFirstName()+" "+comment.getUserIdId().getUserInfoIdId().getUserLastName());
                 comment.setPodcastIdId(pod);
                 comments.add(comment);
                 
