@@ -16,13 +16,15 @@ import javafx.stage.Stage;
  * @author MedAmine
  */
 public class PodTasty extends Application {
-    
+        static Stage stg;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("TagsFxmlDocument.fxml"));
-        
-        Scene scene = new Scene(root);
-        
+        this.stg= stage;
+        Parent root = FXMLLoader.load(getClass().getResource("LogReg.fxml"));
+        //        Parent root = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+
+        Scene scene = new Scene(root);        
         stage.setScene(scene);
         stage.show();
     }

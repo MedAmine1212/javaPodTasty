@@ -1,0 +1,11 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+.btn_primary{
+-fx-background-color:rgb(24,186,234) !important;
+-fx-border-radius: 12px;
+}
+}

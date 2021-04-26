@@ -9,15 +9,27 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+<<<<<<< HEAD
 import javax.persistence.CascadeType;
+=======
+>>>>>>> 13140e666834145815f9d29fc4f500ad332c374c
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+=======
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+>>>>>>> 13140e666834145815f9d29fc4f500ad332c374c
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,7 +38,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
+<<<<<<< HEAD
  * @author Lwiss
+=======
+ * @author Douiri Amine
+>>>>>>> 13140e666834145815f9d29fc4f500ad332c374c
  */
 @Entity
 @Table(name = "channel")
@@ -59,8 +75,18 @@ public class Channel implements Serializable {
     @Basic(optional = false)
     @Column(name = "channel_status")
     private int channelStatus;
+<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "channelIdId")
     private Collection<Playlist> playlistCollection;
+=======
+    @JoinTable(name = "user_channel", joinColumns = {
+        @JoinColumn(name = "channel_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<User> userCollection;
+    @OneToOne(mappedBy = "channelIdId")
+    private User user;
+>>>>>>> 13140e666834145815f9d29fc4f500ad332c374c
 
     public Channel() {
     }
@@ -118,12 +144,29 @@ public class Channel implements Serializable {
     }
 
     @XmlTransient
+<<<<<<< HEAD
     public Collection<Playlist> getPlaylistCollection() {
         return playlistCollection;
     }
 
     public void setPlaylistCollection(Collection<Playlist> playlistCollection) {
         this.playlistCollection = playlistCollection;
+=======
+    public Collection<User> getUserCollection() {
+        return userCollection;
+    }
+
+    public void setUserCollection(Collection<User> userCollection) {
+        this.userCollection = userCollection;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+>>>>>>> 13140e666834145815f9d29fc4f500ad332c374c
     }
 
     @Override

@@ -7,6 +7,7 @@ package entities;
 
 import java.awt.Color;
 import java.util.List;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -16,13 +17,13 @@ public class Tag {
     private int id;
     private String name;
     private String tagStyle;
-    private Color tagColor;
+    private ImageView tagColor;
 
-    public Color getTagColor() {
+    public ImageView getTagColor() {
         return tagColor;
     }
 
-    public void setTagColor(Color tagColor) {
+    public void setTagColor(ImageView tagColor) {
         this.tagColor = tagColor;
     }
     private List<Podcast> listPodcasts;
