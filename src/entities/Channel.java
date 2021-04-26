@@ -80,6 +80,8 @@ public class Channel implements Serializable {
         this.id = id;
     }
 
+    
+
     public Channel(Integer id, String channelName, String channelDescription, Date channelCreationDate, int channelStatus, Collection<Playlist> playlistCollection) {
         this.id = id;
         this.channelName = channelName;

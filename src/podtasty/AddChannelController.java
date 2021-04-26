@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import services.ChannelService;
 
@@ -57,6 +58,8 @@ public class AddChannelController implements Initializable {
     private Label addChannelStatusLabel;
     private int selectedValue;
     private int testBtn=0;
+    @FXML
+    private HBox btnGroupAddChannel;
 
     /**
      * Initializes the controller class.
@@ -67,10 +70,7 @@ public class AddChannelController implements Initializable {
             loader.setLocation(getClass().getResource("ChannelViewController.fxml"));
        
         ChannelViewController ChannelViewController=loader.getController();
-        if (ChannelViewController.testBtn==1) {
-            
-         ChannelNameField.setText("bbbb");
-         ChannelDescriptionField.setText("aaa");}
+        
     }    
     
    
@@ -99,6 +99,12 @@ public class AddChannelController implements Initializable {
      public void setaddChannelStatusLabel(String s){
         addChannelStatusLabel.setText(s);
     }
+     public void disbleStatus(){
+      this.addChannelStatusLabel.setVisible(false);
+      this.btnGroupAddChannel.setVisible(false);
+     }
+     
+     
     
     
     

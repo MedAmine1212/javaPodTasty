@@ -171,6 +171,8 @@ public class PlaylistViewController implements Initializable {
         addPlaylistController.setbtnaddPlaylist("Update");
         addPlaylistController.setaddPlaylistNameLabel("Update the playlist's name");
         addPlaylistController.setaddPlaylistDescriptionLabel("Edit the playlist's description");
+        addPlaylistController.setPlaylistNameField(PlaylistList.getSelectionModel().getSelectedItem().getPlaylistName());
+        addPlaylistController.setPlaylistDescriptionField(PlaylistList.getSelectionModel().getSelectedItem().getPlaylistDescription());
         testBtn=1;
         selectedValue=PlaylistList.getSelectionModel().getSelectedItem().getId();
         stage.setScene(new Scene(parent));

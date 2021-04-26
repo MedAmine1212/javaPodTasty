@@ -57,6 +57,13 @@ public class AddPlaylistController implements Initializable {
        
     }    
 
+    public void setPlaylistNameField(String s){
+        this.PlaylistNameField.setText(s);
+    }
+    public void setPlaylistDescriptionField(String s){
+        this.PlaylistDescriptionField.setText(s);
+    }
+    
     
     public void setaddPlaylistTtitle (String s){
     addPlaylistTtitle.setText(s);}

@@ -144,6 +144,23 @@ public class ChannelService {
         }      
     }
     
+    public boolean updateOwnChannel(int id, Channel c){
+     String req;
+        req = "update channel set channel_name=?, channel_description=? where id = ?";
+        try {
+            pst=connection.prepareStatement(req);
+            pst.setString(1,c.getChannel_Name());
+            pst.setString(2,c.getChannel_Description());
+            pst.setInt(3, id);
+            pst.executeUpdate();
+            return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PlaylistService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
     
     public boolean updateChannel(int id , Channel c){
     String req;

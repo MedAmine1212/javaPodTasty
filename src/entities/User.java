@@ -85,8 +85,15 @@ public class User implements Serializable {
 
     public User(Integer id) {
         this.id = id;
+        
     }
 
+    public User(Integer id, Channel channelIdId) {
+        this.id = id;
+        this.channelIdId = channelIdId;
+    }
+    
+    
     public User(Integer id, String userEmail, boolean isAdmin, boolean desactiveAccount) {
         this.id = id;
         this.userEmail = userEmail;
