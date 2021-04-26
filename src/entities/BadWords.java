@@ -105,11 +105,6 @@ public class BadWords {
                 }
             }
         }
-
-
-        for(String s: badWords) {
-            System.out.println(s + " qualified as a bad word in a username");
-        }
         return badWords;
 
     }

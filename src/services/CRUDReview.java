@@ -32,6 +32,8 @@ public class CRUDReview implements IReview{
             pst.setInt(2,review.getUserIdId().getId());
             pst.setFloat(3,review.getRating()); 
             //executeupdate
+            
+            System.out.println(review.getPodcastIdId().getId());
             pst.executeUpdate();
             return true;
             

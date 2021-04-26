@@ -183,12 +183,8 @@ public class PodcastReviewController implements Initializable {
        rate = Float.parseFloat(strDouble);
        qsList = null;
        PodcastReview review = new PodcastReview();
-       Podcast podcast= new Podcast();
-       podcast.setId(1);
-       User user = new User();
-       user.setId(1);
-       review.setPodcastIdId(podcast);
-       review.setUserIdId(user);
+       review.setPodcastIdId(PodcastCommentsFrontController.getCurrentPodcast());
+       review.setUserIdId(PodcastCommentsFrontController.getCurrentUser());
        review.setRating(rate);
        CRUDReview cr = new CRUDReview(); 
        if(cr.addReview(review)) {
@@ -201,7 +197,6 @@ public class PodcastReviewController implements Initializable {
                 al.setHeaderText("Review added successfully");
                 al.showAndWait();
                 closeThis(null);
-           
        } else {
             Alert al = new Alert(Alert.AlertType.ERROR);
             al.setTitle("Error");

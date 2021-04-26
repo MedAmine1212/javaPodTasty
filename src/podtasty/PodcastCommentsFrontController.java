@@ -200,6 +200,7 @@ public class PodcastCommentsFrontController implements Initializable {
     
    public void setUpView() throws IOException, WriterException {
        
+       
         BufferedImage qrCode = GenerateQRCode.createQRImage(currentPodcast.getId().toString(), 125);
         WritableImage qrCodeImg = SwingFXUtils.toFXImage(qrCode, null);
         qrCodeContainer.setImage(qrCodeImg);
@@ -250,10 +251,14 @@ public class PodcastCommentsFrontController implements Initializable {
                     Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
-            System.out.println(rating);
             rating/=reviewList.size();
             String strDouble = String.format("%.1f", rating);
             podcastRating.setText("Rating: "+strDouble+"/10");
+        } else {
+            ratingSaved = false;
+            userRating.setText("");
+            setImage(rate,  2);
+            podcastRating.setText("");
         }
         
         if(currentPodcast.getCommentsAllowed() == 0) {
