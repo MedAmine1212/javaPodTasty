@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="831.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.SingleChannelViewController">
+   <children>
+      <HBox alignment="CENTER" layoutX="-1.0" layoutY="20.0" prefHeight="47.0" prefWidth="811.0">
+         <children>
+            <Label id="title" fx:id="welcomeTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="642.0" text="Welcome to this channel" textAlignment="CENTER">
+               <effect>
+                  <InnerShadow blurType="GAUSSIAN" choke="0.83" height="116.78" radius="30.37" width="6.7" />
+               </effect></Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="4.0" layoutY="87.0" prefHeight="104.0" prefWidth="802.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="242.0" prefWidth="266.0">
+               <children>
+                  <Label lineSpacing="50.0" text="Playlists">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4952046871185303" green="0.5653021335601807" blue="0.9157894849777222" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="ownerLabel" alignment="CENTER" lineSpacing="50.0" prefHeight="87.0" prefWidth="134.0" text="Owner" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <effect>
+                        <InnerShadow blurType="GAUSSIAN" choke="0.95" height="255.0" radius="127.0" width="255.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="93.0" prefWidth="262.0">
+               <children>
+                  <Label lineSpacing="50.0" text="Created in">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4952046871185303" green="0.5653021335601807" blue="0.9157894849777222" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="createdLabel" alignment="CENTER" lineSpacing="50.0" prefHeight="57.0" prefWidth="177.0" text="Created in" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <effect>
+                        <InnerShadow blurType="GAUSSIAN" choke="1.0" height="255.0" radius="127.0" width="255.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="442.0">
+               <children>
+                  <Label prefHeight="47.0" prefWidth="267.0" text="About this channel">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <textFill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.4952046871185303" green="0.5653021335601807" blue="0.9157894849777222" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="descriptionLabel" alignment="CENTER" prefHeight="392.0" prefWidth="515.0" text="Description" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Label fx:id="a" text="Label" visible="false" />
+      <ScrollPane layoutX="12.0" layoutY="229.0" prefHeight="391.0" prefWidth="786.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+         <content>
+            <GridPane fx:id="big" alignment="CENTER" hgap="10.0" prefHeight="828.0" prefWidth="754.0" vgap="20.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="389.800048828125" minWidth="10.0" prefWidth="380.20001220703125" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="374.59997558593756" minWidth="10.0" prefWidth="373.7999877929688" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Button fx:id="ReturnSingle" layoutX="747.0" layoutY="644.0" mnemonicParsing="false" onAction="#ReturnSingle" text="Return" />
+   </children>
+</AnchorPane>
