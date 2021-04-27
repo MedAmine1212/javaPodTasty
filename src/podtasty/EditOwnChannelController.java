@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -51,6 +52,8 @@ public class EditOwnChannelController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    
 
     @FXML
     private void EditChannelAction(ActionEvent event) {
@@ -60,7 +63,28 @@ public class EditOwnChannelController implements Initializable {
              c.setChannel_Name(ChannelNameField.getText());
              c.setChannel_Description(ChannelDescriptionField.getText());
              
-             sc.updateOwnChannel(21 ,c);
+             sc.updateOwnChannel(28 ,c);
+             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Channel Updated");
+                alert.setHeaderText(null);
+                alert.setContentText("You have succesfully updated the Channel!");
+                alert.showAndWait();
+                Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+                        
+        FXMLLoader loader = new FXMLLoader ();
+            loader.setLocation(getClass().getResource("OwnChannel.fxml"));
+        try {
+            loader.load();
+
+
+              } catch (IOException ex) {
+                  System.out.println(ex.getMessage());
+        }
+
+        Parent parent = loader.getRoot();
+        stage.setScene(new Scene(parent));
+        stage.show();
         
     }
 

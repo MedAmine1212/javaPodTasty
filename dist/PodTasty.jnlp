@@ -10,9 +10,25 @@
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="PodTasty.jar" size="452652" download="eager" />
     <jar href="lib\eclipselink.jar" size="8478776" download="eager" />
+    <jar href="lib\httpclient5-5.0.3.jar" size="775798" download="eager" />
+    <jar href="lib\httpclient5-cache-5.0.3.jar" size="259199" download="eager" />
+    <jar href="lib\httpclient5-fluent-5.0.3.jar" size="24047" download="eager" />
+    <jar href="lib\httpclient5-testing-5.0.3.jar" size="38022" download="eager" />
+    <jar href="lib\httpclient5-win-5.0.3.jar" size="15576" download="eager" />
+    <jar href="lib\httpcore5-5.0.2.jar" size="809733" download="eager" />
+    <jar href="lib\httpcore5-h2-5.0.2.jar" size="225863" download="eager" />
+    <jar href="lib\httpcore5-reactive-5.0.2.jar" size="21544" download="eager" />
+    <jar href="lib\httpcore5-testing-5.0.2.jar" size="145492" download="eager" />
+    <jar href="lib\javax.mail.jar" size="659033" download="eager" />
     <jar href="lib\javax.persistence_2.1.0.v201304241213.jar" size="164637" download="eager" />
+    <jar href="lib\jna-5.2.0.jar" size="1488769" download="eager" />
+    <jar href="lib\jna-platform-5.2.0.jar" size="2527218" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
     <jar href="lib\org.eclipse.persistence.jpa.jpql_2.5.2.v20140319-9ad6abd.jar" size="1366247" download="eager" />
+    <jar href="lib\reactive-streams-1.0.2.jar" size="2097" download="eager" />
+    <jar href="lib\rxjava-2.2.8.jar" size="2340461" download="eager" />
+    <jar href="lib\slf4j-api-1.7.25.jar" size="41203" download="eager" />
+    <jar href="lib\twilio-8.4.0-jar-with-dependencies.jar" size="10111813" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PodTasty" >
     <param name="requiredFXVersion" value="8.0+"/>

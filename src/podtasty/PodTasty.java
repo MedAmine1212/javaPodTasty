@@ -5,30 +5,31 @@
  */
 package podtasty;
 
-import entities.Playlist;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import services.PlaylistService;
 
 /**
  *
  * @author MedAmine
  */
 public class PodTasty extends Application {
-    
+        static Stage stg;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ChannelBrowser.fxml"));
+       /* this.stg= stage;
         
-        Scene scene = new Scene(root);
-        
+        stg.setTitle("Pod-Tasty : The Desktop Application");*/
+        Parent root = FXMLLoader.load(getClass().getResource("OwnChannel.fxml"));
+        //        Parent root = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+
+        Scene scene = new Scene(root);        
         stage.setScene(scene);
         stage.show();
-        
-         
     }
 
     /**
@@ -36,10 +37,6 @@ public class PodTasty extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-        
-       
-        
-                
     }
     
 }

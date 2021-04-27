@@ -88,15 +88,9 @@ public class TagsListController implements Initializable {
         ObservableList<Tag> tList = cr.getTags();
         tagId.setCellValueFactory(new PropertyValueFactory<Tag, Integer>("id") );
         tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name") );
-        tagStyle.setCellValueFactory(new PropertyValueFactory<Tag, ImageView>("tagColor") );
-      
+        tagStyle.setCellValueFactory(new PropertyValueFactory<Tag, ImageView>("tagColor") );      
         tagsList.setItems(tList);      
-    }
-    
-
-    
-
-
+    }        
     @FXML
     private void btnDeleteOnAction(ActionEvent event) {
          Alert alert = new Alert(AlertType.CONFIRMATION);

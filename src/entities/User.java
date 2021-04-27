@@ -26,23 +26,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author khail
+ * @author Douiri Amine
  */
 @Entity
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByUserEmail", query = "SELECT u FROM User u WHERE u.userEmail = :userEmail"),
-    @NamedQuery(name = "User.findByUserPassword", query = "SELECT u FROM User u WHERE u.userPassword = :userPassword"),
-    @NamedQuery(name = "User.findByIsAdmin", query = "SELECT u FROM User u WHERE u.isAdmin = :isAdmin"),
-    @NamedQuery(name = "User.findByDesactiveAccount", query = "SELECT u FROM User u WHERE u.desactiveAccount = :desactiveAccount"),
-    @NamedQuery(name = "User.findByGithubId", query = "SELECT u FROM User u WHERE u.githubId = :githubId")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
+    , @NamedQuery(name = "User.findByUserEmail", query = "SELECT u FROM User u WHERE u.userEmail = :userEmail")
+    , @NamedQuery(name = "User.findByUserPassword", query = "SELECT u FROM User u WHERE u.userPassword = :userPassword")
+    , @NamedQuery(name = "User.findByIsAdmin", query = "SELECT u FROM User u WHERE u.isAdmin = :isAdmin")
+    , @NamedQuery(name = "User.findByDesactiveAccount", query = "SELECT u FROM User u WHERE u.desactiveAccount = :desactiveAccount")
+    , @NamedQuery(name = "User.findByGithubId", query = "SELECT u FROM User u WHERE u.githubId = :githubId")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -62,38 +61,26 @@ public class User implements Serializable {
     @Column(name = "github_id")
     private String githubId;
     @ManyToMany(mappedBy = "userCollection")
-    private Collection<Podcast> podcastCollection;
-    @ManyToMany(mappedBy = "userCollection")
     private Collection<Channel> channelCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdId")
-    private Collection<Notification> notificationCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdId")
-    private Collection<PodcastComment> podcastCommentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdId")
-    private Collection<PodcastReview> podcastReviewCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userIdId")
-    private Collection<Reclamation> reclamationCollection;
     @JoinColumn(name = "channel_id_id", referencedColumnName = "id")
     @OneToOne
     private Channel channelIdId;
     @JoinColumn(name = "user_info_id_id", referencedColumnName = "id")
     @OneToOne
-    private UserInfo userInfoIdId;
+    private int userInfoIdId;
 
     public User() {
     }
 
     public User(Integer id) {
         this.id = id;
-        
     }
 
     public User(Integer id, Channel channelIdId) {
         this.id = id;
         this.channelIdId = channelIdId;
     }
-    
-    
+
     public User(Integer id, String userEmail, boolean isAdmin, boolean desactiveAccount) {
         this.id = id;
         this.userEmail = userEmail;
@@ -150,57 +137,12 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Podcast> getPodcastCollection() {
-        return podcastCollection;
-    }
-
-    public void setPodcastCollection(Collection<Podcast> podcastCollection) {
-        this.podcastCollection = podcastCollection;
-    }
-
-    @XmlTransient
     public Collection<Channel> getChannelCollection() {
         return channelCollection;
     }
 
     public void setChannelCollection(Collection<Channel> channelCollection) {
         this.channelCollection = channelCollection;
-    }
-
-    @XmlTransient
-    public Collection<Notification> getNotificationCollection() {
-        return notificationCollection;
-    }
-
-    public void setNotificationCollection(Collection<Notification> notificationCollection) {
-        this.notificationCollection = notificationCollection;
-    }
-
-    @XmlTransient
-    public Collection<PodcastComment> getPodcastCommentCollection() {
-        return podcastCommentCollection;
-    }
-
-    public void setPodcastCommentCollection(Collection<PodcastComment> podcastCommentCollection) {
-        this.podcastCommentCollection = podcastCommentCollection;
-    }
-
-    @XmlTransient
-    public Collection<PodcastReview> getPodcastReviewCollection() {
-        return podcastReviewCollection;
-    }
-
-    public void setPodcastReviewCollection(Collection<PodcastReview> podcastReviewCollection) {
-        this.podcastReviewCollection = podcastReviewCollection;
-    }
-
-    @XmlTransient
-    public Collection<Reclamation> getReclamationCollection() {
-        return reclamationCollection;
-    }
-
-    public void setReclamationCollection(Collection<Reclamation> reclamationCollection) {
-        this.reclamationCollection = reclamationCollection;
     }
 
     public Channel getChannelIdId() {
@@ -211,11 +153,11 @@ public class User implements Serializable {
         this.channelIdId = channelIdId;
     }
 
-    public UserInfo getUserInfoIdId() {
+    public int getUserInfoIdId() {
         return userInfoIdId;
     }
 
-    public void setUserInfoIdId(UserInfo userInfoIdId) {
+    public void setUserInfoIdId(int userInfoIdId) {
         this.userInfoIdId = userInfoIdId;
     }
 
@@ -241,7 +183,9 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.User[ id=" + id + " ]";
+        return "User{" + "id=" + id + ", userEmail=" + userEmail + ", userPassword=" + userPassword + ", isAdmin=" + isAdmin + ", desactiveAccount=" + desactiveAccount + ", githubId=" + githubId + ", channelCollection=" + channelCollection + ", channelIdId=" + channelIdId + ", userInfoIdId=" + userInfoIdId + '}';
     }
+
+    
     
 }
