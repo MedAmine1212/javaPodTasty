@@ -29,16 +29,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.entity.mime.FileBody;
 import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
@@ -49,6 +52,8 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.HttpResponse;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import services.CRUDUser;
+import services.JavaMailUtils;
+import services.SMSUtils;
 import sun.net.www.http.HttpClient;
 
 /**
@@ -80,16 +85,27 @@ public class ProfileController implements Initializable {
     private Button SettingsBtn1;
     @FXML
     private Button SettingsBtn2;
+    @FXML
+    private Pane NotifPanel;
+    static Boolean notifOn;
+    @FXML
+    private Button notif1;
+    @FXML
+    private TextField activateCode;
+    @FXML
+    private Label activation_error;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.notifOn = false;
+        this.NotifPanel.setVisible(false);
         // TODO 
-    //    Image im = new Image("https://juicylinksmag.files.wordpress.com/2016/02/juliet-ibrahim.jpg", false);
+        //    Image im = new Image("https://juicylinksmag.files.wordpress.com/2016/02/juliet-ibrahim.jpg", false);
 
-     //   this.circle.setFill(new ImagePattern(im));
+        //   this.circle.setFill(new ImagePattern(im));
         try {
             this.setProfile();
         } catch (MalformedURLException ex) {
@@ -107,20 +123,23 @@ public class ProfileController implements Initializable {
             this.LastName.setText(info.getUserLastName());
             this.Bio.setText(info.getUserBio());
             BufferedImage image;
-            if(info.getUserImage()!=null){
-            image = ImageIO.read(new URL("http://127.0.0.1:8000/Files/podcastFiles/" + info.getUserImage()));
-            }else{
-            image = ImageIO.read(new URL("http://127.0.0.1:8000/Files/podcastFiles/avatar.jpg"));
-            
+            if (info.getUserImage() != null) {
+                image = ImageIO.read(new URL("http://127.0.0.1:8000/Files/podcastFiles/" + info.getUserImage()));
+            } else {
+                image = ImageIO.read(new URL("http://127.0.0.1:8000/Files/podcastFiles/avatar.jpg"));
+
             }
             WritableImage img = SwingFXUtils.toFXImage(image, null);
             this.circle.setFill(new ImagePattern(img));
+            if (u.getDesactiveAccount()) {
+                this.notif1.setVisible(true);
+            } else {
+                this.notif1.setVisible(true);
+            }
         } catch (IOException ex) {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
     @FXML
     private void uploadPic(ActionEvent event) throws ProtocolException, IOException {
         Stage primaryStage = new Stage();
@@ -130,14 +149,11 @@ public class ProfileController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(primaryStage);
         if (file != null) {
-     
-            
             UserHolder holder = UserHolder.getInstance();
             User u = holder.getUser();
             CRUDUser cr = new CRUDUser();
             UserInfo info = cr.getUserInfoById(u.getUserInfoIdId());
-            
-            MultipartEntityBuilder  entity = MultipartEntityBuilder.create();
+            MultipartEntityBuilder entity = MultipartEntityBuilder.create();
             entity.addBinaryBody("myFile", file);
             HttpEntity mutiPartHttpEntity = entity.build();
             HttpPost request = new HttpPost("http://127.0.0.1:8000/api/profile/pic/post");
@@ -148,8 +164,8 @@ public class ProfileController implements Initializable {
             System.out.print(file.getName());
             cr.updatePic(file.getName(), info.getId());
             this.setProfile();
-         }
-        
+        }
+
     }
 
     @FXML
@@ -178,10 +194,52 @@ public class ProfileController implements Initializable {
     }
 
     private void Recherche(KeyEvent event) {
-      
-       if(event.getCode().toString().equals("ENTER"))
-    {
-        System.out.print(event);
+
+        if (event.getCode().toString().equals("ENTER")) {
+            System.out.print(event);
+        }
     }
+
+    @FXML
+    private void ShowNotif(ActionEvent event) {
+        this.notifOn = !notifOn;
+        if (notifOn) {
+            this.NotifPanel.setVisible(true);
+        } else {
+            this.NotifPanel.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void Activate(ActionEvent event) {
+        UserHolder holder = UserHolder.getInstance();
+        User u = holder.getUser();
+
+        if (this.activateCode.getText().equals(u.getId().toString())) {
+            CRUDUser cr = new CRUDUser();
+            cr.switchStatusAccount(u.getId());
+            
+        } else {
+            this.activation_error.setVisible(true);
+        }
+    }
+    @FXML
+    private void ResendEmail(MouseEvent event) throws MessagingException {
+        UserHolder holder = UserHolder.getInstance();
+        User u = holder.getUser();
+        JavaMailUtils.sendMail(u.getUserEmail(), u.getId());
+    }
+
+    @FXML
+    private void S(MouseEvent event) {
+    }
+
+    @FXML
+    private void sendSMS(MouseEvent event) {
+        UserHolder holder = UserHolder.getInstance();
+        User u = holder.getUser();
+        SMSUtils.send(u.getId());
+        System.out.print("sms sent");
+        
     }
 }

@@ -9,11 +9,11 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2e3038};" stylesheets="@logreg.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.GestionUsersController">
+<AnchorPane id="AnchorPane" prefHeight="753.0" prefWidth="1222.0" style="-fx-background-color: #2e3038};" stylesheets="@logreg.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.GestionUsersController">
    <children>
-      <AnchorPane prefHeight="47.0" prefWidth="607.0" style="-fx-background-color: #7b7b7b;">
+      <AnchorPane prefHeight="47.0" prefWidth="1222.0" style="-fx-background-color: #7b7b7b;">
          <children>
-            <Label fx:id="username" layoutX="467.0" layoutY="11.0" text="UserName" textFill="WHITE">
+            <Label fx:id="username" layoutX="1073.0" layoutY="11.0" text="UserName" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -23,16 +23,16 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Circle fx:id="imageUser" fill="DODGERBLUE" layoutX="576.0" layoutY="24.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="imageUser" fill="DODGERBLUE" layoutX="1191.0" layoutY="24.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
          </children></AnchorPane>
-      <TableView fx:id="table_users" layoutX="21.0" layoutY="84.0" prefHeight="244.0" prefWidth="328.0">
+      <TableView fx:id="table_users" layoutX="258.0" layoutY="132.0" prefHeight="316.0" prefWidth="489.0">
         <columns>
           <TableColumn fx:id="userId" prefWidth="75.0" text="User ID" />
           <TableColumn fx:id="userEmail" prefWidth="157.0" text="User Email" />
             <TableColumn fx:id="userStatus" prefWidth="157.0" text="Desactive" />
         </columns>
       </TableView>
-      <AnchorPane fx:id="showoneuser" layoutX="359.0" layoutY="84.0" prefHeight="244.0" prefWidth="227.0" style="-fx-background-color: #7b7b7b;">
+      <AnchorPane fx:id="showoneuser" layoutX="776.0" layoutY="132.0" prefHeight="244.0" prefWidth="227.0" style="-fx-background-color: #7b7b7b;">
          <children>
             <Label fx:id="FirstName" layoutX="12.0" layoutY="40.0" />
             <Label fx:id="Lastname" layoutX="12.0" layoutY="98.0" />
@@ -57,6 +57,6 @@
             <Circle fx:id="imageUsers" fill="DODGERBLUE" layoutX="173.0" layoutY="49.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </AnchorPane>
-      <Button fx:id="addbtn" layoutX="282.0" layoutY="346.0" mnemonicParsing="false" onAction="#desactivate" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="Add user" textFill="WHITE" />
+      <Button fx:id="addbtn" layoutX="776.0" layoutY="411.0" mnemonicParsing="false" onAction="#desactivate" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="Add user" textFill="WHITE" />
    </children>
 </AnchorPane>

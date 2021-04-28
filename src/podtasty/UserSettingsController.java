@@ -8,6 +8,7 @@ package podtasty;
 import entities.User;
 import entities.UserHolder;
 import entities.UserInfo;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -130,7 +131,6 @@ public class UserSettingsController implements Initializable {
                 alert.setContentText("Enjoy POD-TASTY!");
                 alert.showAndWait();
                 this.ChangePwd.setVisible(false);
-
             } else if (cr.validate(u.getUserEmail(), this.OldPassword.getText()) == false) {
                 this.ChangePwdError.setText("Old Password Invalid");
 
@@ -177,6 +177,17 @@ public class UserSettingsController implements Initializable {
         alert.setContentText("Enjoy POD-TASTY!");
         alert.showAndWait();
         this.ChangeInfo.setVisible(false);
+
+    }
+
+    @FXML
+    private void LogOut(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LogReg.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        PodTasty.stg.close();
 
     }
 

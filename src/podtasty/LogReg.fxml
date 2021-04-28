@@ -31,9 +31,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="logn" layoutX="355.0" layoutY="-4.0" prefHeight="504.0" prefWidth="362.0" style="-fx-background-color: #2e3038};">
+      <AnchorPane fx:id="logn" layoutX="355.0" layoutY="-4.0" prefHeight="504.0" prefWidth="362.0" style="-fx-background-color: #2e3038;">
          <children>
-            <Pane fx:id="RegForm" layoutX="41.0" layoutY="143.0" prefHeight="343.0" prefWidth="307.0">
+            <Pane fx:id="RegForm" layoutX="41.0" layoutY="143.0" prefHeight="343.0" prefWidth="307.0" visible="false">
                <children>
                   <Label layoutX="90.0" text="Create account" textFill="WHITE">
                      <font>
@@ -85,9 +85,10 @@
                         <Font size="11.0" />
                      </font>
                   </Label>
+                  <Label fx:id="emailexist" layoutX="7.0" layoutY="105.0" text="email exist" textFill="#d71313" visible="false" />
                </children>
             </Pane>
-            <Pane fx:id="LoginForm" layoutX="28.0" layoutY="152.0" prefHeight="326.0" prefWidth="307.0" visible="false">
+            <Pane fx:id="LoginForm" layoutX="28.0" layoutY="152.0" prefHeight="326.0" prefWidth="307.0">
                <children>
                   <PasswordField fx:id="PasswordField" layoutX="75.0" layoutY="64.0" promptText="Password" style="-fx-background-color: tranparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
                   <Button fx:id="LoginBtn" layoutX="114.0" layoutY="190.0" mnemonicParsing="false" onAction="#Login" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="LOGIN" textFill="WHITE" />
@@ -98,7 +99,7 @@
                      </font>
                   </Label>
                   <CheckBox fx:id="RememberCheck" layoutX="76.0" layoutY="101.0" mnemonicParsing="false" text="Remeber me" textFill="WHITE" />
-                  <Hyperlink layoutX="136.0" layoutY="132.0" text="Forget password" />
+                  <Hyperlink layoutX="136.0" layoutY="132.0" onAction="#ForgetPassword" text="Forget password" />
                   <TextField fx:id="EmailField" layoutX="75.0" layoutY="28.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
                   <Label layoutX="127.0" layoutY="-8.0" text="Login" textFill="WHITE">
                      <font>
@@ -107,6 +108,7 @@
                   </Label>
                   <Label fx:id="messagelogin" layoutX="57.0" layoutY="163.0" text="Email or password invalid" textFill="#c61b1b" visible="false" />
                   <Label fx:id="messageloginSucceded" layoutX="108.0" layoutY="163.0" text="Login succeded" textFill="#28c41b" visible="false" />
+                  <Button fx:id="GithubBtn" layoutY="198.0" mnemonicParsing="false" onAction="#GithubBtnAction" text="Github" />
                </children>
             </Pane>
             <ImageView fitHeight="117.0" fitWidth="117.0" layoutX="123.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

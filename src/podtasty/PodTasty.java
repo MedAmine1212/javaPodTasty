@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -21,6 +22,9 @@ public class PodTasty extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.stg= stage;
+        Image icon = new Image("images/donut.png");
+        stg.getIcons().add(icon);
+        stg.setTitle("Pod-Tasty : The Desktop Application");
         Parent root = FXMLLoader.load(getClass().getResource("LogReg.fxml"));
         //        Parent root = FXMLLoader.load(getClass().getResource("Profile.fxml"));
 

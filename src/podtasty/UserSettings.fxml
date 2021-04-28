@@ -55,5 +55,6 @@
             </Label>
          </children>
       </AnchorPane>
+      <Button layoutX="35.0" layoutY="536.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="310.0" style="-fx-background-color: rgb(24,186,234);" text="Logout" textFill="WHITE" />
    </children>
 </AnchorPane>
