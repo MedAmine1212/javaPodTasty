@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PodTasty.jar" size="3778725" download="eager" />
+    <jar href="PodTasty.jar" size="3778676" download="eager" />
     <jar href="lib\TrayNotification-5393c3a54f.jar" size="42522" download="eager" />
     <jar href="lib\actlist-plugin-2.2.0.jar" size="122909" download="eager" />
     <jar href="lib\ansi-regex-4.1.0.jar" size="5830" download="eager" />
@@ -116,9 +116,6 @@
     <jar href="lib\yargs-parser-13.1.2.jar" size="18988" download="eager" />
     <jar href="lib\zxing.jar" size="191436" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PodTasty" >
-    <param name="requiredFXVersion" value="8.0+"/>
-  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="podtasty.PodTasty"  name="PodTasty" />
   <update check="always"/>
 </jnlp>
