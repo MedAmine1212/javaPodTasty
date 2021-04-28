@@ -43,3 +43,8 @@ and open the template in the editor.
 #scroll{
     -fx-background-color:transparent;
 }
+
+#textBorder{
+    -webkit-text-stroke-width: 100px;
+  -webkit-text-stroke-color: black;
+}

@@ -8,7 +8,12 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PodTasty.jar" size="452652" download="eager" />
+    <jar href="PodTasty.jar" size="628606" download="eager" />
+    <jar href="lib\bcrypt-0.4.1.jar" size="42979" download="eager" />
+    <jar href="lib\bytes-0.4.6.jar" size="65802" download="eager" />
+    <jar href="lib\charm-glisten-4.4.1.jar" size="1040787" download="eager" />
+    <jar href="lib\commons-cli-1.4.jar" size="53820" download="eager" />
+    <jar href="lib\commons-codec-1.13.jar" size="344339" download="eager" />
     <jar href="lib\eclipselink.jar" size="8478776" download="eager" />
     <jar href="lib\httpclient5-5.0.3.jar" size="775798" download="eager" />
     <jar href="lib\httpclient5-cache-5.0.3.jar" size="259199" download="eager" />

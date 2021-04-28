@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -171,6 +173,18 @@ public class ProfileController implements Initializable {
 
     @FXML
     private void GoToChannel(ActionEvent event) {
+        UserHolder holder = UserHolder.getInstance();
+            User u = holder.getUser();
+        if (u.getChannelIdId().getChannel_Status()==0) {
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Banned for misconduct");
+                alert.setHeaderText(null);
+                alert.setContentText("You were banned for bad behavior, Please contact the admin for any verification request.");
+                alert.showAndWait();
+                return;
+            
+        }else{
+        
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OwnChannel.fxml"));
@@ -184,7 +198,7 @@ public class ProfileController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }}
 
     @FXML
     private void GoToTimline(ActionEvent event) {

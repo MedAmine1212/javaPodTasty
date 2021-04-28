@@ -30,6 +30,25 @@ public class PlaylistService {
     }
     
     
+    
+    public void AddOwnPlaylist(int id,Playlist p){
+        String req;
+        req = "insert into playlist (playlist_name,playlist_description,playlist_creation_date,channel_id_id,image_name) values (?,?,?,?,?)";
+        try {
+            pst=connection.prepareStatement(req);
+            pst.setString(1,p.getPlaylistName());
+            pst.setString(2,p.getPlaylistDescription());
+            pst.setDate(3, (Date) p.getPlaylistCreationDate());
+            pst.setInt(4, id);
+            pst.setString(5, p.getImageName());
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PlaylistService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     public void AddPlaylist(Playlist p){
         String req;
         req = "insert into playlist (playlist_name,playlist_description,playlist_creation_date) values (?,?,?)";
