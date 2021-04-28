@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +19,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,20 +28,20 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author khail
+ * @author Douiri Amine
  */
 @Entity
 @Table(name = "user_info")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UserInfo.findAll", query = "SELECT u FROM UserInfo u"),
-    @NamedQuery(name = "UserInfo.findById", query = "SELECT u FROM UserInfo u WHERE u.id = :id"),
-    @NamedQuery(name = "UserInfo.findByUserLastName", query = "SELECT u FROM UserInfo u WHERE u.userLastName = :userLastName"),
-    @NamedQuery(name = "UserInfo.findByUserFirstName", query = "SELECT u FROM UserInfo u WHERE u.userFirstName = :userFirstName"),
-    @NamedQuery(name = "UserInfo.findByUserImage", query = "SELECT u FROM UserInfo u WHERE u.userImage = :userImage"),
-    @NamedQuery(name = "UserInfo.findByUserGender", query = "SELECT u FROM UserInfo u WHERE u.userGender = :userGender"),
-    @NamedQuery(name = "UserInfo.findByUserBirthDate", query = "SELECT u FROM UserInfo u WHERE u.userBirthDate = :userBirthDate"),
-    @NamedQuery(name = "UserInfo.findByUserBio", query = "SELECT u FROM UserInfo u WHERE u.userBio = :userBio")})
+    @NamedQuery(name = "UserInfo.findAll", query = "SELECT u FROM UserInfo u")
+    , @NamedQuery(name = "UserInfo.findById", query = "SELECT u FROM UserInfo u WHERE u.id = :id")
+    , @NamedQuery(name = "UserInfo.findByUserLastName", query = "SELECT u FROM UserInfo u WHERE u.userLastName = :userLastName")
+    , @NamedQuery(name = "UserInfo.findByUserFirstName", query = "SELECT u FROM UserInfo u WHERE u.userFirstName = :userFirstName")
+    , @NamedQuery(name = "UserInfo.findByUserImage", query = "SELECT u FROM UserInfo u WHERE u.userImage = :userImage")
+    , @NamedQuery(name = "UserInfo.findByUserGender", query = "SELECT u FROM UserInfo u WHERE u.userGender = :userGender")
+    , @NamedQuery(name = "UserInfo.findByUserBirthDate", query = "SELECT u FROM UserInfo u WHERE u.userBirthDate = :userBirthDate")
+    , @NamedQuery(name = "UserInfo.findByUserBio", query = "SELECT u FROM UserInfo u WHERE u.userBio = :userBio")})
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,11 +67,6 @@ public class UserInfo implements Serializable {
     private Date userBirthDate;
     @Column(name = "user_bio")
     private String userBio;
-    @JoinTable(name = "story_user_info", joinColumns = {
-        @JoinColumn(name = "user_info_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "story_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Story> storyCollection;
     @JoinTable(name = "user_info_user_info", joinColumns = {
         @JoinColumn(name = "user_info_target", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "user_info_source", referencedColumnName = "id")})
@@ -81,12 +74,8 @@ public class UserInfo implements Serializable {
     private Collection<UserInfo> userInfoCollection;
     @ManyToMany(mappedBy = "userInfoCollection")
     private Collection<UserInfo> userInfoCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Post> postCollection;
     @OneToOne(mappedBy = "userInfoIdId")
     private User user;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ownerId")
-    private Collection<Story> storyCollection1;
 
     public UserInfo() {
     }
@@ -160,15 +149,6 @@ public class UserInfo implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Story> getStoryCollection() {
-        return storyCollection;
-    }
-
-    public void setStoryCollection(Collection<Story> storyCollection) {
-        this.storyCollection = storyCollection;
-    }
-
-    @XmlTransient
     public Collection<UserInfo> getUserInfoCollection() {
         return userInfoCollection;
     }
@@ -186,30 +166,12 @@ public class UserInfo implements Serializable {
         this.userInfoCollection1 = userInfoCollection1;
     }
 
-    @XmlTransient
-    public Collection<Post> getPostCollection() {
-        return postCollection;
-    }
-
-    public void setPostCollection(Collection<Post> postCollection) {
-        this.postCollection = postCollection;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    @XmlTransient
-    public Collection<Story> getStoryCollection1() {
-        return storyCollection1;
-    }
-
-    public void setStoryCollection1(Collection<Story> storyCollection1) {
-        this.storyCollection1 = storyCollection1;
     }
 
     @Override

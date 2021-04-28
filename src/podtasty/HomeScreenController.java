@@ -14,11 +14,16 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -27,8 +32,7 @@ import javafx.scene.layout.VBox;
  */
 public class HomeScreenController implements Initializable {
 
-    private static User currentUser;
-
+    private User currentUser;
     private static boolean isCom = false;
     private static HomeScreenController instance;
     @FXML
@@ -75,13 +79,13 @@ public class HomeScreenController implements Initializable {
     private Button signOutAdmin;
     @FXML
     private Pane adminVbox1;
+    
+    private static Stage logRegStage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         instance = this;
-        currentUser = new User();
-        currentUser.setId(1);
-        currentUser.setIsAdmin(true);
+        currentUser = null;
         setUpView();
     }
 
@@ -112,11 +116,11 @@ public class HomeScreenController implements Initializable {
        
        goHome(null);
         }
-      public static User getCurrentUser() {
+      public User getCurrentUser() {
          return currentUser;
      }
       
-          public static void setCurrentUser(User user) {
+          public void setCurrentUser(User user) {
          currentUser = user;
      }
      
@@ -131,157 +135,49 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private void goHome(MouseEvent event) {
-        if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
-    }
-        
-            container.getChildren().clear();
-        FXMLLoader fx = new FXMLLoader(getClass().getResource("podcasts.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        isCom = false;
+       changeView("podcasts.fxml");
     }
 
     @FXML
     private void goBrowse(MouseEvent event) {
-            if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
-    }
-            container.getChildren().clear();
-             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcasts.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        isCom = false;
+        changeView("ChannelBrowser.fxml");
+           
     }
 
     @FXML
     private void goBlog(MouseEvent event) {
-            if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
-    }
-            container.getChildren().clear();
-             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcasts.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        isCom = false;
+            
     }
 
     @FXML
     private void goContact(MouseEvent event) {
-            if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
-    }
-            container.getChildren().clear();
-             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcasts.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        isCom = false;
+           
     }
 
     @FXML
-    private void goSignIn(MouseEvent event) {
-            if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
+    private void goSignIn(MouseEvent event) throws IOException {
+        Parent root;
+            root = FXMLLoader.load(getClass().getResource("LogReg.fxml"));
+            logRegStage = new Stage();
+            logRegStage.setTitle("Sign i");
+            logRegStage.setScene(new Scene(root));
+            logRegStage.initModality(Modality.APPLICATION_MODAL);
+            logRegStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+            logRegStage.show();
     }
-            container.getChildren().clear();
-             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcasts.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        isCom = false;
+    
+    public static void closeSignIn() {
+        logRegStage.close();
     }
 
     @FXML
     private void goSignUp(MouseEvent event) {
-            if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
-    }
-            container.getChildren().clear();
-             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcasts.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        isCom = false;
+       
     }
 
     @FXML
     private void goProfile(MouseEvent event) {
-            if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
-    }
-            container.getChildren().clear();
-             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcasts.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        isCom = false;
+           
     }
 
     @FXML
@@ -306,25 +202,7 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private void goTagsAdmin(MouseEvent event) {
-         if (isCom) {
-             LoadAudio ld = LoadAudio.getInstance();
-        try {
-            ld.stopAudio();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        LoadAudio.destroyInstance();
-    }
-         container.getChildren().clear();
-             FXMLLoader fx = new FXMLLoader(getClass().getResource("TagsFxmlDocument.fxml"));
-        try {
-            Pane p = fx.load();
-            container.getChildren().add(p);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
-        isCom = false;
+         changeView("TagsFxmlDocument.fxml");
     }
 
     @FXML
@@ -341,10 +219,12 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private void goChannelAdmin(MouseEvent event) {
+        changeView("ChannelView.fxml");
     }
 
     @FXML
     private void goPlaylistAdmin(MouseEvent event) {
+        changeView("PlaylistView.fxml");
     }
 
     @FXML
@@ -353,6 +233,29 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private void goProfileAdmin(MouseEvent event) {
+    }
+    
+    
+    public void changeView(String view) {
+         if (isCom) {
+             LoadAudio ld = LoadAudio.getInstance();
+        try {
+            ld.stopAudio();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        LoadAudio.destroyInstance();
+    }
+         container.getChildren().clear();
+             FXMLLoader fx = new FXMLLoader(getClass().getResource(view));
+        try {
+            Pane p = fx.load();
+            container.getChildren().add(p);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        isCom = false;
     }
     
 }

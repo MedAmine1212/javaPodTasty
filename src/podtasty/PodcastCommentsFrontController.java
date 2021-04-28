@@ -145,6 +145,7 @@ public class PodcastCommentsFrontController implements Initializable {
     private Button nextButton;
     @FXML
     private ScrollPane playlistScroll;
+    private HomeScreenController homeView;
     /**
      * Initializes the controller class.
      * @param url
@@ -153,7 +154,7 @@ public class PodcastCommentsFrontController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-       
+       homeView = HomeScreenController.getInstance();
         loading.setVisible(true);
         new Thread(new Runnable() {
 
@@ -205,10 +206,10 @@ public class PodcastCommentsFrontController implements Initializable {
        this.podcastDesc.setText(currentPodcast.getPodcastDescription());
        this.podcastName.setText(currentPodcast.getPodcastName());
        this.podcastViews.setText(currentPodcast.getPodcastViews()+" Views");
-       if(HomeScreenController.getCurrentUser() != null) {
+       if(homeView.getCurrentUser() != null) {
          
        CRUDFavorite cf = new CRUDFavorite();
-       if(cf.getFavoriteByPodcastAnduser(currentPodcast, HomeScreenController.getCurrentUser())) {
+       if(cf.getFavoriteByPodcastAnduser(currentPodcast, homeView.getCurrentUser())) {
             addFavoriteButt.setVisible(false);
             removeFavoriteButt.setVisible(true);
         } else {
@@ -237,9 +238,9 @@ public class PodcastCommentsFrontController implements Initializable {
         if(!reviewList.isEmpty()) {
             float rating = 0;
             rating = reviewList.stream().map(rv -> rv.getRating()).reduce(rating, (accumulator, _item) -> accumulator + _item);
-            if (HomeScreenController.getCurrentUser() != null) {
+            if (homeView.getCurrentUser() != null) {
                 
-            reviewList.stream().filter(rv -> (Objects.equals(rv.getUserIdId().getId(), HomeScreenController.getCurrentUser().getId()))).map(rv -> {
+            reviewList.stream().filter(rv -> (Objects.equals(rv.getUserIdId().getId(), homeView.getCurrentUser().getId()))).map(rv -> {
                 ratingSaved = true;
                 return rv;
             }).forEachOrdered(rv -> {
@@ -268,7 +269,7 @@ public class PodcastCommentsFrontController implements Initializable {
             setImage(rate,  2);
             podcastRating.setText("");
         }
-        if (HomeScreenController.getCurrentUser() != null) {
+        if (homeView.getCurrentUser() != null) {
             
         if(currentPodcast.getCommentsAllowed() == 0) {
             this.commentTextInput.setVisible(false);
@@ -411,8 +412,8 @@ public class PodcastCommentsFrontController implements Initializable {
                     p.setStyle("-fx-border-color:  white");
                     clickedCommentId = com.getId();
                     commentDetails.setVisible(true);
-                    if (HomeScreenController.getCurrentUser() != null) {
-                        if(Objects.equals(com.getUserIdId().getId(), HomeScreenController.getCurrentUser().getId())) {
+                    if (homeView.getCurrentUser() != null) {
+                        if(Objects.equals(com.getUserIdId().getId(), homeView.getCurrentUser().getId())) {
                             deleteCheckedComment.setVisible(true);
                             editCommentButton.setVisible(true);
                         }
@@ -543,7 +544,7 @@ public class PodcastCommentsFrontController implements Initializable {
             } else {
             PodcastComment com = new PodcastComment();
             com.setPodcastIdId(currentPodcast);
-            com.setUserIdId(HomeScreenController.getCurrentUser());
+            com.setUserIdId(homeView.getCurrentUser());
             com.setCommentText(commentTextInput.getText());
             commentTextInput.setText("");
             addCommentButton.setDisable(true);
@@ -608,7 +609,7 @@ public class PodcastCommentsFrontController implements Initializable {
             reviewStage.setOnHiding(ev -> {
                 if (reviewChanged) {
                     CRUDReview cr = new CRUDReview();
-                    PodcastReview rv = cr.getReviewByUserAndPodcast(HomeScreenController.getCurrentUser(), currentPodcast);
+                    PodcastReview rv = cr.getReviewByUserAndPodcast(homeView.getCurrentUser(), currentPodcast);
                     if (rv != null) {
                         ratingSaved = true;
                         reviewSubmitted = true;
@@ -662,7 +663,7 @@ public class PodcastCommentsFrontController implements Initializable {
     @FXML
     private void addFavoriteAction(MouseEvent event) {
         CRUDFavorite cr = new CRUDFavorite();
-        cr.addFavorite(currentPodcast, HomeScreenController.getCurrentUser());
+        cr.addFavorite(currentPodcast, homeView.getCurrentUser());
         removeFavoriteButt.setVisible(true);
         addFavoriteButt.setVisible(false);
         Image img = new Image("/images/favAdded.png", true);
@@ -677,7 +678,7 @@ public class PodcastCommentsFrontController implements Initializable {
     @FXML
     private void removeFavoriteAction(MouseEvent event) {
         CRUDFavorite cr = new CRUDFavorite();
-        cr.removeFavorite(currentPodcast, HomeScreenController.getCurrentUser());
+        cr.removeFavorite(currentPodcast, homeView.getCurrentUser());
         removeFavoriteButt.setVisible(false);
         addFavoriteButt.setVisible(true);
         Image img = new Image("/images/favRemoved.png", true);

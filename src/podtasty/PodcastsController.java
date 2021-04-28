@@ -37,12 +37,13 @@ public class PodcastsController implements Initializable {
     private ScrollPane podcastScroll;
     
     private String chosen;
-
+    private HomeScreenController homeScreen;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        homeScreen = HomeScreenController.getInstance();
         chosen = "";
             CRUDTag cc = new CRUDTag();
             ObservableList<Tag> tags = cc.getTags();
@@ -68,13 +69,13 @@ public void openPodcastComments(Podcast pod) {
     
     HomeScreenController.setIsCom(true);
       String resource = "";
-      if(HomeScreenController.getCurrentUser() == null) {
+      if(homeScreen.getCurrentUser() == null) {
           
       PodcastCommentsFrontController.setCurrentPodcast(pod);
           resource = "PodcastCommentsFront.fxml";
       } else {
           
-      if(HomeScreenController.getCurrentUser().getIsAdmin()) {
+      if(homeScreen.getCurrentUser().getIsAdmin()) {
       PodcastCommentsController.setCurrentPodcast(pod);
           resource = "PodcastComments.fxml";
       }else {

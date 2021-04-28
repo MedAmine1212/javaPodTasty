@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="296.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistZoneOwerController">
+    <Pane fx:id="space" layoutX="-9.0" prefHeight="296.0" prefWidth="806.0">
+                     <children>
+                        <ImageView fx:id="imageplaylist" fitHeight="306.0" fitWidth="817.0" layoutX="-9.0" layoutY="-4.0" opacity="0.87" pickOnBounds="true">
+            <image>
+               <Image url="@../../../../PhpstormProjects/Pod-Tasty/public/images/playlist/c2-608882bc4238f621526684.jpg" />
+            </image></ImageView>
+                        <Label id="a" fx:id="a" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="489.0" layoutY="53.0" prefHeight="0.0" prefWidth="0.0" scaleShape="false" visible="false" />
+                        <Label id="textBorder" fx:id="nameplaylist" graphicTextGap="6.0" layoutX="64.0" layoutY="81.0" lineSpacing="2.0" prefHeight="49.0" prefWidth="222.0" stylesheets="@../PlaylistStyles.css" text="Name" wrapText="true">
+            <font>
+               <Font name="Modern No. 20" size="33.0" />
+            </font>
+            <textFill>
+               <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="0.49999999909000536" startY="0.6679388584981438">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.07052631676197052" green="0.08477193117141724" blue="0.28421053290367126" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="0.25438597798347473" green="0.26330408453941345" blue="0.7894737124443054" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </textFill>
+         </Label>
+                        <Label id="textBorder" fx:id="descriptionplaylist" alignment="TOP_LEFT" layoutX="64.0" layoutY="148.0" prefHeight="64.0" prefWidth="368.0" stylesheets="@../PlaylistStyles.css" text="desc" wrapText="true">
+            <font>
+               <Font size="15.0" />
+            </font>
+            <textFill>
+               <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
+                  <stops>
+                     <Stop>
+                        <color>
+                           <Color red="0.5473684072494507" green="0.5453411340713501" blue="0.5453411340713501" />
+                        </color>
+                     </Stop>
+                     <Stop offset="1.0">
+                        <color>
+                           <Color red="1.0" green="1.0" blue="1.0" />
+                        </color>
+                     </Stop>
+                  </stops>
+               </LinearGradient>
+            </textFill>
+         </Label>
+         <VBox layoutX="714.0" layoutY="105.0" spacing="15.0" stylesheets="@../PlaylistStyles.css">
+            <children>
+               <Button fx:id="PlayPlaylistBtn" mnemonicParsing="false" onAction="#PlayPlaylistBtn" prefHeight="23.0" prefWidth="58.0" text="Play" />
+               <Button fx:id="EditPlaylistBtn" mnemonicParsing="false" onAction="#EditPlaylistBtn" prefHeight="23.0" prefWidth="58.0" text="Edit" />
+               <Button fx:id="DeletePlaylistBtn" mnemonicParsing="false" onAction="#DeletePlaylistBtn" prefHeight="23.0" prefWidth="58.0" text="Delete" />
+            </children>
+         </VBox>
+                     </children>
+      <effect>
+         <Blend />
+      </effect>
+                  </Pane>
+</AnchorPane>

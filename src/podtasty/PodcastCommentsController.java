@@ -237,8 +237,6 @@ public class PodcastCommentsController implements Initializable {
                 public void handle(MouseEvent mouseEvent) {
                     
                     commentDetails.setVisible(false);
-                    deleteCheckedComment.setVisible(false);
-                    editCommentButton.setVisible(false);
                     if (selectedCom != null) {
                         selectedCom.opacityProperty().set(1);
                         selectedCom.setStyle("");

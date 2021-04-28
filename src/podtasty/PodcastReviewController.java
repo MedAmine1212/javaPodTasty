@@ -81,15 +81,17 @@ public class PodcastReviewController implements Initializable {
     private Pane notSubmittedContainer;
     private String submittedRating = "";
    private PodcastReview review;
+   private HomeScreenController homeScreen;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        homeScreen = HomeScreenController.getInstance();
         reviewIsSubmitted = PodcastCommentsFrontController.getReviewSubmitted();
         if(reviewIsSubmitted) {
             CRUDReview cr = new CRUDReview();
-            review = cr.getReviewByUserAndPodcast(HomeScreenController.getCurrentUser(), PodcastCommentsFrontController.getCurrentPodcast());
+            review = cr.getReviewByUserAndPodcast(homeScreen.getCurrentUser(), PodcastCommentsFrontController.getCurrentPodcast());
         
         submittedRating = String.format("%.1f", review.getRating());
         }
@@ -184,7 +186,7 @@ public class PodcastReviewController implements Initializable {
        qsList = null;
        PodcastReview review = new PodcastReview();
        review.setPodcastIdId(PodcastCommentsFrontController.getCurrentPodcast());
-       review.setUserIdId(HomeScreenController.getCurrentUser());
+       review.setUserIdId(homeScreen.getCurrentUser());
        review.setRating(rate);
        CRUDReview cr = new CRUDReview(); 
        if(cr.addReview(review)) {
