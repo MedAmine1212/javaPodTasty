@@ -46,8 +46,6 @@ public class HomeScreenController implements Initializable {
     @FXML
     private Button signInButton;
     @FXML
-    private Button signUpButton;
-    @FXML
     private Button profileButton;
     @FXML
     private Button signOutButton;
@@ -77,8 +75,6 @@ public class HomeScreenController implements Initializable {
     private Button profileAdmin;
     @FXML
     private Button signOutAdmin;
-    @FXML
-    private Pane adminVbox1;
     
     private static Stage logRegStage;
 
@@ -96,7 +92,6 @@ public class HomeScreenController implements Initializable {
             userVbox.setVisible(true);
             adminVbox.setVisible(false);
            signInButton.setVisible(true);
-           signUpButton.setVisible(true);
            profileButton.setVisible(false);
            signOutButton.setVisible(false); 
        } else {
@@ -107,7 +102,6 @@ public class HomeScreenController implements Initializable {
             userVbox.setVisible(true);
             adminVbox.setVisible(false);
            signInButton.setVisible(false);
-           signUpButton.setVisible(false);
            profileButton.setVisible(true);
            signOutButton.setVisible(true);
                
@@ -168,12 +162,9 @@ public class HomeScreenController implements Initializable {
     
     public static void closeSignIn() {
         logRegStage.close();
+        HomeScreenController.instance.setUpView();
     }
 
-    @FXML
-    private void goSignUp(MouseEvent event) {
-       
-    }
 
     @FXML
     private void goProfile(MouseEvent event) {

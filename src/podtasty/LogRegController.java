@@ -102,6 +102,8 @@ public class LogRegController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+            this.LoginForm.setVisible(true);
+            this.RegForm.setVisible(false);
     homeScreen = HomeScreenController.getInstance();
         this.RegisterBtn.setOnAction((e) -> {
             this.LoginForm.setVisible(false);
@@ -205,6 +207,7 @@ public class LogRegController implements Initializable {
                 } else {
                     this.messageloginSucceded.setVisible(true);
                     homeScreen.setCurrentUser(user);
+                    HomeScreenController.closeSignIn();
                 }
 
             } else {
