@@ -9,57 +9,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="396.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.TagsListController">
-    <children>
-      <StackPane fx:id="spProductContent" layoutX="10.0" layoutY="10.0" prefHeight="495.0" prefWidth="699.0">
-         <children>
-            <AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="834.0">
+<AnchorPane id="AnchorPane" prefHeight="754.0" prefWidth="1228.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.TagsListController">
+   <children>
+      <BorderPane layoutX="27.0" layoutY="23.0" prefHeight="703.0" prefWidth="1151.0">
+         <center>
+            <TableView fx:id="tagsList" editable="true" onMouseClicked="#tblViewCurrentStoreOnClick" onScroll="#tblViewCurrentStoreOnScroll" prefHeight="278.0" prefWidth="707.0" style="-fx-background-color: none; -fx-border-color: none;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn fx:id="tagName" minWidth="0.0" prefWidth="575.1999988555908" text="Name" />
+                  <TableColumn fx:id="tagStyle" minWidth="0.0" prefWidth="560.0" text="Style" />
+               </columns>
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem fx:id="miSellSelected" mnemonicParsing="false" onAction="#miSellSelectedOnAction" text="test" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="944.0" spacing="20.0" BorderPane.alignment="CENTER">
                <children>
-                  <BorderPane layoutX="220.0" layoutY="140.0" prefHeight="479.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <center>
-                        <TableView fx:id="tagsList" editable="true" onMouseClicked="#tblViewCurrentStoreOnClick" onScroll="#tblViewCurrentStoreOnScroll" prefHeight="278.0" prefWidth="707.0" style="-fx-background-color: none; -fx-border-color: none;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
-                           <columns>
-                              <TableColumn fx:id="tagId" prefWidth="49.60000455379486" text="ID" />
-                              <TableColumn fx:id="tagName" minWidth="0.0" prefWidth="508.7999267578125" text="Name" />
-                              <TableColumn fx:id="tagStyle" prefWidth="61.5999755859375" text="Style" />
-                           </columns>
-                           <contextMenu>
-                              <ContextMenu>
-                                 <items>
-                                    <MenuItem fx:id="miSellSelected" mnemonicParsing="false" onAction="#miSellSelectedOnAction" text="test" />
-                                 </items>
-                              </ContextMenu>
-                           </contextMenu>
-                        </TableView>
-                     </center>
-                     <bottom>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="944.0" spacing="20.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button fx:id="btnAddNew" mnemonicParsing="false" onAction="#btnAddNewOnAction" style="-fx-background-color: #300d33;" text="Add New" textFill="WHITE" />
-                              <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #300d33;" text="Update" textFill="WHITE" />
-                              <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #300d33;" text="Delete" textFill="WHITE" />
-                           </children>
-                           <BorderPane.margin>
-                              <Insets right="20.0" />
-                           </BorderPane.margin>
-                        </HBox>
-                     </bottom>
-                     <top>
-                        <BorderPane prefHeight="85.0" prefWidth="944.0" BorderPane.alignment="CENTER">
-                           <left>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tags list" BorderPane.alignment="CENTER" />
-                           </left></BorderPane>
-                     </top>
-                  </BorderPane>
+                  <Button fx:id="btnAddNew" mnemonicParsing="false" onAction="#btnAddNewOnAction" style="-fx-background-color: #300d33;" text="Add New" textFill="WHITE" />
+                  <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #300d33;" text="Update" textFill="WHITE" />
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #300d33;" text="Delete" textFill="WHITE" />
                </children>
-            </AnchorPane>
-         </children>
-         <padding>
-            <Insets left="30.0" right="30.0" />
-         </padding>
-      </StackPane>
-    </children>
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+         <top>
+            <BorderPane prefHeight="85.0" prefWidth="944.0" BorderPane.alignment="CENTER">
+               <left>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags list" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+               </left>
+            </BorderPane>
+         </top>
+      </BorderPane>
+   </children>
 </AnchorPane>

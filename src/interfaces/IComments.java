@@ -26,4 +26,6 @@ public interface IComments<PodcastComment> {
     public ObservableList<Podcast> getPodcasts();
     public ObservableList<Podcast> getPodcastsByTag(int id);
     
+    public boolean changeCommentingStatus(int id, int status);
+    
 }

@@ -35,6 +35,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import services.CRUDTag;
 
@@ -46,14 +47,14 @@ import services.CRUDTag;
 
 public class TagsListController implements Initializable {
 
+    
+    private static Stage addTagStage;
     @FXML
     private Button btnUpdate;
     @FXML
     private Button btnDelete;
     @FXML
     private TableView<Tag> tagsList;
-    @FXML
-    private TableColumn<Tag, Integer> tagId;
     @FXML
     private TableColumn<Tag, String> tagName;
     @FXML
@@ -62,35 +63,33 @@ public class TagsListController implements Initializable {
     private static int selectedId = -1;
    
     @FXML
-    private StackPane spProductContent;
-    @FXML
     private Button btnAddNew;
     @FXML
     private MenuItem miSellSelected;
+    private static TagsListController instance;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-         CRUDTag cr = new CRUDTag();
-         Tag tag = new Tag();
-         btnDelete.setDisable(true);
-         btnUpdate.setDisable(true);
+         instance = this;
          showTags();
     }    
     
     
     
       public void showTags(){
+        tagsList.setItems(null);
+         btnDelete.setDisable(true);
+         btnUpdate.setDisable(true);
          CRUDTag cr = new CRUDTag();
         ObservableList<Tag> tList = cr.getTags();
-        tagId.setCellValueFactory(new PropertyValueFactory<Tag, Integer>("id") );
         tagName.setCellValueFactory(new PropertyValueFactory<Tag, String>("name") );
         tagStyle.setCellValueFactory(new PropertyValueFactory<Tag, ImageView>("tagColor") );
       
-        tagsList.setItems(tList);      
+        tagsList.setItems(tList);  
+        tagsList.refresh();
     }
     
 
@@ -135,44 +134,35 @@ public class TagsListController implements Initializable {
     private void btnAddNewOnAction(ActionEvent event) throws IOException {
         
         selectedId = -1;
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-                        
-        FXMLLoader loader = new FXMLLoader ();
-            loader.setLocation(getClass().getResource("AddTag.fxml"));
-        try {
-            loader.load();
-
-
-              } catch (IOException ex) {
-                  System.out.println(ex.getMessage());
-        }
-
-        Parent parent = loader.getRoot();
-        stage.setScene(new Scene(parent));
-        stage.show();
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("AddTag.fxml"));
+            addTagStage = new Stage();
+            addTagStage.setTitle("Podcast review");
+            addTagStage.setScene(new Scene(root));
+            addTagStage.initModality(Modality.WINDOW_MODAL);
+            addTagStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+            addTagStage.show();
         
     }
     
+    public static void closeStage() {
+         addTagStage.close();
+         TagsListController.getInstance().showTags();
+    } 
+    public static TagsListController getInstance() {
+        return instance;
+    }
     @FXML
-    private void btnUpdateOnAction(ActionEvent event) {
+    private void btnUpdateOnAction(ActionEvent event) throws IOException {
         
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-                        
-        FXMLLoader loader = new FXMLLoader ();
-            loader.setLocation(getClass().getResource("AddTag.fxml"));
-        try {
-            loader.load();
-
-
-              } catch (IOException ex) {
-                  System.out.println(ex.getMessage());
-        }
-
-        Parent parent = loader.getRoot();
-        stage.setScene(new Scene(parent));
-        stage.show();
+        Parent root;
+        root = FXMLLoader.load(getClass().getResource("AddTag.fxml"));
+            addTagStage = new Stage();
+            addTagStage.setTitle("Podcast review");
+            addTagStage.setScene(new Scene(root));
+            addTagStage.initModality(Modality.WINDOW_MODAL);
+            addTagStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+            addTagStage.show();
         
     }
 

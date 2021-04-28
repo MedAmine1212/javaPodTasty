@@ -154,23 +154,8 @@ public class AddTagController implements Initializable {
 
     @FXML
     private void btnCancelAddTagClick(ActionEvent event) {
-        
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-                        
-        FXMLLoader loader = new FXMLLoader ();
-            loader.setLocation(getClass().getResource("TagsFxmlDocument.fxml"));
-        try {
-            loader.load();
-
-
-              } catch (IOException ex) {
-                  System.out.println(ex.getMessage());
-        }
-
-        Parent parent = loader.getRoot();
-        stage.setScene(new Scene(parent));
-        stage.show();
+       
+        TagsListController.closeStage();
     }
 
     @FXML

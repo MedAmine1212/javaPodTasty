@@ -23,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
 public class TagViewController implements Initializable {
 
     @FXML
-    private Button tagName;
+    private Button tagNameHome;
 
     /**
      * Initializes the controller class.
@@ -35,11 +35,8 @@ public class TagViewController implements Initializable {
     
     
     public void setView(Tag tag) {
-        tagName.setText(tag.getName());
+        tagNameHome.setText(tag.getName());
     }
 
-    @FXML
-    private void goHome(MouseEvent event) {
-    }
     
 }

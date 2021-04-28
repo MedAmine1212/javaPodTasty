@@ -29,7 +29,7 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color: #10165F;
+    -fx-background-color: white;
     -fx-background-radius: 5em;
 }
 
@@ -50,12 +50,29 @@
 
     -fx-background:transparent;
 }
-#tagName{
+#tagNameHome{
     -fx-background-color : transparent;
     -fx-background-radius: 120px;
     -fx-alignment: right;
 }
 
-#tagName:hover{
+#tagNameHome:hover{
     -fx-background-color : rgba(1,1,1,0.6);
+}
+
+#activateButton{
+    -fx-font-weight:bolder;
+    -fx-background-color : #4bbf73;
+}
+#activateButton:hover{
+    -fx-background-color : #4bbf79;
+}
+
+#deactivateButton{
+    -fx-font-weight:bolder;
+    -fx-background-color :  #d23430;
+}
+#deactivateButton:hover{
+
+    -fx-background-color :  #d234
 }

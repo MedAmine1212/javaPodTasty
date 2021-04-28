@@ -328,8 +328,25 @@ public class CRUDComments implements IComments<PodcastComment> {
             return null;
         }
     }
+
+    @Override
+    public boolean changeCommentingStatus(int id, int status) {
+        try{
+         String requete= "update podcast set comments_allowed=? where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1,status);
+            pst.setInt(2,id); 
+            //executeupdate
+            pst.executeUpdate();
+            return true;
+            
+            
+        }catch(Exception e) {
+            System.out.println(e);
+            return false;
+        }   
+    }
     
-    
-    
-    
+
 }

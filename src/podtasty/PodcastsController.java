@@ -15,14 +15,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import services.CRUDComments;
 import services.CRUDTag;
 
@@ -69,9 +65,26 @@ public void filterPods(int id, String target){
     chosen = target;
 }
 public void openPodcastComments(Podcast pod) {
+    
     HomeScreenController.setIsCom(true);
+      String resource = "";
+      if(HomeScreenController.getCurrentUser() == null) {
+          
       PodcastCommentsFrontController.setCurrentPodcast(pod);
-      FXMLLoader fx = new FXMLLoader(getClass().getResource("PodcastCommentsFront.fxml"));
+          resource = "PodcastCommentsFront.fxml";
+      } else {
+          
+      if(HomeScreenController.getCurrentUser().getIsAdmin()) {
+      PodcastCommentsController.setCurrentPodcast(pod);
+          resource = "PodcastComments.fxml";
+      }else {
+          
+      PodcastCommentsFrontController.setCurrentPodcast(pod);
+          resource = "PodcastCommentsFront.fxml";
+      }
+      
+      }
+      FXMLLoader fx = new FXMLLoader(getClass().getResource(resource));
         try {
             Pane p = fx.load();
             HomeScreenController.getInstance().getContainer().getChildren().clear();
@@ -148,7 +161,7 @@ public void openPodcastComments(Podcast pod) {
             });
             tagsContainer.add(pn, i, j);
             i++;
-            if(i == 8) {
+            if(i == 7) {
                 i =0;
                 j++;
             }

@@ -89,7 +89,7 @@ public class PodcastReviewController implements Initializable {
         reviewIsSubmitted = PodcastCommentsFrontController.getReviewSubmitted();
         if(reviewIsSubmitted) {
             CRUDReview cr = new CRUDReview();
-            review = cr.getReviewByUserAndPodcast(PodcastCommentsFrontController.getCurrentUser(), PodcastCommentsFrontController.getCurrentPodcast());
+            review = cr.getReviewByUserAndPodcast(HomeScreenController.getCurrentUser(), PodcastCommentsFrontController.getCurrentPodcast());
         
         submittedRating = String.format("%.1f", review.getRating());
         }
@@ -184,7 +184,7 @@ public class PodcastReviewController implements Initializable {
        qsList = null;
        PodcastReview review = new PodcastReview();
        review.setPodcastIdId(PodcastCommentsFrontController.getCurrentPodcast());
-       review.setUserIdId(PodcastCommentsFrontController.getCurrentUser());
+       review.setUserIdId(HomeScreenController.getCurrentUser());
        review.setRating(rate);
        CRUDReview cr = new CRUDReview(); 
        if(cr.addReview(review)) {
