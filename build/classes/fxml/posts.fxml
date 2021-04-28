@@ -266,20 +266,6 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/user.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="Issam Ben Ammar">
-                           <font>
-                              <Font name="Segoe UI Semibold" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
                </children>
                <padding>
                   <Insets top="20.0" />
@@ -292,12 +278,12 @@
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="825.0" prefWidth="17.0" HBox.hgrow="ALWAYS" />
-            <ScrollPane prefHeight="814.0" prefWidth="545.0" style="-fx-background-color: transparent;">
+            <ScrollPane prefHeight="814.0" prefWidth="622.0" style="-fx-background-color: transparent;">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
                <content>
-                  <VBox fx:id="postsContainer" alignment="TOP_CENTER" prefHeight="826.0" prefWidth="533.0" styleClass="body-background" stylesheets="@../resources/styles.css">
+                  <VBox fx:id="postsContainer" alignment="TOP_CENTER" prefHeight="826.0" prefWidth="610.0" spacing="10.0" styleClass="body-background" stylesheets="@../resources/styles.css">
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="160.0" styleClass="post-background" stylesheets="@../resources/styles.css">
                            <children>
