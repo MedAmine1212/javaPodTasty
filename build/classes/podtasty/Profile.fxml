@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="380.0" style="-fx-background-color: #2e3038};" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.ProfileController">
+    <stylesheets>
+        <URL value="@profile.css" />
+    </stylesheets>
+
+   <children>
+          
+      <ImageView fitHeight="160.0" fitWidth="296.0" layoutX="42.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:/C:/Users/Douiri%20Amine/Desktop/PIDEV/PI-Symfony/Pod-Tasty/public/assets/frontOffice/images/bg4.jpg" />
+         </image>
+      </ImageView>
+      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="184.0" layoutY="219.0" radius="64.0" stroke="BLACK" strokeType="INSIDE" />
+      <AnchorPane layoutX="82.0" layoutY="272.0" prefHeight="146.0" prefWidth="198.0">
+         <children>
+            <Label fx:id="LastName" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="14.0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Button fx:id="SettingsBtn" layoutX="61.0" layoutY="96.0" mnemonicParsing="false" onAction="#GoToSettings" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="SETTINGS" textFill="WHITE" />
+            <Label fx:id="FirstName" alignment="CENTER" layoutX="76.0" layoutY="42.0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="Bio" alignment="CENTER" contentDisplay="CENTER" layoutX="-47.0" layoutY="61.0" prefHeight="25.0" prefWidth="296.0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label fx:id="LastName1" layoutX="57.0" layoutY="508.0" text="Followers" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="LastName2" layoutX="235.0" layoutY="514.0" text="Following" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="Followers" layoutX="82.0" layoutY="539.0" text="122" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="following" layoutX="260.0" layoutY="538.0" text="155" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="SettingsBtn1" layoutX="145.0" layoutY="421.0" mnemonicParsing="false" onAction="#GoToChannel" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="CHANNEL" textFill="WHITE" />
+      <Button fx:id="SettingsBtn2" layoutX="145.0" layoutY="473.0" mnemonicParsing="false" onAction="#GoToTimline" prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="TIMELINE" textFill="WHITE" />
+      <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/undo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="218.0" layoutY="242.0" mnemonicParsing="false" onAction="#uploadPic" style="-fx-border-radius: 15px; -fx-background-radius: 15px; -fx-background-color: rgb(24,186,234);" text="up" textFill="WHITE" />
+      <Button fx:id="notif1" layoutX="70.0" layoutY="13.0" mnemonicParsing="false" onAction="#ShowNotif" style="-fx-border-radius: 15px; -fx-background-radius: 15px; -fx-background-color: red;" text="1" textFill="WHITE" />
+      <Pane fx:id="NotifPanel" layoutX="14.0" layoutY="49.0" prefHeight="363.0" prefWidth="171.0" style="-fx-background-color: #7b7b7b;" visible="false">
+         <children>
+            <Label layoutX="6.0" prefHeight="63.0" prefWidth="171.0" text="Your account is not activated" textFill="WHITE" wrapText="true" />
+            <Button layoutX="54.0" layoutY="292.0" mnemonicParsing="false" onAction="#Activate" style="-fx-background-color: rgb(24,186,234);" text="Activate" textFill="WHITE" />
+            <TextField fx:id="activateCode" layoutX="9.0" layoutY="252.0" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <Label layoutX="6.0" layoutY="54.0" prefHeight="41.0" prefWidth="143.0" text="To activate it write the code sent in email" textFill="WHITE" wrapText="true" />
+            <Label fx:id="activation_error" layoutX="6.0" layoutY="322.0" prefHeight="41.0" prefWidth="159.0" text="activation code is not correct" textFill="#c31111" visible="false" wrapText="true" />
+            <Label layoutX="6.0" layoutY="102.0" prefHeight="41.0" prefWidth="143.0" text="If you dose'nt receive an email " textFill="WHITE" wrapText="true" />
+            <Label layoutX="47.0" layoutY="111.0" onMouseClicked="#ResendEmail" prefHeight="41.0" prefWidth="62.0" text="click here " textFill="#3142c3" underline="true" wrapText="true" />
+            <Label layoutX="6.0" layoutY="132.0" prefHeight="41.0" prefWidth="143.0" text="to send another email" textFill="WHITE" wrapText="true" />
+            <Label layoutX="92.0" layoutY="173.0" onMouseClicked="#S" prefHeight="41.0" prefWidth="62.0" text="click here " textFill="#3142c3" underline="true" wrapText="true" />
+            <Label layoutX="2.0" layoutY="161.0" onMouseClicked="#sendSMS" prefHeight="41.0" prefWidth="152.0" text="To receive the acitvation code via SMS" textFill="WHITE" wrapText="true" />
+         </children>
+      </Pane>
+
+   </children>
+</AnchorPane>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="580.0" prefWidth="380.0" style="-fx-background-color: #2e3038};" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.UserSettingsController">
+   <children>
+      <Button layoutX="35.0" layoutY="60.0" mnemonicParsing="false" onAction="#ShowChangeInfo" prefHeight="30.0" prefWidth="310.0" style="-fx-background-color: rgb(24,186,234);" text="Change your information" textFill="WHITE" />
+      <ImageView fx:id="back" fitHeight="28.0" fitWidth="31.0" layoutX="27.0" layoutY="15.0" onMouseClicked="#GoBack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/undo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="35.0" layoutY="103.0" mnemonicParsing="false" onAction="#ShowChangePasswd" prefHeight="30.0" prefWidth="310.0" style="-fx-background-color: rgb(24,186,234);" text="Change your password" textFill="WHITE" />
+      <Button layoutX="35.0" layoutY="146.0" mnemonicParsing="false" onAction="#DisableAccount" prefHeight="30.0" prefWidth="310.0" style="-fx-background-color: red;" text="Desable your account" textFill="WHITE" />
+      <AnchorPane fx:id="ChangeInfo" layoutX="35.0" layoutY="211.0" prefHeight="288.0" prefWidth="310.0">
+         <children>
+            <TextField fx:id="FSField" layoutX="79.0" layoutY="54.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <Label layoutX="38.0" layoutY="14.0" text="Change your information" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="LSField" layoutX="79.0" layoutY="95.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <TextField fx:id="BioField" layoutX="79.0" layoutY="143.0" promptText="Bio" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <Button fx:id="SaveButton" layoutX="88.0" layoutY="223.0" mnemonicParsing="false" onAction="#ChangeInfo" prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: rgb(24,186,234);" text="Save" textFill="WHITE" />
+            <Label fx:id="ChangeInfoError" layoutX="136.0" layoutY="190.0" textFill="#e11212">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ChangePwd" layoutX="35.0" layoutY="205.0" prefHeight="288.0" prefWidth="310.0" visible="false">
+         <children>
+            <Label layoutX="59.0" layoutY="14.0" text="Change your password" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Button fx:id="SaveButtonPwd" layoutX="88.0" layoutY="244.0" mnemonicParsing="false" onAction="#changePwdbtn" prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: rgb(24,186,234);" text="Save" />
+            <PasswordField fx:id="OldPassword" layoutX="80.0" layoutY="65.0" prefHeight="27.0" prefWidth="151.0" promptText="Old Password" style="-fx-background-color: tranparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <PasswordField fx:id="NewPassword" layoutX="80.0" layoutY="115.0" prefHeight="27.0" prefWidth="151.0" promptText="New Password" style="-fx-background-color: tranparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <PasswordField fx:id="NewPasswordComfirm" layoutX="80.0" layoutY="172.0" prefHeight="27.0" prefWidth="151.0" promptText="New Password Confirm" style="-fx-background-color: tranparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <Label fx:id="ChangePwdError" layoutX="84.0" layoutY="214.0" textFill="#e11212">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button layoutX="35.0" layoutY="536.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="30.0" prefWidth="310.0" style="-fx-background-color: rgb(24,186,234);" text="Logout" textFill="WHITE" />
+   </children>
+</AnchorPane>
