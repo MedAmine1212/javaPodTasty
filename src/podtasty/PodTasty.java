@@ -6,6 +6,7 @@
 package podtasty;
 
 import entities.Post;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,10 +24,9 @@ public class PodTasty extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("TagsFxmlDocument.fxml"));
-
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/posts.fxml"));
+        stage.setTitle("Tasty posts");        
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.show();
     }
@@ -41,7 +41,7 @@ public class PodTasty extends Application {
         CRUDPost c = new CRUDPost();
         
          ObservableList<Post> posts = FXCollections.observableArrayList();
-        posts= c.getPostByText(new Post("faza"));
+        posts= c.getPostByText(new Post("/fxml/post.fxml"));
         System.out.println(p.getId()+p.getText());
         //c.addPost(p);
        // for (Post p : c.getPosts()) {
