@@ -100,6 +100,9 @@ public class ProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        UserHolder holder = UserHolder.getInstance();
+            User u = holder.getUser();
+            
         this.notifOn = false;
         this.NotifPanel.setVisible(false);
         // TODO 
