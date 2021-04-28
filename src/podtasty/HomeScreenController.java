@@ -83,7 +83,7 @@ public class HomeScreenController implements Initializable {
         instance = this;
         currentUser = new User();
         currentUser.setId(1);
-        currentUser.setIsAdmin(false);
+        currentUser.setIsAdmin(true);
         setUpView();
     }
 
