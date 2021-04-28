@@ -13,22 +13,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="154.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistZoneController">
-    <Pane fx:id="space" layoutX="-36.0" prefHeight="220.0" prefWidth="758.0">
+<AnchorPane id="AnchorPane" prefHeight="295.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistZoneController">
+    <Pane fx:id="space" prefHeight="295.0" prefWidth="832.0">
                      <children>
                         <Label id="a" fx:id="a" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="489.0" layoutY="53.0" prefHeight="0.0" prefWidth="0.0" scaleShape="false" visible="false" />
-                        <ImageView fx:id="imageplaylist" fitHeight="227.0" fitWidth="730.0" layoutX="36.0" layoutY="-4.0" pickOnBounds="true">
+                        <ImageView fx:id="imageplaylist" fitHeight="302.0" fitWidth="795.0" layoutX="36.0" layoutY="-4.0" pickOnBounds="true">
             <image>
                <Image url="@../../../../Pictures/Camera%20Roll/WIN_20181204_09_17_55_Pro.jpg" />
             </image></ImageView>
-                        <Label fx:id="nameplaylist" graphicTextGap="6.0" layoutX="65.0" layoutY="62.0" lineSpacing="2.0" prefHeight="49.0" prefWidth="368.0" text="Name" textFill="#12296e">
+                        <Label fx:id="nameplaylist" graphicTextGap="6.0" layoutX="65.0" layoutY="98.0" lineSpacing="2.0" prefHeight="49.0" prefWidth="368.0" text="Name" textFill="#12296e">
             <font>
                <Font name="Modern No. 20" size="33.0" />
             </font>
             <effect>
                <Glow />
             </effect></Label>
-                        <Label fx:id="descriptionplaylist" alignment="TOP_LEFT" layoutX="65.0" layoutY="111.0" prefHeight="64.0" prefWidth="368.0" text="desc" textFill="#a6a4a4">
+                        <Label fx:id="descriptionplaylist" alignment="TOP_LEFT" layoutX="65.0" layoutY="148.0" prefHeight="124.0" prefWidth="430.0" text="desc" textFill="#a6a4a4">
             <font>
                <Font size="15.0" />
             </font>
@@ -42,7 +42,7 @@
                   </light>
                </Lighting>
             </effect></Label>
-         <Button layoutX="636.0" layoutY="95.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="72.0" stylesheets="@../PlaylistStyles.css" text="Play" />
+         <Button layoutX="727.0" layoutY="132.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="72.0" stylesheets="@../PlaylistStyles.css" text="Play" />
                      </children>
       <effect>
          <Blend />

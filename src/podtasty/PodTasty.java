@@ -24,7 +24,7 @@ public class PodTasty extends Application {
        /* this.stg= stage;
         
         stg.setTitle("Pod-Tasty : The Desktop Application");*/
-        Parent root = FXMLLoader.load(getClass().getResource("LogReg.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("OwnChannel.fxml"));
         //        Parent root = FXMLLoader.load(getClass().getResource("Profile.fxml"));
 
         Scene scene = new Scene(root);        

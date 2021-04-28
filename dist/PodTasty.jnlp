@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PodTasty.jar" size="628606" download="eager" />
+    <jar href="PodTasty.jar" size="629665" download="eager" />
     <jar href="lib\bcrypt-0.4.1.jar" size="42979" download="eager" />
     <jar href="lib\bytes-0.4.6.jar" size="65802" download="eager" />
     <jar href="lib\charm-glisten-4.4.1.jar" size="1040787" download="eager" />

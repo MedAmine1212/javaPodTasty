@@ -38,6 +38,28 @@ public class ChannelService {
         connection=MyConnection.getInstance().getCnx();
 }
 
+    public int getSize() throws SQLException{
+        String query ="select * from channel;";
+            
+        Statement st;
+        ResultSet rs;
+            st=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, 
+    ResultSet.CONCUR_READ_ONLY);
+            rs=st.executeQuery(query);
+            int size = 0;
+try {
+    rs.last();
+    size = rs.getRow();
+    rs.beforeFirst();
+}
+catch(Exception ex) {
+    return 0;
+}
+return size;
+            
+   }
+
+
 
     public List<Playlist> getPlaylistsbyChannelId(int id) throws SQLException{
         List<Playlist> pl=new ArrayList<>();
@@ -60,6 +82,38 @@ public class ChannelService {
         }
         return pl;
     }
+    public List<Channel> getChannelList(){
+            List<Channel> l=new ArrayList<>();
+            try {
+            String query ="select * from channel;";
+            
+        Statement st;
+        ResultSet rs;
+            st=connection.createStatement();
+            rs=st.executeQuery(query);
+           
+            while (rs.next()) {
+                Channel channel= new Channel();
+                
+                
+                
+                 channel.setId(rs.getInt("id"));
+                 channel.setChannel_Name(rs.getString("channel_name"));
+                 channel.setChannel_Description(rs.getString("channel_descriptiosn"));
+                 channel.setChannel_CreationDate(rs.getDate("channel_creation_date"));
+                 channel.setChannel_Status(rs.getInt("channel_status"));
+                  
+                 
+                l.add(channel);
+              
+            }
+        } catch (Exception e) {
+            
+        }
+       return l;
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     public ObservableList<Channel> getAllChannels(){

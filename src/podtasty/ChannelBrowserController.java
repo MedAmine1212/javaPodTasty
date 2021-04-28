@@ -15,6 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -28,6 +31,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -55,13 +59,30 @@ public class ChannelBrowserController implements Initializable {
     private Button visitBtn;
     @FXML
     private TableColumn<Channel, Integer> channelId;
+    @FXML
+    private Pagination pagination;
+    private final static int rowsPerPage=10;
+    private final static int dataSize=100;
+    private int size;
+    private List<Channel> l;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /* ChannelService cs=new ChannelService();
+        try {
+            this.size = cs.getSize();
+            System.out.println(size);
+            this.l=cs.getChannelList();
+            System.out.println(l);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ChannelBrowserController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
         showChannels();
+    /*    pagination.setPageFactory(this::createPage);*/
                  
     }    
 
@@ -108,11 +129,18 @@ public class ChannelBrowserController implements Initializable {
 		
 		// 5. Add sorted (and filtered) data to the table.
 		channelList.setItems(sortedData);
+                
                
         
     }    
         
-        
+      private Node createPage(int pageIndex) {
+         
+        int fromIndex = pageIndex * rowsPerPage;
+        int toIndex = Math.min(fromIndex + rowsPerPage, size);
+        channelList.setItems(FXCollections.observableArrayList(l.subList(fromIndex, toIndex)));
+        return channelList;
+    }  
     
     
     

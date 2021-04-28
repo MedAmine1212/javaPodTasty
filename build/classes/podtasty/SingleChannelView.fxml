@@ -15,9 +15,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="685.0" prefWidth="831.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.SingleChannelViewController">
+<AnchorPane id="AnchorPane" prefHeight="753.0" prefWidth="1222.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.SingleChannelViewController">
    <children>
-      <HBox alignment="CENTER" layoutX="-1.0" layoutY="20.0" prefHeight="47.0" prefWidth="811.0">
+      <HBox alignment="CENTER" layoutX="-1.0" layoutY="20.0" prefHeight="47.0" prefWidth="1221.0">
          <children>
             <Label id="title" fx:id="welcomeTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="810.0" text="Welcome to this channel" textAlignment="CENTER">
                <effect>
@@ -25,9 +25,9 @@
                </effect></Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="4.0" layoutY="87.0" prefHeight="104.0" prefWidth="802.0">
+      <HBox alignment="CENTER" layoutX="4.0" layoutY="87.0" prefHeight="104.0" prefWidth="1218.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="242.0" prefWidth="266.0">
+            <VBox alignment="CENTER" prefHeight="104.0" prefWidth="287.0">
                <children>
                   <Label lineSpacing="50.0" text="Playlists">
                      <font>
@@ -101,7 +101,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="220.0" prefWidth="442.0">
+            <VBox alignment="CENTER" prefHeight="104.0" prefWidth="554.0">
                <children>
                   <Label prefHeight="47.0" prefWidth="267.0" text="About this channel">
                      <font>
@@ -134,9 +134,9 @@
          </children>
       </HBox>
       <Label fx:id="a" text="Label" visible="false" />
-      <ScrollPane layoutX="12.0" layoutY="229.0" prefHeight="391.0" prefWidth="786.0" style="-fx-background: transparent; -fx-background-color: transparent;">
+      <ScrollPane layoutX="12.0" layoutY="229.0" prefHeight="446.0" prefWidth="1210.0" style="-fx-background: transparent; -fx-background-color: transparent;">
          <content>
-            <GridPane fx:id="big" alignment="CENTER" hgap="10.0" prefHeight="200.0" prefWidth="754.0" vgap="20.0">
+            <GridPane fx:id="big" alignment="CENTER" hgap="10.0" prefHeight="288.0" prefWidth="1182.0" vgap="20.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="389.800048828125" minWidth="10.0" prefWidth="380.20001220703125" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="374.59997558593756" minWidth="10.0" prefWidth="373.7999877929688" />
@@ -147,6 +147,6 @@
             </GridPane>
          </content>
       </ScrollPane>
-      <Button fx:id="ReturnSingle" layoutX="747.0" layoutY="644.0" mnemonicParsing="false" onAction="#ReturnSingle" text="Return" />
+      <Button fx:id="ReturnSingle" layoutX="1117.0" layoutY="704.0" mnemonicParsing="false" onAction="#ReturnSingle" text="Return" />
    </children>
 </AnchorPane>

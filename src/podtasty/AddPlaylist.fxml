@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.AddPlaylistController">
+<AnchorPane id="AnchorPane" prefHeight="753.0" prefWidth="1222.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.AddPlaylistController">
    <children>
       <FlowPane AnchorPane.bottomAnchor="0.0">
          <children>
             <StackPane>
                <children>
-                  <BorderPane prefHeight="400.0" prefWidth="600.0">
+                  <BorderPane prefHeight="753.0" prefWidth="1222.0">
                      <top>
                         <Label id="title" fx:id="addPlaylistTtitle" alignment="CENTER" prefHeight="58.0" prefWidth="398.0" text="Add a new Playlist" BorderPane.alignment="CENTER">
                            <font>

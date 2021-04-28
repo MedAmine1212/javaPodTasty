@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="445.0" prefWidth="670.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistViewController">
+<AnchorPane id="AnchorPane" prefHeight="753.0" prefWidth="1222.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PlaylistViewController">
    <children>
-      <StackPane layoutX="2.0" layoutY="3.0" prefHeight="438.0" prefWidth="659.0">
+      <StackPane layoutX="2.0" layoutY="3.0" prefHeight="753.0" prefWidth="1222.0">
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <top>

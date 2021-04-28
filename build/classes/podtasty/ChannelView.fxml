@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="357.0" prefWidth="499.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.ChannelViewController">
+<AnchorPane id="AnchorPane" prefHeight="753.0" prefWidth="1222.0" styleClass="bodybg" stylesheets="@../PlaylistStyles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.ChannelViewController">
    <children>
-      <StackPane layoutY="3.0" prefHeight="451.0" prefWidth="695.0">
+      <StackPane layoutY="3.0" prefHeight="753.0" prefWidth="1221.0">
          <children>
-            <BorderPane prefHeight="452.0" prefWidth="807.0">
+            <BorderPane prefHeight="548.0" prefWidth="811.0">
                <top>
-                  <Label id="title" alignment="CENTER" prefHeight="62.0" prefWidth="443.0" text="Channel list" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                  <Label id="title" alignment="CENTER" prefHeight="62.0" prefWidth="1224.0" text="Channel list" textAlignment="CENTER" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="16.0" />
                      </font>
