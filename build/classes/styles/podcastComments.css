@@ -1,9 +1,4 @@
-#AnchorPane{
-    -fx-background-image: url("../images/bg.png");
-    -fx-background-repeat: stretch;   
-    -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
-}
+
 
 #editCommentButton{
 	-fx-background-color:#17a2b8;

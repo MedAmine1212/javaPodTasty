@@ -10,14 +10,11 @@ import entities.Podcast;
 import entities.PodcastComment;
 import interfaces.IComments;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -50,7 +47,6 @@ public class CRUDComments implements IComments<PodcastComment> {
                 con.setRequestMethod("GET");
                 int status = con.getResponseCode();
                 System.out.println(status);
-                
             }
             
             
@@ -247,4 +243,93 @@ public class CRUDComments implements IComments<PodcastComment> {
             return 0;
         }
 }
+    
+    
+    
+           @Override
+    public ObservableList<Podcast> getPodcasts() {
+        
+        ObservableList<Podcast> pods = FXCollections.observableArrayList();
+
+        try {
+            String requete = "SELECT * FROM podcast p WHERE currently_live=0 AND is_blocked=0";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Podcast pod = new Podcast();
+                pod.setId(rs.getInt("id"));
+                pod.setCommentsAllowed(rs.getInt("comments_allowed"));
+                pod.setCurrentlyLive(rs.getInt("currently_live"));
+                pod.setCurrentlyWatching(rs.getInt("currently_watching"));
+                pod.setIsBlocked(rs.getInt("is_blocked"));
+                pod.setPodcastDate(rs.getDate("podcast_date"));
+                pod.setPodcastImage(rs.getString("podcast_image"));
+                pod.setPodcastSource(rs.getString("podcast_source"));
+                pod.setPodcastViews(rs.getInt("podcast_views"));
+                pod.setPodcastName(rs.getString("podcast_name"));
+                pod.setPodcastDescription(rs.getString("podcast_description"));
+                pods.add(pod);
+                
+        }
+            
+            
+            return pods;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return null;
+        }
+    }
+
+    @Override
+    public ObservableList<Podcast> getPodcastsByTag(int id) {
+        ObservableList<Podcast> pods = FXCollections.observableArrayList();
+
+        try {
+            
+            String req = "SELECT podcast_id from tag_podcast WHERE tag_id = ?";
+             PreparedStatement ps = MyConnection.getInstance().getCnx()
+                    .prepareStatement(req);
+            
+            ps.setInt(1, id);
+            ResultSet res = ps.executeQuery();
+            while(res.next()){
+                
+            String requete = "SELECT * FROM podcast p WHERE id = ? AND currently_live=0 AND is_blocked=0 ";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, res.getInt(1));
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Podcast pod = new Podcast();
+                pod.setId(rs.getInt("id"));
+                pod.setCommentsAllowed(rs.getInt("comments_allowed"));
+                pod.setCurrentlyLive(rs.getInt("currently_live"));
+                pod.setCurrentlyWatching(rs.getInt("currently_watching"));
+                pod.setIsBlocked(rs.getInt("is_blocked"));
+                pod.setPodcastDate(rs.getDate("podcast_date"));
+                pod.setPodcastImage(rs.getString("podcast_image"));
+                pod.setPodcastSource(rs.getString("podcast_source"));
+                pod.setPodcastViews(rs.getInt("podcast_views"));
+                pod.setPodcastName(rs.getString("podcast_name"));
+                pod.setPodcastDescription(rs.getString("podcast_description"));
+                pods.add(pod);
+                
+        }
+            
+            }
+            return pods;
+        }catch(Exception e) {
+            System.out.println("__________________________________________");
+            System.out.println(e);
+            System.out.println("__________________________________________");
+            return null;
+        }
+    }
+    
+    
+    
+    
 }

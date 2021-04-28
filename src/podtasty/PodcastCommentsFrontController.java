@@ -14,6 +14,7 @@ import entities.User;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -153,6 +154,8 @@ public class PodcastCommentsFrontController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+       
         loading.setVisible(true);
         new Thread(new Runnable() {
 
@@ -165,17 +168,8 @@ public class PodcastCommentsFrontController implements Initializable {
             @Override
             public void run() { 
                 
-        currentUser = new User();
-        currentUser.setId(1);
+        currentUser = HomeScreenController.getCurrentUser();
         searchInput.setPromptText("Search comments...");
-        currentPodcast = new Podcast();
-        currentPodcast.setId(1);
-        currentPodcast.setCommentsAllowed(1);
-        currentPodcast.setPodcastDescription("Description Description Description Description ");
-        currentPodcast.setPodcastName("Podcast 1");
-        currentPodcast.setPodcastViews(120);
-        currentPodcast.setPodcastImage("1.jpeg");
-        currentPodcast.setPodcastSource("6074b2a184d44.mp3");
         CRUDComments cr = new CRUDComments();
         playlist = cr.getPodcastByPlaylist(1, currentPodcast.getId());
         try {
@@ -199,8 +193,7 @@ public class PodcastCommentsFrontController implements Initializable {
     
     
    public void setUpView() throws IOException, WriterException {
-       
-       
+      
         BufferedImage qrCode = GenerateQRCode.createQRImage(currentPodcast.getId().toString(), 125);
         WritableImage qrCodeImg = SwingFXUtils.toFXImage(qrCode, null);
         qrCodeContainer.setImage(qrCodeImg);
@@ -215,6 +208,8 @@ public class PodcastCommentsFrontController implements Initializable {
        this.podcastDesc.setText(currentPodcast.getPodcastDescription());
        this.podcastName.setText(currentPodcast.getPodcastName());
        this.podcastViews.setText(currentPodcast.getPodcastViews()+" Views");
+       if(currentUser != null) {
+         
        CRUDFavorite cf = new CRUDFavorite();
        if(cf.getFavoriteByPodcastAnduser(currentPodcast, currentUser)) {
             addFavoriteButt.setVisible(false);
@@ -223,6 +218,14 @@ public class PodcastCommentsFrontController implements Initializable {
             removeFavoriteButt.setVisible(false);
             addFavoriteButt.setVisible(true);
         }
+         
+       } else{
+           
+        removeFavoriteButt.setVisible(false);
+        addFavoriteButt.setVisible(false);
+        report.setVisible(false);
+        
+       }
         CRUDComments cr = new CRUDComments();
         CRUDReview crr = new CRUDReview();
         BufferedImage image;
@@ -237,7 +240,8 @@ public class PodcastCommentsFrontController implements Initializable {
         if(!reviewList.isEmpty()) {
             float rating = 0;
             rating = reviewList.stream().map(rv -> rv.getRating()).reduce(rating, (accumulator, _item) -> accumulator + _item);
-            
+            if (currentUser != null) {
+                
             reviewList.stream().filter(rv -> (Objects.equals(rv.getUserIdId().getId(), currentUser.getId()))).map(rv -> {
                 ratingSaved = true;
                 return rv;
@@ -251,6 +255,13 @@ public class PodcastCommentsFrontController implements Initializable {
                     Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+            } else {
+                
+            ratingSaved = false;
+            userRating.setText("");
+            rate.setVisible(false);
+            }
+
             rating/=reviewList.size();
             String strDouble = String.format("%.1f", rating);
             podcastRating.setText("Rating: "+strDouble+"/10");
@@ -260,7 +271,8 @@ public class PodcastCommentsFrontController implements Initializable {
             setImage(rate,  2);
             podcastRating.setText("");
         }
-        
+        if (currentUser != null) {
+            
         if(currentPodcast.getCommentsAllowed() == 0) {
             this.commentTextInput.setVisible(false);
             this.addCommentButton.setVisible(false);
@@ -268,6 +280,12 @@ public class PodcastCommentsFrontController implements Initializable {
         } else {
             this.commentTextInput.setVisible(true);
             this.addCommentButton.setVisible(true);
+            commentsDiabled.setVisible(false);
+        }
+        
+        } else {
+            this.commentTextInput.setVisible(false);
+            this.addCommentButton.setVisible(false);
             commentsDiabled.setVisible(false);
         }
         ObservableList<PodcastComment> comList = cr.getCommentsByPodcast(currentPodcast);
@@ -293,7 +311,7 @@ public class PodcastCommentsFrontController implements Initializable {
             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcastView.fxml"));
             Pane pn = fx.load();
             PodcastViewController controller = fx.getController();
-            controller.setView(pod);
+            controller.setView(pod, false);
             pn.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -507,7 +525,7 @@ public class PodcastCommentsFrontController implements Initializable {
     );
     }
     @FXML
-    private void addCommentAction(MouseEvent event) {
+    private void addCommentAction(MouseEvent event) throws IOException {
         
             CRUDComments cr = new CRUDComments();
         if (cr.getCommentsAllowedForPod(currentPodcast) == 1) {
@@ -555,7 +573,7 @@ public class PodcastCommentsFrontController implements Initializable {
     }
 
     @FXML
-    private void deactivateButton(KeyEvent event) {
+    private void deactivateButton(KeyEvent event) throws IOException {
         
         if(event.getCode().toString().equals("ENTER") && !addCommentButton.isDisabled()){
             addCommentButton.setDisable(true);
@@ -767,6 +785,10 @@ public class PodcastCommentsFrontController implements Initializable {
          return currentPodcast;
      }   
 
+     public static void setCurrentPodcast(Podcast pod) {
+         currentPodcast = pod;
+     } 
+     
     @FXML
     private void showCommentDetails(MouseEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

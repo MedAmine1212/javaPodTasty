@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="102.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastViewController">
+<Pane fx:id="podContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="114.0" prefWidth="300.0" stylesheets="@../styles/dashboard.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastViewController">
    <children>
-      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="190.0">
+      <BorderPane fx:id="podBorder" layoutX="10.0" layoutY="10.0" prefHeight="99.0" prefWidth="232.0">
          <left>
-            <ImageView fx:id="podcastImg" fitHeight="82.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="podcastImg" fitHeight="99.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/defPod.png" />
                </image></ImageView>
          </left>
          <right>
-            <Pane prefHeight="94.0" prefWidth="102.0" BorderPane.alignment="CENTER">
+            <Pane fx:id="textContainer" prefHeight="99.0" prefWidth="106.0" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="podcastName" textFill="WHITE">
                      <font>
@@ -39,7 +39,7 @@
             </Pane>
          </right>
          <center>
-            <FlowPane prefHeight="82.0" prefWidth="26.0" BorderPane.alignment="CENTER" />
+            <FlowPane minWidth="-Infinity" prefHeight="99.0" prefWidth="27.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

@@ -20,6 +20,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javax.imageio.ImageIO;
 
 /**
@@ -37,6 +39,12 @@ public class PodcastViewController implements Initializable {
     private Label podcastDesc;
     @FXML
     private Label podcastViews;
+    @FXML
+    private Pane textContainer;
+    @FXML
+    private Pane podContainer;
+    @FXML
+    private BorderPane podBorder;
 
     /**
      * Initializes the controller class.
@@ -46,7 +54,7 @@ public class PodcastViewController implements Initializable {
         // TODO
     } 
     
-     public void setView(Podcast pod){
+     public void setView(Podcast pod, boolean big){
         podcastName.setText(pod.getPodcastName());
         podcastViews.setText(pod.getPodcastViews()+" Views");
         podcastDesc.setText(pod.getPodcastDescription());
@@ -55,6 +63,10 @@ public class PodcastViewController implements Initializable {
             image = ImageIO.read(new URL("http://127.0.0.1:8000/Files/podcastFiles/"+pod.getPodcastImage()));
             WritableImage img = SwingFXUtils.toFXImage(image, null);
             podcastImg.setImage(img);
+            if (big) {
+                podcastImg.setFitWidth(220);
+                podcastImg.setFitHeight(100);
+            }
         } catch (Exception ex) {
             Logger.getLogger(PodcastCommentsFrontController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,5 +22,8 @@ public interface IComments<PodcastComment> {
     public ObservableList<PodcastComment> getCommentsByComText(Podcast pod,String text);
     public ObservableList<Podcast> getPodcastByPlaylist(int id, int podId);
     public int getCommentsAllowedForPod(Podcast pod);
+   
+    public ObservableList<Podcast> getPodcasts();
+    public ObservableList<Podcast> getPodcastsByTag(int id);
     
 }

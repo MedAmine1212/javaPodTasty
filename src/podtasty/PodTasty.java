@@ -38,7 +38,7 @@ public class PodTasty extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("TagsFxmlDocument.fxml"));
         
         
-        Parent root = FXMLLoader.load(getClass().getResource("PodcastCommentsFront.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homeScreen.fxml"));
         
         
         
