@@ -281,7 +281,7 @@ public class Podcast implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Podcast_1[ id=" + id + " ]";
+        return "entities.Podcast_1[ id=" + id + " ] name [ "+ podcastName +"] description ["+podcastDescription+"] currently live ["+currentlyLive+"]"  ;
     }
     
 }
