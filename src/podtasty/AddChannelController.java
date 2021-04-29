@@ -205,22 +205,7 @@ public class AddChannelController implements Initializable {
 
     @FXML
     private void CancelAddChannel(ActionEvent event) {
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-                        
-        FXMLLoader loader = new FXMLLoader ();
-            loader.setLocation(getClass().getResource("ChannelView.fxml"));
-        try {
-            loader.load();
-
-
-              } catch (IOException ex) {
-                  System.out.println(ex.getMessage());
-        }
-
-        Parent parent = loader.getRoot();
-        stage.setScene(new Scene(parent));
-        stage.show();
-    }
+      ChannelViewController.closeUpdateChannel();
     
+}
 }

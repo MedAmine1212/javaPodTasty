@@ -28,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ScrollEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import services.PlaylistService;
 
@@ -58,6 +59,7 @@ public class PlaylistViewController implements Initializable {
     
     public static int testBtn=0;
     public static int selectedValue=0;
+    private static Stage addPlaylist;
     
     
     
@@ -140,10 +142,13 @@ public class PlaylistViewController implements Initializable {
      
     }
 
-    
+        
+    public static void closeUpdatePlaylist() {
+        addPlaylist.close();
+    }
 
     @FXML
-    private void updateAction(ActionEvent event) {
+    private void updateAction(ActionEvent event) throws IOException {
         if (PlaylistList.getSelectionModel().getSelectedItem()==null) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("No playlist was selected");
@@ -152,31 +157,27 @@ public class PlaylistViewController implements Initializable {
             alert.showAndWait();
             return;
         }
-         Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
+        
+        
+         testBtn=1;
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddPlaylist.fxml"));
+            Parent root = (Parent)loader.load();
+            AddPlaylistController AddPlaylistController = (AddPlaylistController)loader.getController();
+            addPlaylist = new Stage();
+            addPlaylist.setTitle("Edit channel");
+            addPlaylist.setScene(new Scene(root));
+            addPlaylist.initModality(Modality.WINDOW_MODAL);
+            addPlaylist.initOwner(((Node)(event.getSource())).getScene().getWindow());
+       AddPlaylistController.setaddPlaylistTtitle("Update playlist");
+        AddPlaylistController.setbtnaddPlaylist("Update");
+        AddPlaylistController.setaddPlaylistNameLabel("Update the playlist's name");
+        AddPlaylistController.setaddPlaylistDescriptionLabel("Edit the playlist's description");
+        AddPlaylistController.setPlaylistNameField(PlaylistList.getSelectionModel().getSelectedItem().getPlaylistName());
+        AddPlaylistController.setPlaylistDescriptionField(PlaylistList.getSelectionModel().getSelectedItem().getPlaylistDescription());
+        addPlaylist.show();
                         
-        FXMLLoader loader = new FXMLLoader ();
-            loader.setLocation(getClass().getResource("AddPlaylist.fxml"));
-        try {
-            loader.load();
-
-
-              } catch (IOException ex) {
-                  System.out.println(ex.getMessage());
-        }
-
-        Parent parent = loader.getRoot();
-        AddPlaylistController addPlaylistController=loader.getController();
-        addPlaylistController.setaddPlaylistTtitle("Update playlist");
-        addPlaylistController.setbtnaddPlaylist("Update");
-        addPlaylistController.setaddPlaylistNameLabel("Update the playlist's name");
-        addPlaylistController.setaddPlaylistDescriptionLabel("Edit the playlist's description");
-        addPlaylistController.setPlaylistNameField(PlaylistList.getSelectionModel().getSelectedItem().getPlaylistName());
-        addPlaylistController.setPlaylistDescriptionField(PlaylistList.getSelectionModel().getSelectedItem().getPlaylistDescription());
-        testBtn=1;
-        selectedValue=PlaylistList.getSelectionModel().getSelectedItem().getId();
-        stage.setScene(new Scene(parent));
-        stage.show();
+       
     }
 
     

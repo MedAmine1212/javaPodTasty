@@ -28,6 +28,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import services.ChannelService;
 import services.PlaylistService;
@@ -61,6 +62,7 @@ public class ChannelViewController implements Initializable {
     private TableColumn<Channel, Integer> ChannelStatus;
     public static int testBtn=0;
     public static int selectedValue=0;
+    private static Stage addChannel;
 
     /**
      * Initializes the controller class.
@@ -110,7 +112,7 @@ public class ChannelViewController implements Initializable {
     }
 
     @FXML
-    private void updateAction(ActionEvent event) {
+    private void updateAction(ActionEvent event) throws IOException {
         if (ChannelList.getSelectionModel().getSelectedItem()==null) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("No channel was selected");
@@ -122,29 +124,35 @@ public class ChannelViewController implements Initializable {
          Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
                         
-        FXMLLoader loader = new FXMLLoader ();
-            loader.setLocation(getClass().getResource("AddChannel.fxml"));
-        try {
-            loader.load();
-
-
-              } catch (IOException ex) {
-                  System.out.println(ex.getMessage());
-        }
-
-        Parent parent = loader.getRoot();
-        AddChannelController AddChannelController=loader.getController();
+        
+        testBtn=1;
+        
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddChannel.fxml"));
+            Parent root = (Parent)loader.load();
+            AddChannelController AddChannelController = (AddChannelController)loader.getController();
+            addChannel = new Stage();
+            addChannel.setTitle("Edit channel");
+            addChannel.setScene(new Scene(root));
+            addChannel.initModality(Modality.WINDOW_MODAL);
+            addChannel.initOwner(((Node)(event.getSource())).getScene().getWindow());
         AddChannelController.setaddChannelTtitle("Update Channel");
         AddChannelController.setbtnaddChannel("Update");
         AddChannelController.setaddChannelNameLabel("Update the channel's name");
         AddChannelController.setaddChannelDescriptionLabel("Edit the channel's description");
         AddChannelController.setChannelNameField(ChannelList.getSelectionModel().getSelectedItem().getChannel_Name());
         AddChannelController.setChannelDescriptionField(ChannelList.getSelectionModel().getSelectedItem().getChannel_Description());
-        testBtn=1;
+       
         AddChannelController.setselectedValue(ChannelList.getSelectionModel().getSelectedItem().getId());
-        stage.setScene(new Scene(parent));
-        stage.show();
+        addChannel.show();
+       
     }
+    
+       
+    public static void closeUpdateChannel() {
+        addChannel.close();
+    }
+    
 
     @FXML
     private void deleteAction(ActionEvent event) {
