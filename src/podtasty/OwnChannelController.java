@@ -85,10 +85,9 @@ public class OwnChannelController implements Initializable {
     homeScreen = HomeScreenController.getInstance();
         ChannelService cs= new ChannelService();
         try {
-            Channel ch=cs.findById(28);
-            list=cs.getPlaylistsbyChannelId(16);
+             u=  homeScreen.getCurrentUser();
+            list=cs.getPlaylistsbyChannelId(u.getChannelIdId().getId());
           
-             u= new User(1,ch);
              welcome();
         } catch (SQLException ex) {
             Logger.getLogger(OwnChannelController.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,26 +100,7 @@ public class OwnChannelController implements Initializable {
 
     @FXML
     private void ReturnSingle(ActionEvent event) {
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-                        
-        FXMLLoader loader = new FXMLLoader ();
-        
-            loader.setLocation(getClass().getResource("Profile.fxml"));
-        try {
-            loader.load();
-
-
-              } catch (IOException ex) {
-                  System.out.println(ex.getMessage());
-        }
-
-        Parent parent = loader.getRoot();
-        
-        
-        stage.setScene(new Scene(parent));
-        
-        stage.show();
+       ProfileController.closeChannel();
     }
 
 
@@ -172,7 +152,7 @@ public class OwnChannelController implements Initializable {
         setdescriptionLabel(u.getChannelIdId().getChannel_Description());
         Date date=u.getChannelIdId().getChannel_CreationDate();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-          String strDate = dateFormat.format(date);  
+        String strDate = dateFormat.format(date);  
         setcreatedLabel(strDate);
         setownerLabel(list.size()+"");
         

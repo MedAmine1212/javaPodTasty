@@ -6,6 +6,7 @@
 package podtasty;
 
 import entities.Playlist;
+import entities.Podcast;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -59,6 +60,7 @@ public class PlaylistZoneOwerController implements Initializable {
     private Playlist p;
     @FXML
     private Button PlayPlaylistBtn;
+    private Playlist pl;
     /**
      * Initializes the controller class.
      */
@@ -75,6 +77,11 @@ public class PlaylistZoneOwerController implements Initializable {
                 image = ImageIO.read(new URL("http://127.0.0.1:8000/images/playlist/"+pl.getImageName()));
                 WritableImage img = SwingFXUtils.toFXImage(image, null);
                 imageplaylist.setImage(img);
+                this.pl = pl;
+                
+               if( pl.getPodcastCollection().isEmpty()) {
+                   PlayPlaylistBtn.setVisible(false);
+               }
     }
 
     @FXML
@@ -158,6 +165,26 @@ public class PlaylistZoneOwerController implements Initializable {
 
     @FXML
     private void PlayPlaylistBtn(ActionEvent event) {
+        
+                
+        Podcast pod = pl.getPodcastCollection().iterator().next();
+        HomeScreenController.setIsCom(true);
+     
+      PodcastCommentsFrontController.setCurrentPodcast(pod);
+      
+      
+      FXMLLoader fx = new FXMLLoader(getClass().getResource("PodcastCommentsFront.fxml"));
+        try {
+            Pane p = fx.load();
+            HomeScreenController.getInstance().getContainer().getChildren().clear();
+            HomeScreenController.getInstance().getContainer().getChildren().add(p);
+        ProfileController.closeChannel();
+        HomeScreenController.closeProfile();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
     }
 }
     

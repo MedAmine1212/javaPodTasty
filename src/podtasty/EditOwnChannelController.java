@@ -8,6 +8,7 @@ package podtasty;
 import entities.Channel;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,26 +45,28 @@ public class EditOwnChannelController implements Initializable {
     private Label addChannelDescriptionLabel;
     @FXML
     private TextField ChannelDescriptionField;
+    private HomeScreenController homeScreen;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        homeScreen = HomeScreenController.getInstance();
     }    
     
     
 
     @FXML
-    private void EditChannelAction(ActionEvent event) {
+    private void EditChannelAction(ActionEvent event) throws SQLException {
         
         ChannelService sc=new ChannelService();
              Channel c=new Channel();
              c.setChannel_Name(ChannelNameField.getText());
              c.setChannel_Description(ChannelDescriptionField.getText());
              
-             sc.updateOwnChannel(28 ,c);
+             sc.updateOwnChannel(homeScreen.getCurrentUser().getChannelIdId().getId() ,c);
+             homeScreen.getCurrentUser().setChannelIdId(sc.findById(homeScreen.getCurrentUser().getChannelIdId().getId()));
              Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Channel Updated");
                 alert.setHeaderText(null);

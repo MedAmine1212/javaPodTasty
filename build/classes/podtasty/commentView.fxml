@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -12,11 +11,6 @@
    <children>
       <Pane prefHeight="131.0" prefWidth="811.0" style="-fx-background: transparent;">
          <children>
-            <ImageView fitHeight="71.0" fitWidth="67.0" layoutX="8.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/avatar.jpg" />
-               </image>
-            </ImageView>
             <Text fx:id="userName" fill="WHITE" layoutX="82.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Khaili Med Amine">
                <font>
                   <Font size="22.0" />
@@ -27,15 +21,16 @@
                   <Font size="19.0" />
                </font>
             </Text>
-            <ScrollPane fx:id="scroll" layoutX="95.0" layoutY="45.0" prefHeight="77.0" prefWidth="714.0" style="-fx-border-color: rgba(0,0,0,0.1); -fx-background-color: transparent;">
+            <ScrollPane fx:id="scroll" layoutX="108.0" layoutY="45.0" prefHeight="77.0" prefWidth="701.0" style="-fx-border-color: rgba(0,0,0,0.1); -fx-background-color: transparent;">
                <content>
-                  <Text fx:id="commentText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="683.8802186846733">
+                  <Text fx:id="commentText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="677.4803163409233">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
                </content>
             </ScrollPane>
+            <Circle fx:id="commentOwnerImage" fill="DODGERBLUE" layoutX="38.0" layoutY="45.0" radius="34.0" stroke="TRANSPARENT" strokeType="INSIDE" />
          </children>
       </Pane>
    </children>

@@ -153,21 +153,35 @@ public class HomeScreenController implements Initializable {
         Parent root;
             root = FXMLLoader.load(getClass().getResource("LogReg.fxml"));
             logRegStage = new Stage();
-            logRegStage.setTitle("Sign i");
+            logRegStage.setTitle("Sign in");
             logRegStage.setScene(new Scene(root));
             logRegStage.initModality(Modality.APPLICATION_MODAL);
             logRegStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
             logRegStage.show();
     }
     
+    
+    
     public static void closeSignIn() {
         logRegStage.close();
         HomeScreenController.instance.setUpView();
     }
+    
+      public static void closeProfile() {
+        logRegStage.close();
+    }
 
 
     @FXML
-    private void goProfile(MouseEvent event) {
+    private void goProfile(MouseEvent event) throws IOException {
+        Parent root;
+            root = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+            logRegStage = new Stage();
+            logRegStage.setTitle("Profile");
+            logRegStage.setScene(new Scene(root));
+            logRegStage.initModality(Modality.APPLICATION_MODAL);
+            logRegStage.initOwner(((Node)(event.getSource())).getScene().getWindow());
+            logRegStage.show();
            
     }
 
@@ -206,6 +220,7 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private void goUsersAdmin(MouseEvent event) {
+        changeView("GestionUsers.fxml");
     }
 
     @FXML
@@ -223,7 +238,8 @@ public class HomeScreenController implements Initializable {
     }
 
     @FXML
-    private void goProfileAdmin(MouseEvent event) {
+    private void goProfileAdmin(MouseEvent event) throws IOException {
+        goProfile(event);
     }
     
     

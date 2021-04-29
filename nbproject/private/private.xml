@@ -3,19 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/DBConnection/MyConnection.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/ITag.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/ChannelService.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/PodcastCommentsFrontController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/PlaylistZoneOwerController.java</file>
             <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/LogRegController.java</file>
             <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/PodTasty.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/JavaMailUtils.java</file>
             <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/entities/UserInfo.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/GestionUsersController.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/UserSettingsController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/CommentViewController.java</file>
             <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/ProfileController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/ResetPasswordController.java</file>
             <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/TagsListController.java</file>
             <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/AddTagController.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/IUser.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/entities/User.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/CRUDComments.java</file>
             <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/CRUDUser.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/HomeScreenController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/DBConnection/MyConnection.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/ITag.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/EditOwnChannelController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/PlaylistZoneController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/GestionUsersController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/UserSettingsController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/AddOwnPlaylistController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/IUser.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/OwnChannelController.java</file>
+            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/entities/User.java</file>
         </group>
     </open-files>
 </project-private>

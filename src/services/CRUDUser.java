@@ -72,7 +72,7 @@ public class CRUDUser implements IUser<User> {
 
                 pst1.setString(2, bcryptHashString);
                 pst1.setBoolean(3, false);
-                pst1.setBoolean(4, false);
+                pst1.setBoolean(4, true);
                 pst1.executeUpdate();
                 return true;
             } catch (Exception e) {
@@ -172,6 +172,8 @@ public class CRUDUser implements IUser<User> {
                 user.setUserEmail(rs.getString("user_email"));
                 user.setUserInfoIdId(getUserInfoById(rs.getInt("user_info_id_id")));
                 user.setDesactiveAccount(rs.getBoolean("desactive_account"));
+                ChannelService chS = new ChannelService();
+                user.setChannelIdId(chS.findById(rs.getInt("channel_id_id")));
                 user.setIsAdmin(rs.getBoolean("is_admin"));
                 
                
@@ -253,6 +255,8 @@ public class CRUDUser implements IUser<User> {
                 user.setUserEmail(rs.getString("user_email"));
                 user.setUserInfoIdId(getUserInfoById(rs.getInt("user_info_id_id")));
                 user.setDesactiveAccount(rs.getBoolean("desactive_account"));
+                ChannelService chS = new ChannelService();
+                user.setChannelIdId(chS.findById(rs.getInt("channel_id_id")));
                 user.setIsAdmin(rs.getBoolean("is_admin"));
                 return user;
             }
@@ -270,7 +274,9 @@ public class CRUDUser implements IUser<User> {
                 String requete = "update user set user_password=? where id = ?";
                 PreparedStatement pst = MyConnection.getInstance().getCnx()
                         .prepareStatement(requete);
-                pst.setString(1, pwd);
+         String bcryptHashString = BCrypt.withDefaults().hashToString(12, pwd.toCharArray());
+
+                pst.setString(1, bcryptHashString);
 
                 pst.setInt(2, id);
                 pst.executeUpdate();

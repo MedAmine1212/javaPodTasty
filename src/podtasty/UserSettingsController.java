@@ -6,7 +6,7 @@
 package podtasty;
 
 import entities.User;
-import entities.UserInfo;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -127,7 +127,6 @@ public class UserSettingsController implements Initializable {
                 alert.setContentText("Enjoy POD-TASTY!");
                 alert.showAndWait();
                 this.ChangePwd.setVisible(false);
-
             } else if (cr.validate(u.getUserEmail(), this.OldPassword.getText()) == false) {
                 this.ChangePwdError.setText("Old Password Invalid");
 
@@ -142,20 +141,8 @@ public class UserSettingsController implements Initializable {
     }
 
     @FXML
-    private void GoBack(MouseEvent event) {
-        try {
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Profile.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-            final Node source = (Node) event.getSource();
-            final Stage Oldstage = (Stage) source.getScene().getWindow();
-            Oldstage.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void GoBack(MouseEvent event) throws MalformedURLException {
+        ProfileController.closeSettings();
     }
 
     @FXML
@@ -174,5 +161,6 @@ public class UserSettingsController implements Initializable {
         this.ChangeInfo.setVisible(false);
 
     }
+
 
 }
