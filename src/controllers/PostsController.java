@@ -23,11 +23,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import objects.Account;
 import objects.PostAudience;
+import podtasty.PodTasty;
 import services.CRUDPost;
 
 /**
@@ -47,10 +49,12 @@ public class PostsController implements Initializable {
     private Button postButton;
     @FXML
     private VBox postContainer2;
+    @FXML
+    private Label username;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        username.setText(PodTasty.getUserInfo().getUserFirstName()+" "+PodTasty.getUserInfo().getUserLastName());
         fill();
     }
     
@@ -58,6 +62,7 @@ public class PostsController implements Initializable {
     
    void fill()
    {
+      System.out.println("appel el fill");
        posts = new ArrayList<>(getDatabasePosts());
         System.out.println("hedha");
         try {
@@ -138,6 +143,8 @@ public class PostsController implements Initializable {
             post.setTotalReactions(10);
             post.setNbComments(2);
             post.setNbShares(3);
+            System.out.println("affectation mta3 el moula: "+p.getUserId());
+            post.setIdUser(p.getUserId());
             ls.add(post);
         }
         Collections.reverse(ls);

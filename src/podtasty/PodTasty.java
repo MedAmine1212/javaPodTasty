@@ -7,6 +7,8 @@ package podtasty;
 
 
 import entities.Post;
+import entities.User;
+import entities.UserInfo;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -24,10 +26,25 @@ import services.CRUDPost;
  */
 public class PodTasty extends Application {
 
+static User user = new User();
+public static User getUser()
+{
+    return user;
+}
 
+static UserInfo userInfo = new UserInfo();
+public static UserInfo getUserInfo()
+{
+    return userInfo;
+}
     
     @Override
     public void start(Stage stage) throws Exception {
+        user.setId(5);
+        userInfo.setId(6);
+        userInfo.setUserFirstName("Issam");
+        userInfo.setUserLastName("Ben Ammar");
+        
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/posts.fxml"));
         stage.setTitle("Tasty posts");        
         Scene scene = new Scene(root);
@@ -42,8 +59,6 @@ public class PodTasty extends Application {
     public static void main(String[] args) {
 
         
-        
-
         launch(args);
     }
 

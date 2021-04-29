@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="890.0" prefWidth="1095.0" styleClass="body-background" stylesheets="@../resources/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PostsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="1222.0" styleClass="body-background" stylesheets="@../resources/styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PostsController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="200.0" styleClass="white-background" stylesheets="@../resources/styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -133,7 +133,7 @@
                               <Image url="@../img/user.png" />
                            </image>
                         </ImageView>
-                        <Label prefWidth="220.0" text="Issam Ben Ammar">
+                        <Label fx:id="username" prefWidth="220.0" text="Issam Ben Ammar">
                            <font>
                               <Font name="Segoe UI Semibold" size="18.0" />
                            </font>

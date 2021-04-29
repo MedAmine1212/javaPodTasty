@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.UserInfo;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -18,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import podtasty.PodTasty;
 import services.CRUDPost;
 
 public class PostController implements Initializable {
@@ -165,7 +167,17 @@ public class PostController implements Initializable {
         Image img;
         img = new Image(getClass().getResourceAsStream(post.getAccount().getProfileImg()));
         imgProfile.setImage(img);
-        username.setText(post.getAccount().getName());
+        CRUDPost c = new CRUDPost();
+        if (post.getIdUser()!=0) {
+             UserInfo user = c.getOwner(post.getIdUser());
+        
+        username.setText(user.getUserFirstName()+" "+user.getUserLastName());
+        }else   
+        {
+            username.setText("username");
+        }
+       
+        
         if(post.getAccount().isVerified()){
             imgVerified.setVisible(true);
         }else{
@@ -199,6 +211,19 @@ public class PostController implements Initializable {
         nbShares.setText(post.getNbShares()+" shares");
 
         currentReaction = Reactions.NON;
+        
+        
+               if(PodTasty.getUserInfo().getId()!=post.getIdUser()){
+            btndelete.setVisible(false);
+        }else
+               {
+                   btndelete.setVisible(true);
+               }
+        
+        System.out.println("connecté:  "+PodTasty.getUserInfo().getId());
+        System.out.println("mta3 el post: "+post.getIdUser());
+        
+        
     }
 
     private Post getPost(){
@@ -215,6 +240,10 @@ public class PostController implements Initializable {
         post.setTotalReactions(10);
         post.setNbComments(2);
         post.setNbShares(3);
+        
+        
+ 
+        
 
         return post;
     }
@@ -222,6 +251,8 @@ public class PostController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setData(getPost());
+        
+        
     }
 
     @FXML

@@ -7,6 +7,8 @@ package services;
 
 import DBConnection.MyConnection;
 import entities.Post;
+import entities.User;
+import entities.UserInfo;
 import interfaces.IPost;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +16,7 @@ import java.sql.Statement;
 import java.util.Date;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import podtasty.PodTasty;
 
 /**
  *
@@ -29,7 +32,11 @@ public class CRUDPost implements IPost<Post> {
             PreparedStatement pst = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
 
-            pst.setInt(1, 5);
+// ya amiiiiiiiine
+            
+            
+    
+            pst.setInt(1, PodTasty.getUserInfo().getId());
             pst.setString(2, post.getText());
             java.util.Date utilDate = new java.util.Date();
             
@@ -144,6 +151,13 @@ public class CRUDPost implements IPost<Post> {
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
     @Override
     public ObservableList<Post> getPostByOwner(Post post) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -178,6 +192,30 @@ public class CRUDPost implements IPost<Post> {
             return null;
         }
       
+    }
+    
+    
+        public UserInfo getOwner(int id) {
+         try{
+        String requete= "select * from user_info where id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet res = pst.executeQuery();
+            while(res.next()) { 
+            
+            
+            UserInfo user = new UserInfo();
+            user.setUserFirstName(res.getString("user_first_name"));
+            user.setUserLastName(res.getString("user_last_name"));
+            
+            return user;
+            }
+            return null;
+        }catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
 }
