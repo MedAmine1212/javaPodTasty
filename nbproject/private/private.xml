@@ -3,18 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/CRUDReview.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/CRUDFavorite.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/entities/BadWords.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/ITag.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/PodcastCommentsFrontController.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/PodcastReviewController.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/services/CRUDComments.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/PodTasty.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/IReview.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/interfaces/IFavorite.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/entities/GenerateQRCode.java</file>
-            <file>file:/C:/Users/khail/Documents/NetBeansProjects/PodTasty/src/podtasty/LoadAudio.java</file>
+            <file>file:/C:/Users/LENOVO/Desktop/Java/javaPodTasty/src/entities/GenerateQRCode.java</file>
         </group>
     </open-files>
 </project-private>

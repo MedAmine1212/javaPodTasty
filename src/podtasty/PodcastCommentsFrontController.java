@@ -48,10 +48,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -79,6 +76,10 @@ public class PodcastCommentsFrontController implements Initializable {
     @FXML
     private TextField commentTextInput;
     private static Stage reviewStage;
+    private static Stage reportStage;
+    private static Stage podcastStage;
+
+
     @FXML
     private TextField searchInput;
     private static boolean reviewChanged = false;
@@ -100,6 +101,9 @@ public class PodcastCommentsFrontController implements Initializable {
     private ImageView rate;
     @FXML
     private ImageView report;
+
+    @FXML
+    private Button add;
     @FXML
     private Label podcastRating;
     @FXML
@@ -168,13 +172,13 @@ public class PodcastCommentsFrontController implements Initializable {
         currentUser = new User();
         currentUser.setId(1);
         searchInput.setPromptText("Search comments...");
-        currentPodcast = new Podcast();
+        /*currentPodcast = new Podcast();
         currentPodcast.setId(1);
         currentPodcast.setCommentsAllowed(1);
         currentPodcast.setPodcastDescription("Description Description Description Description ");
         currentPodcast.setPodcastName("Podcast 1");
         currentPodcast.setPodcastViews(120);
-        currentPodcast.setPodcastImage("1.jpeg");
+        currentPodcast.setPodcastImage("1.jpeg");*/
         currentPodcast.setPodcastSource("6074b2a184d44.mp3");
         CRUDComments cr = new CRUDComments();
         playlist = cr.getPodcastByPlaylist(1, currentPodcast.getId());
@@ -207,7 +211,7 @@ public class PodcastCommentsFrontController implements Initializable {
         reviewSubmitted = false;
         audioLoader = LoadAudio.getInstance();
         audioLoader.setAudioUrl(currentPodcast.getPodcastSource());
-        audioLoader.start();
+       // audioLoader.start();
         BufferedImage imgg;
         imgg = ImageIO.read(new File("src/images/play.png"));
         WritableImage im = SwingFXUtils.toFXImage(imgg, null);
@@ -227,7 +231,7 @@ public class PodcastCommentsFrontController implements Initializable {
         CRUDReview crr = new CRUDReview();
         BufferedImage image;
         try {
-            image = ImageIO.read(new URL("http://127.0.0.1:8000/Files/podcastFiles/"+currentPodcast.getPodcastImage()));
+            image = ImageIO.read(new URL("http://127.0.0.1:8000/getResources?file="+currentPodcast.getPodcastImage()));
             WritableImage img = SwingFXUtils.toFXImage(image, null);
             podcastImage.setImage(img);
         } catch (Exception ex) {
@@ -288,8 +292,8 @@ public class PodcastCommentsFrontController implements Initializable {
         playlistContainer.getChildren().clear();
         int i = 3;
         for(Podcast pod : playlist) {
-        try {   
-            
+        try {
+
             FXMLLoader fx = new FXMLLoader(getClass().getResource("podcastView.fxml"));
             Pane pn = fx.load();
             PodcastViewController controller = fx.getController();
@@ -298,7 +302,7 @@ public class PodcastCommentsFrontController implements Initializable {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                      gotToNext(pod);
-                } 
+                }
             });
             playlistContainer.add(pn, 0, i);
             i++;
@@ -658,6 +662,44 @@ public class PodcastCommentsFrontController implements Initializable {
         
     }
     @FXML
+    private void reportAction(MouseEvent event) {
+        Parent root;
+        try {
+            //root = FXMLLoader.load(getClass().getResource("PodcastReport.fxml"));
+            FXMLLoader fx = new FXMLLoader(getClass().getResource("PodcastReport.fxml"));
+             root = fx.load();
+            PodcastReport controller = fx.getController();
+            controller.initData(currentPodcast);
+            reviewStage = new Stage();
+            reviewStage.setTitle("Add Podcast");
+            reviewStage.setScene(new Scene(root));
+            reviewStage.initModality(Modality.WINDOW_MODAL);
+            reviewStage.initOwner(((Node) (event.getSource())).getScene().getWindow());
+            reviewStage.show();
+        /*Label secondLabel = new Label("I'm a Label on new Window");
+
+        StackPane secondaryLayout = new StackPane();
+        secondaryLayout.getChildren().add(secondLabel);
+
+        Scene secondScene = new Scene(secondaryLayout, 230, 100);
+
+        // New window (Stage)
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Second Stage");
+        newWindow.setScene(secondScene);
+
+        // Set position of second window, related to primary window.
+
+
+        newWindow.show();*/
+            new PodcastReport().start(reviewStage);
+        } catch (Exception e )
+        {
+            System.out.printf(e.getMessage());
+        }
+
+    }
+    @FXML
     private void removeFavoriteAction(MouseEvent event) {
         CRUDFavorite cr = new CRUDFavorite();
         cr.removeFavorite(currentPodcast, currentUser);
@@ -781,5 +823,44 @@ public class PodcastCommentsFrontController implements Initializable {
             alert.setHeaderText("Owner: "+com.getUserIdId().getUserInfoIdId().getUserFirstName()+" "+com.getUserIdId().getUserInfoIdId().getUserLastName()+"\nDate: "+date+"\nTime: "+time);
             alert.showAndWait();
         
+    }
+    @FXML
+    private void addPodcastAction(MouseEvent event) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Podcast.fxml"));
+
+            reviewStage = new Stage();
+            reviewStage.setTitle("Add Podcast");
+            reviewStage.setScene(new Scene(root));
+            reviewStage.initModality(Modality.WINDOW_MODAL);
+            reviewStage.initOwner(((Node) (event.getSource())).getScene().getWindow());
+            reviewStage.show();
+        /*Label secondLabel = new Label("I'm a Label on new Window");
+
+        StackPane secondaryLayout = new StackPane();
+        secondaryLayout.getChildren().add(secondLabel);
+
+        Scene secondScene = new Scene(secondaryLayout, 230, 100);
+
+        // New window (Stage)
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Second Stage");
+        newWindow.setScene(secondScene);
+
+        // Set position of second window, related to primary window.
+
+
+        newWindow.show();*/
+            new PodcastReport().start(reviewStage);
+        } catch (Exception e )
+        {
+            System.out.printf(e.getMessage());
+        }
+
+    }
+    void initData(entities.Podcast podcast)
+    {
+        currentPodcast = podcast;
     }
 }

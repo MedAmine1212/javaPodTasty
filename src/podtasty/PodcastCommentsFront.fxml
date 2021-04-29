@@ -78,11 +78,16 @@
             <Image url="@../images/addFavoriteButt.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="report" fitHeight="34.0" fitWidth="38.0" layoutX="970.0" layoutY="33.0" onMouseEntered="#hoverButton" onMouseExited="#unhoverButton" pickOnBounds="true" preserveRatio="true">
+
+
+
+      <ImageView fx:id="report" fitHeight="34.0" fitWidth="38.0" layoutX="970.0" layoutY="33.0"  onMouseClicked="#reportAction" onMouseEntered="#hoverButton" onMouseExited="#unhoverButton" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/report.png" />
+            <Image url="@../images/report.png"  />
          </image>
       </ImageView>
+      <Button  fx:id="addpod" text="ADD PODCAST" layoutX="980.0" layoutY="100.0" onMouseClicked="#addPodcastAction" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #dc3545; -fx-text-fill: #ffffff;" textAlignment="CENTER" BorderPane.alignment="CENTER"/>
+
       <GridPane layoutX="1026.0" layoutY="33.0" prefHeight="63.0" prefWidth="41.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

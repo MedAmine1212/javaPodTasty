@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="489.0" prefWidth="385.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastReport">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" />
+      <VBox layoutX="66.0" layoutY="67.0" prefHeight="247.0" prefWidth="319.0">
+         <children>
+            <RadioButton mnemonicParsing="false" text="Violent or repulsive content" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+                <toggleGroup>
+                    <ToggleGroup fx:id="group" />
+                </toggleGroup>
+            </RadioButton>
+             <RadioButton mnemonicParsing="false" text="Hateful or abusive content" textFill="WHITE">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+                 <toggleGroup>
+                     <fx:reference source="group" />
+                 </toggleGroup>
+             </RadioButton>
+             <RadioButton mnemonicParsing="false" text="Harmful or dangerous acts" textFill="WHITE">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+                 <toggleGroup>
+                     <fx:reference source="group" />
+                 </toggleGroup>
+             </RadioButton>
+             <RadioButton mnemonicParsing="false" text="Violent or repulsive content" textFill="WHITE">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+                 <toggleGroup>
+                     <fx:reference source="group" />
+                 </toggleGroup>
+             </RadioButton>
+             <RadioButton mnemonicParsing="false" text="Promote terrorism" textFill="WHITE">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+                 <toggleGroup>
+                     <fx:reference source="group" />
+                 </toggleGroup>
+             </RadioButton>
+             <RadioButton mnemonicParsing="false" text="Spam or misleading" textFill="WHITE">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+                 <toggleGroup>
+                     <fx:reference source="group" />
+                 </toggleGroup>
+             </RadioButton>
+             <RadioButton mnemonicParsing="false" text="Infringes my rights" textFill="WHITE">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+
+                 <toggleGroup>
+                     <fx:reference source="group" />
+                 </toggleGroup>
+             </RadioButton>
+             <RadioButton mnemonicParsing="false" text="Captions issue" textFill="WHITE">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+
+                 <toggleGroup>
+                     <fx:reference source="group" />
+                 </toggleGroup>
+             </RadioButton>
+
+         </children>
+      </VBox>
+      <Button  layoutX="66.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#report" style="-fx-background-color: #000000;" text="Report" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TextArea fx:id="description" layoutX="68.0" layoutY="296.0" prefHeight="96.0" prefWidth="268.0" promptText="Description" />
+      <Label fx:id="podid" layoutX="117.0" layoutY="19.0" prefHeight="27.0" prefWidth="178.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

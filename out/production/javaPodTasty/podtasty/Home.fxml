@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane prefHeight="529.0" prefWidth="735.0" style="-fx-background-color: linear-gradient(to bottom, derive(#333, 20%), black);" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.Home">
+   <children>
+      <Label layoutX="40.0" layoutY="40.0" text="HOME " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="playlistScroll" layoutX="27.0" layoutY="120.0" prefHeight="400.0" prefWidth="900.0" style="-fx-background-color:transparent;" >
+         <content>
+            <GridPane fx:id="podcastlist" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color:#333;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="400.0" prefWidth="400.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+   </children>
+   <Button fx:id="addpod" layoutX="715.0" layoutY="27.0" onMouseClicked="#addPodcastAction" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: #dc3545; -fx-text-fill: #ffffff;" text="ADD PODCAST" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+   <Button  onMouseClicked="#showPlaylist" layoutX="125.0" layoutY="40.0" mnemonicParsing="false" text="PODCASTS" style="-fx-background-color: #dc3545; -fx-text-fill: #ffffff;"/>
+   <Button  onMouseClicked="#clearList" layoutX="220.0" layoutY="40.0" mnemonicParsing="false" text="REPORTS" style="-fx-background-color: #dc3545; -fx-text-fill: #ffffff;"/>
+
+</AnchorPane>
