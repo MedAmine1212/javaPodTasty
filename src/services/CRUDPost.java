@@ -32,7 +32,14 @@ public class CRUDPost implements IPost<Post> {
             pst.setInt(1, 5);
             pst.setString(2, post.getText());
             java.util.Date utilDate = new java.util.Date();
+            
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+           
+           
+           
+            //sqlDate.setMinutes(utilDate.getMinutes());
+            //sqlDate.setDate(utilDate.getDate());
+            //System.out.println(utilDate.getHours()+"aaaaaaaaaaaaa");
             pst.setDate(3, sqlDate);
             pst.setInt(4, 0);
             //executeupdate

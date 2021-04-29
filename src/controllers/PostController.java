@@ -15,6 +15,10 @@ import objects.Reactions;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import services.CRUDPost;
 
 public class PostController implements Initializable {
     @FXML
@@ -83,6 +87,10 @@ public class PostController implements Initializable {
     private long startTime = 0;
     private Reactions currentReaction;
     private Post post;
+    @FXML
+    private Button btndelete;
+    @FXML
+    private VBox everything;
 
     @FXML
     public void onLikeContainerPressed(MouseEvent me){
@@ -214,5 +222,16 @@ public class PostController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setData(getPost());
+    }
+
+    @FXML
+    private void deletePost(ActionEvent event) {
+        
+        System.out.println(post.getId());
+        CRUDPost c = new CRUDPost();
+        c.deletePost(post.getId());
+        everything.toFront();
+        everything.setVisible(false);
+        
     }
 }

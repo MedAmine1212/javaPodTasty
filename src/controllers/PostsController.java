@@ -45,11 +45,20 @@ public class PostsController implements Initializable {
     private TextField textFiled;
     @FXML
     private Button postButton;
+    @FXML
+    private VBox postContainer2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-        posts = new ArrayList<>(getDatabasePosts());
+        fill();
+    }
+    
+   
+    
+   void fill()
+   {
+       posts = new ArrayList<>(getDatabasePosts());
         System.out.println("hedha");
         try {
             for (Post post : posts) {
@@ -62,16 +71,12 @@ public class PostsController implements Initializable {
                 System.out.println("hedha");
                 PostController postController = fxmlLoader.getController();
                 postController.setData(post);
-                postsContainer.getChildren().add(vBox);
+                postContainer2.getChildren().add(vBox);
             }
         } catch (IOException ex) {
             System.out.println("leee");
         }
-    }
-    
-   
-    
-   
+   }
     
 
     public List<Post> getPosts() {
@@ -149,6 +154,8 @@ public class PostsController implements Initializable {
             c.addPost(post);
             
             textFiled.setText("Issam,  what do you wanna tell your followers?");
+            postContainer2.getChildren().clear();
+            fill();
     }
 
 }
