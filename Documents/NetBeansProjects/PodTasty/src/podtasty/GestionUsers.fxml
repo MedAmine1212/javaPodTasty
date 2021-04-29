@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="753.0" prefWidth="1222.0" style="-fx-background-color: #2e3038};" stylesheets="@logreg.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.GestionUsersController">
+   <children>
+      <AnchorPane prefHeight="47.0" prefWidth="1222.0" style="-fx-background-color: #7b7b7b;">
+         <children>
+            <Label fx:id="username" layoutX="1073.0" layoutY="11.0" text="UserName" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="11.0" text="User Gestion" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Circle fx:id="imageUser" fill="DODGERBLUE" layoutX="1191.0" layoutY="24.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+         </children></AnchorPane>
+      <TableView fx:id="table_users" layoutX="258.0" layoutY="132.0" prefHeight="316.0" prefWidth="489.0">
+        <columns>
+          <TableColumn fx:id="userId" prefWidth="75.0" text="User ID" />
+          <TableColumn fx:id="userEmail" prefWidth="157.0" text="User Email" />
+            <TableColumn fx:id="userStatus" prefWidth="157.0" text="Desactive" />
+        </columns>
+      </TableView>
+      <AnchorPane fx:id="showoneuser" layoutX="776.0" layoutY="132.0" prefHeight="244.0" prefWidth="227.0" style="-fx-background-color: #7b7b7b;">
+         <children>
+            <Label fx:id="FirstName" layoutX="12.0" layoutY="40.0" />
+            <Label fx:id="Lastname" layoutX="12.0" layoutY="98.0" />
+            <Label fx:id="gender" layoutX="12.0" layoutY="156.0" />
+            <Button fx:id="editbtn" layoutX="148.0" layoutY="107.0" mnemonicParsing="false" onAction="#edit" style="-fx-background-color: rgb(24,186,234);" text="Edit" textFill="WHITE" />
+            <Button fx:id="deletebtn" layoutX="148.0" layoutY="150.0" mnemonicParsing="false" onAction="#deleteuser" style="-fx-background-color: rgb(24,186,234);" text="Delete" textFill="WHITE" />
+            <Button fx:id="desactivatebtn" layoutX="148.0" layoutY="189.0" mnemonicParsing="false" onAction="#desactivate" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" textFill="WHITE" />
+            <Label layoutX="12.0" layoutY="14.0" text="First Name" />
+            <Label layoutX="13.0" layoutY="70.0" text="Last Name" />
+            <Label fx:id="gender_label" layoutX="11.0" layoutY="128.0" text="Gender" />
+            <Label layoutX="16.0" layoutY="180.0" text="Email" />
+            <Label fx:id="email" layoutX="15.0" layoutY="210.0" />
+            <TextField fx:id="firstname_input" layoutX="14.0" layoutY="36.0" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <TextField fx:id="lastname_input" layoutX="10.0" layoutY="94.0" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <TextField fx:id="email_input" layoutX="15.0" layoutY="206.0" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: transparent; -fx-border-color: rgb(24,186,234); -fx-border-radius: 4px; -fx-text-fill: white;" />
+            <Label layoutX="8.0" layoutY="157.0" textFill="#e81111">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Button fx:id="saveEdit" layoutX="148.0" layoutY="189.0" mnemonicParsing="false" onAction="#saveEdit" style="-fx-background-color: rgb(24,186,234);" text="Edit" textFill="WHITE" visible="false" />
+            <Circle fx:id="imageUsers" fill="DODGERBLUE" layoutX="173.0" layoutY="49.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="addbtn" layoutX="776.0" layoutY="411.0" mnemonicParsing="false" onAction="#desactivate" style="-fx-background-color: rgb(24,186,234);" styleClass="btn_primary" text="Add user" textFill="WHITE" />
+   </children>
+</AnchorPane>

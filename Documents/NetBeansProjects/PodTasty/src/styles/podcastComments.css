@@ -1,0 +1,36 @@
+
+
+#editCommentButton{
+	-fx-background-color:#17a2b8;
+	-fx-border-radius:12px;
+
+}
+
+#commentDetails{
+    -fx-background-color:lightgray;
+    -fx-border-radius:12px;
+
+}
+
+#deleteCheckedComment{
+
+	-fx-background-color:#dc3545;
+	-fx-border-radius:12px;
+}
+
+#addCommentButton{
+	-fx-background-color:rgb(24,186,234);
+
+	-fx-border-radius:12px;
+	
+}
+
+#commentsScroll, #playlistScroll{
+
+    -fx-background:transparent;
+}
+
+#loading{
+	
+    -fx-background-image: url("../images/bg.png");
+}

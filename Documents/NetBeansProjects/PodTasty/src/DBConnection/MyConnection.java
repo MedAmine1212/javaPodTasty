@@ -8,11 +8,11 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author House
+ * @author MedAmine
  */
 public class MyConnection {
 
-    String url="jdbc:mysql://localhost:3306/pidev2";
+    String url="jdbc:mysql://localhost:3306/pod-tasty";
     String login="root";
     String pwd="";
     Connection cnx;

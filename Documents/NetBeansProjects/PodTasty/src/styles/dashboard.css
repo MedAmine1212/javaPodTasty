@@ -1,0 +1,78 @@
+.button
+{
+    -fx-background-color : #05071F;
+    -fx-text-fill : #e7e5e5;
+}
+.button:hover{
+    -fx-background-color : #10165F;
+}
+.button:pressed
+{
+    -fx-background-color : #1620A1;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 5em;
+}
+
+#container{
+    -fx-background-image: url("../images/bg.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+
+#podcastScroll{
+
+    -fx-background:transparent;
+}
+
+#podContainer, #podBorder{
+
+    -fx-background:transparent;
+}
+#tagNameHome{
+    -fx-background-color : transparent;
+    -fx-background-radius: 120px;
+    -fx-alignment: right;
+}
+
+#tagNameHome:hover{
+    -fx-background-color : rgba(1,1,1,0.6);
+}
+
+#activateButton{
+    -fx-font-weight:bolder;
+    -fx-background-color : #4bbf73;
+}
+#activateButton:hover{
+    -fx-background-color : #4bbf79;
+}
+
+#deactivateButton{
+    -fx-font-weight:bolder;
+    -fx-background-color :  #d23430;
+}
+#deactivateButton:hover{
+
+    -fx-background-color :  #d234
+}
