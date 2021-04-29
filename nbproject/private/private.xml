@@ -5,11 +5,14 @@
         <group>
             <file>file:/D:/java%20sprint/javaPodTasty/src/podtasty/PodTasty.java</file>
             <file>file:/D:/java%20sprint/javaPodTasty/src/fxml/post.fxml</file>
-            <file>file:/D:/java%20sprint/javaPodTasty/src/resources/styles.css</file>
-            <file>file:/D:/java%20sprint/javaPodTasty/src/fxml/posts.fxml</file>
+            <file>file:/D:/java%20sprint/javaPodTasty/src/entities/Post.java</file>
+            <file>file:/D:/java%20sprint/javaPodTasty/src/podtasty/AddTagController.java</file>
             <file>file:/D:/java%20sprint/javaPodTasty/src/main/Main.java</file>
+            <file>file:/D:/java%20sprint/javaPodTasty/src/services/CRUDPost.java</file>
             <file>file:/D:/java%20sprint/javaPodTasty/src/controllers/PostController.java</file>
+            <file>file:/D:/java%20sprint/javaPodTasty/src/fxml/allPosts.fxml</file>
             <file>file:/D:/java%20sprint/javaPodTasty/src/controllers/PostsController.java</file>
+            <file>file:/D:/java%20sprint/javaPodTasty/src/fxml/faza.fxml</file>
         </group>
     </open-files>
 </project-private>

@@ -1,8 +1,6 @@
 package objects;
 
-/**
- * Created by Mahmoud Hamwi on 17-Feb-21.
- */
+
 public enum PostAudience {
     PUBLIC(0,"Public","/img/ic_public.png"),
     FRIENDS(1,"Friends","/img/ic_friend.png");

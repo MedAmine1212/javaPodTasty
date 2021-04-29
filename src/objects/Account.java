@@ -1,8 +1,6 @@
 package objects;
 
-/**
- * Created by Mahmoud Hamwi on 17-Feb-21.
- */
+
 public class Account {
     private String name;
     private String profileImg;

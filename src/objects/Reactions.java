@@ -1,8 +1,6 @@
 package objects;
 
-/**
- * Created by Mahmoud Hamwi on 17-Feb-21.
- */
+
 public enum Reactions {
     NON(0,"Like","#606266","/img/ic_like_outline.png"),
     LIKE(1,"Like","#056BE1","/img/ic_like.png"),

@@ -1,9 +1,25 @@
 package objects;
 
-/**
- * Created by Mahmoud Hamwi on 17-Feb-21.
- */
+
 public class Post {
+    private int id;
+    private int idUser;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
     private Account account;
     private PostAudience audience;
     private String date;
