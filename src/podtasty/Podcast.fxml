@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="613.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.Podcast">
+   <children>
+
+      <TextField fx:id="name" layoutX="125.0" layoutY="87.0" prefHeight="26.0" prefWidth="258.0" />
+      <Label layoutX="46.0" layoutY="91.0" style="-fx-text-fill: #fff;" text="Name" />
+      <TextArea id="description" fx:id="description" layoutX="125.0" layoutY="128.0" prefHeight="72.0" prefWidth="258.0" />
+      <Label layoutX="46.0" layoutY="128.0" style="-fx-text-fill: #fff;" text="Description" />
+      <ChoiceBox fx:id="playlistid" layoutX="125.0" layoutY="217.0" prefWidth="150.0" />
+      <CheckBox fx:id="currentlylive" layoutX="300.0" layoutY="221.0" mnemonicParsing="false" style="-fx-text-fill: #fff;" text="Currently Live" />
+      <Label layoutX="46.0" layoutY="221.0" style="-fx-text-fill: #fff;" text="Playlist" />
+      <Button layoutX="122.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#addPodcast" prefWidth="267.0" style="-fx-background-color: #dc3545; -fx-text-fill: #ffffff;" text="Add Podcast" />
+       <ImageView fx:id="imgview" fitHeight="71.0" fitWidth="67.0" layoutX="8.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+           <image>
+               <Image url="@../images/avatar.jpg" />
+           </image>
+       </ImageView>
+      <Button id="imgbtn" layoutX="125.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#addImage" style="-fx-background-color: #dc3545; -fx-text-fill: #ffffff;" text="Add Image" />
+      <Button id="audiotbtn" layoutX="316.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#addAudio" style="-fx-background-color: #dc3545; -fx-text-fill: #ffffff;" text="Add Audio" />
+      <Label fx:id="result" layoutX="401.0" layoutY="347.0" textFill="#ccd6ff">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="allow_comments" layoutX="411.0" layoutY="91.0" mnemonicParsing="false" text="Allow comments" textFill="WHITE" />
+      <CheckBox fx:id="block" layoutX="539.0" layoutY="91.0" mnemonicParsing="false" text="Block" textFill="WHITE" />
+
+   </children>
+</AnchorPane>
