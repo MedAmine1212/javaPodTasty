@@ -54,7 +54,7 @@ public class Reclamation implements Serializable {
     private User userIdId;
     @JoinColumn(name = "podcast_id_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Podcast podcastIdId;
+    private int podcastIdId;
 
     public Reclamation() {
     }
@@ -110,11 +110,11 @@ public class Reclamation implements Serializable {
         this.userIdId = userIdId;
     }
 
-    public Podcast getPodcastIdId() {
+    public int getPodcastIdId() {
         return podcastIdId;
     }
 
-    public void setPodcastIdId(Podcast podcastIdId) {
+    public void setPodcastIdId(int podcastIdId) {
         this.podcastIdId = podcastIdId;
     }
 
