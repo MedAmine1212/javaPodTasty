@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="102.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="102.0" prefWidth="671.0" style="-fx-background-color: transparent  ; -fx-border-radius: 6;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="podtasty.PodcastViewController">
    <children>
-      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="190.0">
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="273.0">
          <left>
-            <ImageView fx:id="podcastImg" fitHeight="82.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="podcastImg" fitHeight="82.0" fitWidth="152.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../images/defPod.png" />
                </image></ImageView>
          </left>
-         <right>
-            <Pane prefHeight="94.0" prefWidth="102.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="podcastName" textFill="WHITE">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="podcastDesc" layoutY="62.0" prefHeight="40.0" prefWidth="102.0" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="podcastViews" layoutX="2.0" layoutY="40.0" prefHeight="20.0" prefWidth="96.0" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </right>
          <center>
-            <FlowPane prefHeight="82.0" prefWidth="26.0" BorderPane.alignment="CENTER" />
+            <FlowPane prefHeight="82.0" prefWidth="26.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane prefHeight="94.0" prefWidth="544.0">
+                     <children>
+                        <Label fx:id="podcastName" layoutX="25.0" prefHeight="28.0" prefWidth="413.0" textFill="WHITE">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="podcastDesc" layoutX="25.0" layoutY="62.0" prefHeight="40.0" prefWidth="494.0" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="podcastViews" layoutX="25.0" layoutY="40.0" prefHeight="20.0" prefWidth="491.0" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nbviews" layoutX="480.0" layoutY="5.0"  textFill="#655dfa">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="375.0" layoutY="0.0"  fx:id="commentairesboutton" onMouseClicked="#seecomments" style="-fx-background-color: black;" text="Comments" textFill="white" />
+
+                     </children>
+                  </Pane>
+               </children></FlowPane>
          </center>
       </BorderPane>
    </children>
